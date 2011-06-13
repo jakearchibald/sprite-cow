@@ -9,3 +9,7 @@
 	width: 5px;
 	height: 5px;
 }
+.css-output {
+	display: block;
+	white-space: pre;
+}

@@ -66,7 +66,7 @@
 			this._bgData = [0, 0, 0, 0];
 		}
 		
-		var SpriteCanvasProto = SpriteCanvas.prototype;
+		var SpriteCanvasProto = SpriteCanvas.prototype = new MicroEvent;
 		
 		SpriteCanvasProto.setImg = function(img) {
 			var canvas = this.canvas,
@@ -84,46 +84,45 @@
 			this._bgData = pixelArr;
 		};
 		
-		SpriteCanvasProto.expandToSpriteBoundry = function(region, callback) {
-			this.currentRegion = region;
-			var edgeBgResult = this._edgesAreBg(region),
-				edgeBoundsResult = this._edgesAtBounds(region);
+		SpriteCanvasProto.expandToSpriteBoundry = function(rect, callback) {
+			var edgeBgResult = this._edgesAreBg(rect),
+				edgeBoundsResult = this._edgesAtBounds(rect);
 				
 			// expand
 			while ( !allArrayOrTrue(edgeBgResult, edgeBoundsResult) ) {
-				region = this._expandRegion(region, edgeBgResult, edgeBoundsResult);
-				edgeBgResult = this._edgesAreBg(region);
-				edgeBoundsResult = this._edgesAtBounds(region);
+				rect = this._expandRect(rect, edgeBgResult, edgeBoundsResult);
+				edgeBgResult = this._edgesAreBg(rect);
+				edgeBoundsResult = this._edgesAtBounds(rect);
 				// callback(); // for debugging
 			}
 			
 			// trim edges of bg
-			region = this._contractRegion(region, edgeBgResult);
+			rect = this._contractRect(rect, edgeBgResult);
 			
-			return region;
+			return rect;
 		};
 		
-		SpriteCanvasProto._edgesAreBg = function(region) {
+		SpriteCanvasProto._edgesAreBg = function(rect) {
 			// look at the pixels around the edges
 			var canvas = this.canvas,
-				pixels = canvas.getContext('2d').getImageData(region.x, region.y, region.width, region.height).data;
+				pixels = canvas.getContext('2d').getImageData(rect.x, rect.y, rect.width, rect.height).data;
 			
 			return [
-				this._pixelsContainOnlyBg(pixels, 0, 4, region.width * 4),
-				this._pixelsContainOnlyBg(pixels, (region.width - 1) * 4, region.width * 4, pixels.length),
-				this._pixelsContainOnlyBg(pixels, region.width * 4 * (region.height - 1), 4, pixels.length),
-				this._pixelsContainOnlyBg(pixels, 0, region.width * 4, pixels.length)
+				this._pixelsContainOnlyBg(pixels, 0, 4, rect.width * 4),
+				this._pixelsContainOnlyBg(pixels, (rect.width - 1) * 4, rect.width * 4, pixels.length),
+				this._pixelsContainOnlyBg(pixels, rect.width * 4 * (rect.height - 1), 4, pixels.length),
+				this._pixelsContainOnlyBg(pixels, 0, rect.width * 4, pixels.length)
 			];
 		};
 		
-		SpriteCanvasProto._edgesAtBounds = function(region) {
+		SpriteCanvasProto._edgesAtBounds = function(rect) {
 			var canvas = this.canvas;
 			
 			return [
-				region.y === 0,
-				region.x + region.width === canvas.width,
-				region.y + region.height === canvas.height,
-				region.x === 0
+				rect.y === 0,
+				rect.x + rect.width === canvas.width,
+				rect.y + rect.height === canvas.height,
+				rect.x === 0
 			];
 		};
 		
@@ -138,50 +137,48 @@
 			return true;
 		};
 		
-		SpriteCanvasProto._expandRegion = function(region, edgeBgResult, edgeBoundsResult) {
+		SpriteCanvasProto._expandRect = function(rect, edgeBgResult, edgeBoundsResult) {
 			if ( !edgeBgResult[0] && !edgeBoundsResult[0] ) {
-				region.y--;
-				region.height++;
+				rect.y--;
+				rect.height++;
 			}
 			if ( !edgeBgResult[1] && !edgeBoundsResult[1] ) {
-				region.width++;
+				rect.width++;
 			}
 			if ( !edgeBgResult[2] && !edgeBoundsResult[2] ) {
-				region.height++;
+				rect.height++;
 			}
 			if ( !edgeBgResult[3] && !edgeBoundsResult[3] ) {
-				region.x--;
-				region.width++;
+				rect.x--;
+				rect.width++;
 			}
 			
-			return region;
+			return rect;
 		};
 		
-		SpriteCanvasProto._contractRegion = function(region, edgeBgResult) {
-			if ( edgeBgResult[0] && region.height ) {
-				region.y++;
-				region.height--;
+		SpriteCanvasProto._contractRect = function(rect, edgeBgResult) {
+			if ( edgeBgResult[0] && rect.height ) {
+				rect.y++;
+				rect.height--;
 			}
-			if ( edgeBgResult[1] && region.width ) {
-				region.width--;
+			if ( edgeBgResult[1] && rect.width ) {
+				rect.width--;
 			}
-			if ( edgeBgResult[2] && region.height ) {
-				region.height--;
+			if ( edgeBgResult[2] && rect.height ) {
+				rect.height--;
 			}
-			if ( edgeBgResult[3] && region.width ) {
-				region.x++;
-				region.width--;
+			if ( edgeBgResult[3] && rect.width ) {
+				rect.x++;
+				rect.width--;
 			}
 			
-			return region;
+			return rect;
 		};
 		
 		return SpriteCanvas;
 	})();
 	
 	var SpriteCanvasView = (function() {
-		
-		
 		function SpriteCanvasView(spriteCanvas, $appendToElm) {
 			var spriteCanvasView = this,
 				$container = $('<div class="sprite-canvas-container"/>'),
@@ -189,28 +186,36 @@
 				
 			this._$container = $container;
 			this._spriteCanvas = spriteCanvas;
-			this._$highlight = $('<div class="highlight"/>')
+			this._$highlight = $('<div class="highlight"/>');
+			this.currentRect = new Rect(0, 0, 0, 0);
 			
 			$container.append( $canvas ).append( this._$highlight ).appendTo( $appendToElm );
 			
 			$canvas.mousedown(function(event) {
 				var offset = $canvas.offset(),
 					rect = new Rect(
-						event.pageX - offset.left,
-						event.pageY - offset.top,
+						// firefox like coming up with fraction values from offset()
+						Math.floor(event.pageX - offset.left),
+						Math.floor(event.pageY - offset.top),
 						1, 1
 					),
 					spriteRect = spriteCanvas.expandToSpriteBoundry(rect, function() {
-						spriteCanvasView._highlightRegion(rect);
+						spriteCanvasView._highlightRect(rect);
 					});
 					
-				spriteCanvasView._highlightRegion(spriteRect);
+				spriteCanvasView._setCurrentRect(spriteRect);
 			});
 		}
 		
-		var SpriteCanvasViewProto = SpriteCanvasView.prototype;
+		var SpriteCanvasViewProto = SpriteCanvasView.prototype = new MicroEvent;
 		
-		SpriteCanvasViewProto._highlightRegion = function(rect) {
+		SpriteCanvasViewProto._setCurrentRect = function(rect) {
+			this.currentRect = rect;
+			this._highlightRect(rect);
+			this.trigger('rectChange', rect);
+		};
+		
+		SpriteCanvasViewProto._highlightRect = function(rect) {
 			this._$highlight.css({
 				left: rect.x,
 				top: rect.y,
@@ -227,14 +232,14 @@
 			var imgInput = this,
 				$fileInput = $('<input type="file" accept="image/*">').appendTo( $container );
 			
-			// creates file input element & handles drag & drop
+			// todo - handles drag & drop
+			imgInput.fileName = '';
 			
 			$fileInput.change(function(event) {
 				var file = this.files[0];
+				imgInput.fileName = file.fileName;
 				file && imgInput._fileToImg(file);
 			});
-			
-			// fires an event with a base64 <img> when it's ready to use
 		}
 		
 		var ImgInputProto = ImgInput.prototype = new MicroEvent;
@@ -257,15 +262,43 @@
 	})();
 	
 	var CssOutput = (function() {
+		function bgPosVal(offset) {
+			if (offset) {
+				return ' -' + offset + 'px';
+			}
+			return ' 0';
+		}
 		
-		function CssOutput(imgName, left, top, width, height) {
-			
+		function CssOutput($appendTo) {
+			this._$container = $('<code class="css-output"/>').appendTo( $appendTo );
+			this.backgroundFileName = '';
+			this.path = 'images/';
+			this.rect = new Rect(0, 0, 0, 0);
+			this.useTabs = true;
+			this.useBgUrl = true;
+			this.selector = '.whatever';
 		}
 		
 		var CssOutputProto = CssOutput.prototype;
 		
-		CssOutputProto.toString = function(shorthandBg, tabs) {
+		CssOutputProto.update = function() {
+			var indent = this.useTabs ? '\t' : '    ',
+				rect = this.rect,
+				output = this.selector + ' {\n';
+				
+			if (this.useBgUrl && this.backgroundFileName) {
+				output += indent + "background: url('" + this.path + this.backgroundFileName + "') no-repeat";
+			}
+			else {
+				output += indent + "background-position:";
+			}
 			
+			output += bgPosVal(rect.x) + bgPosVal(rect.y) + ';\n';
+			output += indent + 'width: ' + rect.width + 'px;\n';
+			output += indent + 'height: ' + rect.height + 'px;\n';
+			output += '}';
+			
+			this._$container.text(output);
 		};
 		
 		return CssOutput;
@@ -279,11 +312,18 @@
 			var spriteSelector = this,
 				spriteCanvas = new SpriteCanvas(),
 				spriteCanvasView = new SpriteCanvasView( spriteCanvas, $container ),
-				imgInput = new ImgInput( $container );
+				imgInput = new ImgInput( $container ),
+				cssOutput = new CssOutput( $container );
 			
 			imgInput.bind('load', function(img) {
 				spriteCanvas.setImg(img);
+				cssOutput.backgroundFileName = imgInput.fileName;
 			});
+			
+			spriteCanvasView.bind('rectChange', function(rect) {
+				cssOutput.rect = rect;
+				cssOutput.update();
+			})
 		}
 		
 		var SpriteSelectorProto = SpriteSelector.prototype;
