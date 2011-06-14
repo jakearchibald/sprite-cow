@@ -95,9 +95,9 @@
 			var edgeBgResult;
 			
 			do {
-				edgeBgResult = this._edgesAreBg(rect, edgeBgResult);
+				edgeBgResult = this._edgesAreBg(rect);
 				rect = this._contractRect(rect, edgeBgResult);
-			} while ( !allArrayFalse(edgeBgResult) );
+			} while ( rect.height && rect.width && !allArrayFalse(edgeBgResult) );
 			
 			return rect;
 		};
@@ -297,7 +297,12 @@
 			
 			selectArea.bind('select', function(rect) {
 				var spriteRect = spriteCanvas.trimBg(rect);
-				spriteRect = spriteCanvas.expandToSpriteBoundry(rect);
+				if (spriteRect.width && spriteRect.height) { // false if clicked on transparent pixel
+					spriteRect = spriteCanvas.expandToSpriteBoundry(rect);
+				}
+				else {
+					spriteCanvasView._highlightRect(rect);
+				}
 				spriteCanvasView._setCurrentRect(spriteRect);
 			});
 		}
