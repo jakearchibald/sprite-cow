@@ -210,7 +210,8 @@
 				rect = new Rect(0, 0, 0, 0),
 				startX, startY,
 				startPositionX, startPositionY,
-				isDragging;
+				isDragging,
+				$document = $(document);
 			
 			selectArea._listeners.push([
 				selectArea._$area, 'mousedown', function(event) {
@@ -234,7 +235,7 @@
 			]);
 			
 			selectArea._listeners.push([
-				selectArea._$area, 'mousemove', function(event) {
+				$document, 'mousemove', function(event) {
 					if (!isDragging) { return; }
 					
 					rect.x = startPositionX + Math.min(event.pageX - startX, 0);
@@ -246,7 +247,7 @@
 			]);
 			
 			selectArea._listeners.push([
-				selectArea._$area, 'mouseup', function(event) {
+				$document, 'mouseup', function(event) {
 					if (!isDragging) { return; }
 					isDragging = false;
 					selectArea.trigger('select', rect);
