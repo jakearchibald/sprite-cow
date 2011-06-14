@@ -61,6 +61,13 @@
 			return true;
 		}
 		
+		function allArrayFalse(arr1) {
+			for (var i = arr1.length; i--;) if ( arr1[i] ) {
+				return false;
+			}
+			return true;
+		}
+		
 		function SpriteCanvas() {
 			this.canvas = $('<canvas/>')[0];
 			this._bgData = [0, 0, 0, 0];
@@ -82,6 +89,17 @@
 		
 		SpriteCanvasProto.setBg = function(pixelArr) {
 			this._bgData = pixelArr;
+		};
+		
+		SpriteCanvasProto.trimBg = function(rect) {
+			var edgeBgResult;
+			
+			do {
+				edgeBgResult = this._edgesAreBg(rect, edgeBgResult);
+				rect = this._contractRect(rect, edgeBgResult);
+			} while ( !allArrayFalse(edgeBgResult) );
+			
+			return rect;
 		};
 		
 		SpriteCanvasProto.expandToSpriteBoundry = function(rect, callback) {
@@ -178,91 +196,91 @@
 		return SpriteCanvas;
 	})();
 	
-	var SpriteCanvasView = (function() {
-		var SelectArea = (function() {
-			function SelectArea($area, $highlight) {
-				this._$area = $area;
-				this._$highlight = $highlight;
-				this._listeners = [];
-			}
-			
-			var SelectAreaProto = SelectArea.prototype = new MicroEvent;
-			
-			SelectAreaProto.activate = function() {
-				var selectArea = this,
-					rect = new Rect(0, 0, 0, 0),
-					startX, startY,
-					startPositionX, startPositionY,
-					isDragging;
-				
-				selectArea._listeners.push([
-					selectArea._$area, 'mousedown', function(event) {
-						var offset = selectArea._$area.offset();
-						startX = event.pageX;
-						startY = event.pageY;
-						// firefox like coming up with fraction values from offset()
-						startPositionX = Math.floor(event.pageX - offset.left);
-						startPositionY = Math.floor(event.pageY - offset.top);
-						
-						rect = new Rect(
-							startPositionX,
-							startPositionY,
-							1, 1
-						);
-						
-						selectArea._highlightRect(rect);
-						isDragging = true;
-						event.preventDefault();
-					}
-				]);
-				
-				selectArea._listeners.push([
-					selectArea._$area, 'mousemove', function(event) {
-						if (!isDragging) { return; }
-						
-						rect.x = startPositionX + Math.min(event.pageX - startX, 0);
-						rect.y = startPositionY + Math.min(event.pageY - startY, 0);
-						rect.width = Math.abs(event.pageX - startX) || 1;
-						rect.height = Math.abs(event.pageY - startY) || 1;
-						selectArea._highlightRect(rect);
-					}
-				]);
-				
-				selectArea._listeners.push([
-					selectArea._$area, 'mouseup', function(event) {
-						if (!isDragging) { return; }
-						isDragging = false;
-						selectArea.trigger('select', rect);
-					}
-				]);
-				
-				selectArea._listeners.forEach(function(set) {
-					set[0].bind.apply( set[0], set.slice(1) );
-				});
-				
-				return selectArea;
-			};
-			
-			SelectAreaProto.deactivate = function() {
-				this._listeners.forEach = function(set) {
-					set[0].unbind.apply( set[0], set.slice(1) );
-				};
-				
-				return this;
-			};
-			
-			SelectAreaProto._highlightRect = function(rect) {
-				this._$highlight.css({
-					left: rect.x,
-					top: rect.y,
-					width: rect.width,
-					height: rect.height
-				});
-			};
-			
-			return SelectArea;
-		})();
+	var SelectArea = (function() {
+		function SelectArea($area, $highlight) {
+			this._$area = $area;
+			this._$highlight = $highlight;
+			this._listeners = [];
+		}
 		
+		var SelectAreaProto = SelectArea.prototype = new MicroEvent;
+		
+		SelectAreaProto.activate = function() {
+			var selectArea = this,
+				rect = new Rect(0, 0, 0, 0),
+				startX, startY,
+				startPositionX, startPositionY,
+				isDragging;
+			
+			selectArea._listeners.push([
+				selectArea._$area, 'mousedown', function(event) {
+					var offset = selectArea._$area.offset();
+					startX = event.pageX;
+					startY = event.pageY;
+					// firefox like coming up with fraction values from offset()
+					startPositionX = Math.floor(event.pageX - offset.left);
+					startPositionY = Math.floor(event.pageY - offset.top);
+					
+					rect = new Rect(
+						startPositionX,
+						startPositionY,
+						1, 1
+					);
+					
+					selectArea._highlightRect(rect);
+					isDragging = true;
+					event.preventDefault();
+				}
+			]);
+			
+			selectArea._listeners.push([
+				selectArea._$area, 'mousemove', function(event) {
+					if (!isDragging) { return; }
+					
+					rect.x = startPositionX + Math.min(event.pageX - startX, 0);
+					rect.y = startPositionY + Math.min(event.pageY - startY, 0);
+					rect.width = Math.abs(event.pageX - startX) || 1;
+					rect.height = Math.abs(event.pageY - startY) || 1;
+					selectArea._highlightRect(rect);
+				}
+			]);
+			
+			selectArea._listeners.push([
+				selectArea._$area, 'mouseup', function(event) {
+					if (!isDragging) { return; }
+					isDragging = false;
+					selectArea.trigger('select', rect);
+				}
+			]);
+			
+			selectArea._listeners.forEach(function(set) {
+				set[0].bind.apply( set[0], set.slice(1) );
+			});
+			
+			return selectArea;
+		};
+		
+		SelectAreaProto.deactivate = function() {
+			this._listeners.forEach = function(set) {
+				set[0].unbind.apply( set[0], set.slice(1) );
+			};
+			
+			return this;
+		};
+		
+		SelectAreaProto._highlightRect = function(rect) {
+			this._$highlight.css({
+				left: rect.x,
+				top: rect.y,
+				width: rect.width,
+				height: rect.height
+			});
+		};
+		
+		return SelectArea;
+	})();
+	
+	var SpriteCanvasView = (function() {
 		function SpriteCanvasView(spriteCanvas, $appendToElm) {
 			var spriteCanvasView = this,
 				$container = $('<div class="sprite-canvas-container"/>'),
@@ -278,7 +296,8 @@
 			$container.append( $canvas ).append( this._$highlight ).appendTo( $appendToElm );
 			
 			selectArea.bind('select', function(rect) {
-				var spriteRect = spriteCanvas.expandToSpriteBoundry(rect);
+				var spriteRect = spriteCanvas.trimBg(rect);
+				spriteRect = spriteCanvas.expandToSpriteBoundry(rect);
 				spriteCanvasView._setCurrentRect(spriteRect);
 			});
 		}
