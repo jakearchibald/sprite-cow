@@ -179,30 +179,106 @@
 	})();
 	
 	var SpriteCanvasView = (function() {
+		var SelectArea = (function() {
+			function SelectArea($area, $highlight) {
+				this._$area = $area;
+				this._$highlight = $highlight;
+				this._listeners = [];
+			}
+			
+			var SelectAreaProto = SelectArea.prototype = new MicroEvent;
+			
+			SelectAreaProto.activate = function() {
+				var selectArea = this,
+					rect = new Rect(0, 0, 0, 0),
+					startX, startY,
+					startPositionX, startPositionY,
+					isDragging;
+				
+				selectArea._listeners.push([
+					selectArea._$area, 'mousedown', function(event) {
+						var offset = selectArea._$area.offset();
+						startX = event.pageX;
+						startY = event.pageY;
+						// firefox like coming up with fraction values from offset()
+						startPositionX = Math.floor(event.pageX - offset.left);
+						startPositionY = Math.floor(event.pageY - offset.top);
+						
+						rect = new Rect(
+							startPositionX,
+							startPositionY,
+							1, 1
+						);
+						
+						selectArea._highlightRect(rect);
+						isDragging = true;
+						event.preventDefault();
+					}
+				]);
+				
+				selectArea._listeners.push([
+					selectArea._$area, 'mousemove', function(event) {
+						if (!isDragging) { return; }
+						
+						rect.x = startPositionX + Math.min(event.pageX - startX, 0);
+						rect.y = startPositionY + Math.min(event.pageY - startY, 0);
+						rect.width = Math.abs(event.pageX - startX) || 1;
+						rect.height = Math.abs(event.pageY - startY) || 1;
+						selectArea._highlightRect(rect);
+					}
+				]);
+				
+				selectArea._listeners.push([
+					selectArea._$area, 'mouseup', function(event) {
+						if (!isDragging) { return; }
+						isDragging = false;
+						selectArea.trigger('select', rect);
+					}
+				]);
+				
+				selectArea._listeners.forEach(function(set) {
+					set[0].bind.apply( set[0], set.slice(1) );
+				});
+				
+				return selectArea;
+			};
+			
+			SelectAreaProto.deactivate = function() {
+				this._listeners.forEach = function(set) {
+					set[0].unbind.apply( set[0], set.slice(1) );
+				};
+				
+				return this;
+			};
+			
+			SelectAreaProto._highlightRect = function(rect) {
+				this._$highlight.css({
+					left: rect.x,
+					top: rect.y,
+					width: rect.width,
+					height: rect.height
+				});
+			};
+			
+			return SelectArea;
+		})();
+		
 		function SpriteCanvasView(spriteCanvas, $appendToElm) {
 			var spriteCanvasView = this,
 				$container = $('<div class="sprite-canvas-container"/>'),
-				$canvas = $( spriteCanvas.canvas );
+				$canvas = $( spriteCanvas.canvas ),
+				$highlight = $('<div class="highlight"/>'),
+				selectArea = new SelectArea($canvas, $highlight).activate();
 				
 			this._$container = $container;
 			this._spriteCanvas = spriteCanvas;
-			this._$highlight = $('<div class="highlight"/>');
+			this._$highlight = $highlight;
 			this.currentRect = new Rect(0, 0, 0, 0);
 			
 			$container.append( $canvas ).append( this._$highlight ).appendTo( $appendToElm );
 			
-			$canvas.mousedown(function(event) {
-				var offset = $canvas.offset(),
-					rect = new Rect(
-						// firefox like coming up with fraction values from offset()
-						Math.floor(event.pageX - offset.left),
-						Math.floor(event.pageY - offset.top),
-						1, 1
-					),
-					spriteRect = spriteCanvas.expandToSpriteBoundry(rect, function() {
-						spriteCanvasView._highlightRect(rect);
-					});
-					
+			selectArea.bind('select', function(rect) {
+				var spriteRect = spriteCanvas.expandToSpriteBoundry(rect);
 				spriteCanvasView._setCurrentRect(spriteRect);
 			});
 		}

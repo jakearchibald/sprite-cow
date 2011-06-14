@@ -8,6 +8,7 @@
 	left: 0;
 	width: 5px;
 	height: 5px;
+	pointer-events: none;
 }
 .css-output {
 	display: block;
