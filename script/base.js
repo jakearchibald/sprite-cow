@@ -407,14 +407,15 @@
 	
 	var SpriteSelector = (function() {
 		
-		function SpriteSelector($container) {
-			$container = $( $container );
+		function SpriteSelector($canvasContainer, $codeContainer) {
+			$canvasContainer = $( $canvasContainer );
+			$codeContainer = $( $codeContainer );
 			
 			var spriteSelector = this,
 				spriteCanvas = new SpriteCanvas(),
-				spriteCanvasView = new SpriteCanvasView( spriteCanvas, $container ),
-				imgInput = new ImgInput( $container ),
-				cssOutput = new CssOutput( $container );
+				spriteCanvasView = new SpriteCanvasView( spriteCanvas, $canvasContainer ),
+				imgInput = new ImgInput( $codeContainer ),
+				cssOutput = new CssOutput( $codeContainer );
 			
 			imgInput.bind('load', function(img) {
 				spriteCanvas.setImg(img);
@@ -434,5 +435,5 @@
 	
 	
 	// here we go...
-	var spriteSelector = new SpriteSelector('#sprite-selector');
+	var spriteSelector = new SpriteSelector('.canvas-view', '.code-view');
 })(document);
