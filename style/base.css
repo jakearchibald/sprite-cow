@@ -1,5 +1,5 @@
 html {
-	background: #0091d5 url(imgs/grid.png);
+	background: url(imgs/grid.png), -webkit-gradient(radial, center center, 135, center center, 570, from(#0091d5), to(#004a86));
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -13,38 +13,50 @@ body {
 	-webkit-box-pack: justify;
 }
 
-.canvas-view {
-	background: url(imgs/trans.png);
-	text-align: center;
-	line-height: 1;
-	-webkit-box-flex: 1;
-	display: -webkit-box;
-	-webkit-box-pack: center;
-	overflow: auto;
-}
+/* Header */
+	h1 {
+		text-align: center;
+		color: #fff;
+		font: normal 4em/1 prowin, monospace;
+		padding: 30px 0;
+	}
+/* Canvas */
+	.canvas-view {
+		background: url(imgs/trans.png);
+		text-align: center;
+		line-height: 1;
+		-webkit-box-flex: 1;
+		display: -webkit-box;
+		-webkit-box-pack: center;
+		-webkit-box-align: center;
+		overflow: auto;
+		-webkit-transition: all 3s;
+	}
+	
+	.sprite-canvas-container {
+		position: relative;
+	}
+	.sprite-canvas-container canvas {
+		display: block;
+	}
+	.sprite-canvas-container .highlight {
+		background: rgba(0, 90, 255, 0.25);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 5px;
+		height: 5px;
+		pointer-events: none;
+		border: 1px solid rgba(0, 114, 255, 0.5);
+		box-sizing: border-box;
+	}
+/* Code ouput */
+	.css-output {
+		display: block;
+		white-space: pre;
+	}
 
-.sprite-canvas-container {
-	position: relative;
-}
-.sprite-canvas-container canvas {
-	display: block;
-}
-.sprite-canvas-container .highlight {
-	background: rgba(0, 90, 255, 0.25);
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 5px;
-	height: 5px;
-	pointer-events: none;
-	border: 1px solid rgba(0, 114, 255, 0.5);
-	box-sizing: border-box;
-}
-.css-output {
-	display: block;
-	white-space: pre;
-}
-
-body > footer {
-	background: rgba(0, 0, 0, .23);
-}
+/* Footer */
+	body > footer {
+		background: rgba(0, 0, 0, .23);
+	}
