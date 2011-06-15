@@ -1,19 +1,111 @@
 html {
+	background: #fff;
 	background: -webkit-gradient(radial, center center, 135, center center, 570, from(#0091d5), to(#004a86));
 	height: 100%;
+}
+
+html, body {
 	margin: 0;
 	padding: 0;
 }
+
 body {
 	height: 100%;
 	margin: 0;
-	padding: 0 70px;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-box-pack: justify;
+	padding: 0;
 	background: url(imgs/grid.png);
 }
 
+/* Reset */
+	ul, ol, li, form, dl, dt, dd {
+		padding: 0;
+		margin: 0;
+		display: block;
+	}
+	ul, ol {
+		list-style: none;
+	}
+	article, aside, details, figcaption, figure,
+	footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+/* Text/Fonts */
+	body, select, input, textarea {
+		color: #333;
+	}
+	body {
+		font:13px/1.231 sans-serif;
+		*font-size:small;
+	}
+	pre, code, kbd, samp { font-family: monospace, sans-serif; }
+	/*
+	sub, sup { font-size: 75%; line-height: 0; position: relative; }
+	sup { top: -0.5em; }
+	sub { bottom: -0.25em; }
+	*/
+	p {
+		line-height: 1.4;
+	}
+/* Links */
+	a img {
+		border: 0;
+	}
+	
+	a:link, a:visited {
+		text-decoration: none;
+		color: #289de9;
+	}
+	
+	a:hover, a:active {
+		text-decoration: underline;
+	}
+/* Forms */
+	/* Webkit browsers add a 2px margin outside the chrome of form elements */
+	select, input, textarea, button { font:99% sans-serif; margin: 0; }
+	
+	input, select {
+		vertical-align: middle;
+		_vertical-align: text-bottom;
+	}
+	
+	input[type="radio"] { vertical-align: text-bottom; }
+	input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
+	
+	textarea, input {
+		font-family: arial, sans-serif;
+		font-size: 1em;
+	}
+	
+	button.custom {
+		padding: 0;
+		margin: 0;
+		border: 0;
+		background: none;
+		cursor: pointer;
+		overflow: visible;
+		vertical-align: middle;
+		font-size: 1em;
+		width: auto;
+	}
+	button.custom::-moz-focus-inner { 
+		border: 0;
+		padding: 0;
+	}
+	legend { *margin-left: -7px; } 
+	
+	label, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
+
+/*******************************************
+ ********* Section specific styles *********
+ *******************************************/
+
+/* Main container */
+	.container {		
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-box-pack: justify;
+		height: 100%;
+	}
 /* Header */
 	h1 {
 		text-align: center;
@@ -50,6 +142,7 @@ body {
 		pointer-events: none;
 		border: 1px solid rgba(0, 114, 255, 0.5);
 		box-sizing: border-box;
+		display: none;
 	}
 /* Code ouput */
 	.css-output {
@@ -58,6 +151,6 @@ body {
 	}
 
 /* Footer */
-	body > footer {
+	.container > footer {
 		background: rgba(0, 0, 0, .23);
 	}

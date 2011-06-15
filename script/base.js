@@ -229,6 +229,7 @@
 					);
 					
 					selectArea._highlightRect(rect);
+					selectArea._$highlight.css('display', 'block');
 					isDragging = true;
 					event.preventDefault();
 				}
@@ -262,9 +263,9 @@
 		};
 		
 		SelectAreaProto.deactivate = function() {
-			this._listeners.forEach = function(set) {
+			this._listeners.forEach(function(set) {
 				set[0].unbind.apply( set[0], set.slice(1) );
-			};
+			});
 			
 			return this;
 		};
@@ -287,12 +288,13 @@
 				$container = $('<div class="sprite-canvas-container"/>'),
 				$canvas = $( spriteCanvas.canvas ),
 				$highlight = $('<div class="highlight"/>'),
-				selectArea = new SelectArea($canvas, $highlight).activate();
+				selectArea = new SelectArea($canvas, $highlight);
 				
 			this._$container = $container;
 			this._spriteCanvas = spriteCanvas;
 			this._$highlight = $highlight;
 			this.currentRect = new Rect(0, 0, 0, 0);
+			this._selectArea = selectArea;
 			
 			$container.append( $canvas ).append( this._$highlight ).appendTo( $appendToElm );
 			
@@ -321,8 +323,20 @@
 				left: rect.x,
 				top: rect.y,
 				width: rect.width,
-				height: rect.height
+				height: rect.height,
+				display: 'block'
 			});
+		};
+		
+		SpriteCanvasViewProto.setTool = function(mode) {
+			var selectArea = this._selectArea;
+			selectArea.deactivate();
+			
+			switch (mode) {
+				case 'sprite':
+					selectArea.activate();
+					break;
+			}
 		};
 		
 		return SpriteCanvasView;
@@ -419,6 +433,7 @@
 			
 			imgInput.bind('load', function(img) {
 				spriteCanvas.setImg(img);
+				spriteCanvasView.setTool('sprite');
 				cssOutput.backgroundFileName = imgInput.fileName;
 			});
 			
