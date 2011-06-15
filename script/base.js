@@ -345,7 +345,8 @@
 	var ImgInput = (function() {
 		function ImgInput($container, $dropzone) {
 			var imgInput = this,
-				$fileInput = $('<input type="file" accept="image/*">').appendTo( $container );
+				$fileInput = $('<input type="file" accept="image/*" class="upload-input">').appendTo( $container ),
+				$styledButton = $('<div role="button" class="select-btn">Select Image</div>').appendTo( $container );
 			
 			// todo - handles drag & drop
 			imgInput.fileName = '';
@@ -355,6 +356,12 @@
 				imgInput.fileName = file.fileName;
 				file && imgInput._fileToImg(file);
 			});
+			
+			// calling click on a file input needs a direct link to a user-triggered event, so we can't use jquery
+			$styledButton[0].addEventListener('click', function(event) {
+				event.preventDefault();
+				$fileInput[0].click();
+			}, false);
 		}
 		
 		var ImgInputProto = ImgInput.prototype = new MicroEvent;
@@ -428,7 +435,7 @@
 			var spriteSelector = this,
 				spriteCanvas = new SpriteCanvas(),
 				spriteCanvasView = new SpriteCanvasView( spriteCanvas, $canvasContainer ),
-				imgInput = new ImgInput( $codeContainer ),
+				imgInput = new ImgInput( $canvasContainer ),
 				cssOutput = new CssOutput( $codeContainer );
 			
 			imgInput.bind('load', function(img) {
@@ -450,5 +457,5 @@
 	
 	
 	// here we go...
-	var spriteSelector = new SpriteSelector('.canvas-view', '.code-view');
+	var spriteSelector = new SpriteSelector('.canvas-view', '.further-detail');
 })(document);
