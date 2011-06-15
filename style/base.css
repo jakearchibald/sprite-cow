@@ -1,16 +1,17 @@
 html {
-	background: url(imgs/grid.png), -webkit-gradient(radial, center center, 135, center center, 570, from(#0091d5), to(#004a86));
+	background: -webkit-gradient(radial, center center, 135, center center, 570, from(#0091d5), to(#004a86));
 	height: 100%;
 	margin: 0;
 	padding: 0;
 }
 body {
 	height: 100%;
-	margin: 0 70px;
-	padding: 0;
+	margin: 0;
+	padding: 0 70px;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-box-pack: justify;
+	background: url(imgs/grid.png);
 }
 
 /* Header */
