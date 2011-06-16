@@ -1,6 +1,10 @@
 html {
-	background: #fff;
-	background: -webkit-gradient(radial, center center, 135, center center, 570, from(#0091d5), to(#004a86));
+	background: #004a86;
+	background: -webkit-radial-gradient(center center, circle cover, #0091d5 0%, #0091d5 15%, #004a86 100%);
+	background: -moz-radial-gradient(center center, circle cover, #0091d5 0%, #0091d5 15%, #004a86 100%);
+	background: -ms-radial-gradient(center center, circle cover, #0091d5 0%, #0091d5 15%, #004a86 100%);
+	background: -o-radial-gradient(center center, circle cover, #0091d5 0%, #0091d5 15%, #004a86 100%);
+	background: radial-gradient(center center, circle cover, #0091d5 0%, #0091d5 15%, #004a86 100%);
 	height: 100%;
 }
 
@@ -13,7 +17,7 @@ body {
 	height: 100%;
 	min-height: 100%;
 	margin: 0;
-	padding: 0;
+	padding: 0 30px;
 	background: url(imgs/grid.png);
 }
 
@@ -109,16 +113,14 @@ body {
 		margin: 0 auto;
 		position: relative;
 		display: table;
-		padding: 0 30px;
 	}
 	.container.intro {
 		width: 835px;
 	}
 /* Header */
 	.container > header {
-		display: -webkit-box;
-		-webkit-box-pack: center;
-		-webkit-box-align: center;
+		display: table-cell;
+		vertical-align: middle;
 		height: 100px;
 	}
 	.container.intro > header {
@@ -135,20 +137,23 @@ body {
 	.canvas-view {
 		text-align: center;
 		display: table-row;
-		overflow: auto;
+	}
+	.canvas-cell {
+		display: table-cell;
 		height: 100%;
 	}
 	.canvas-inner {
+		overflow: auto;
 		position: relative;
 		background: url(imgs/trans.png);
 		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
 		height: 100%;
 	}
-	.container.intro .canvas-view {
+	.container.intro .canvas-cell {
 		height: 170px;
 	}
 	.sprite-canvas-container {
-		position: relative;
+		position: absolute;
 	}
 	.sprite-canvas-container canvas {
 		display: block;
@@ -162,6 +167,7 @@ body {
 		height: 5px;
 		pointer-events: none;
 		border: 1px solid rgba(0, 114, 255, 0.5);
+		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		display: none;
 	}
@@ -174,15 +180,20 @@ body {
 		.select-btn {
 			position: absolute;
 			top: 54px;
-			left: 265px;
+			left: 293px;
 			border-radius: 100px;
 			color: #fff;
 			font: normal 2.4em/1 prowin, monospace;
 			padding: 13px 28px;
-			background: -webkit-linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
 			box-shadow: inset 0 0 6px rgba(255, 108, 0, 1), 0 3px 6px rgba(0, 0, 0, 0.7);
+			background: -webkit-linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
+			background:    -moz-linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
+			background:     -ms-linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
+			background:      -o-linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
+			background:         linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
 			cursor: pointer;
 			text-shadow: rgba(0,0,0,0.5) 0 2px 0;
+			display: none;
 		}
 		.container.intro .select-btn {
 			display: block;
@@ -191,7 +202,7 @@ body {
 	.further-detail {
 		display: table-row;
 		overflow: hidden;
-		height: 100px;
+		/*height: 100px;*/
 	}
 	.container.intro .further-detail {
 		height: 100%;
@@ -221,7 +232,9 @@ body {
 			display: block;
 			white-space: pre;
 			background: rgba(0, 0, 0, .23);
-			height: 100%;
+			margin: 14px 0 10px;
+			padding: 16px 24px;
+			font: normal 1.2em/1 prowin, monospace;
 		}
 		.container.intro .css-output {
 			display: none;
@@ -232,4 +245,5 @@ body {
 		display: table-row;
 		height: 40px;
 		background: rgba(0, 0, 0, .23);
+		
 	}

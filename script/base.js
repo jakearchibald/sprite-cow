@@ -282,6 +282,17 @@
 		return SelectArea;
 	})();
 	
+	var SpriteCanvasToolbar = (function() {
+		function SpriteCanvasToolbar($appendToElm) {
+			// YOU ARE HERE
+			// display bg colour
+		}
+		
+		var SpriteCanvasToolbarProto = SpriteCanvasToolbar.prototype = new MicroEvent;
+		
+		return SpriteCanvasToolbar;
+	})();
+	
 	var SpriteCanvasView = (function() {
 		function SpriteCanvasView(spriteCanvas, $appendToElm) {
 			var spriteCanvasView = this,
@@ -428,9 +439,10 @@
 	
 	var SpriteSelector = (function() {
 		
-		function SpriteSelector($canvasContainer, $codeContainer) {
+		function SpriteSelector($pageContainer, $canvasContainer, $codeContainer) {
 			$canvasContainer = $( $canvasContainer );
 			$codeContainer = $( $codeContainer );
+			$pageContainer = $( $pageContainer );
 			
 			var spriteSelector = this,
 				spriteCanvas = new SpriteCanvas(),
@@ -442,6 +454,7 @@
 				spriteCanvas.setImg(img);
 				spriteCanvasView.setTool('sprite');
 				cssOutput.backgroundFileName = imgInput.fileName;
+				$pageContainer.removeClass('intro');
 			});
 			
 			spriteCanvasView.bind('rectChange', function(rect) {
@@ -457,5 +470,5 @@
 	
 	
 	// here we go...
-	var spriteSelector = new SpriteSelector('.canvas-inner', '.further-detail');
+	var spriteSelector = new SpriteSelector('.container', '.canvas-inner', '.further-detail');
 })(document);
