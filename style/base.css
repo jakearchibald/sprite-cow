@@ -107,16 +107,13 @@ body {
 		height: 100%;
 		margin: 0 auto;
 		position: relative;
+		display: table;
 	}
 	.container.intro {
 		width: 835px;
 	}
 /* Header */
 	.container > header {
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
 		display: -webkit-box;
 		-webkit-box-pack: center;
 		-webkit-box-align: center;
@@ -133,9 +130,7 @@ body {
 	}
 /* Canvas */
 	.canvas-view {
-		position: absolute;
-		left: 0;
-		right: 0;
+		position: relative;
 		background: url(imgs/trans.png);
 		text-align: center;
 		display: -webkit-box;
@@ -146,7 +141,6 @@ body {
 	}
 	.container.intro .canvas-view {
 		height: 170px;
-		top: 169px;
 	}
 	.sprite-canvas-container {
 		position: relative;
@@ -187,9 +181,7 @@ body {
 		}
 /* Further detail */
 	.further-detail {
-		position: absolute;
-		left: 0;
-		right: 0;
+		display: table-row;
 		overflow: hidden;
 	}
 	.container.intro .further-detail {
@@ -221,10 +213,7 @@ body {
 
 /* Footer */
 	.container > footer {
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		display: table-row;
 		height: 40px;
 		background: rgba(0, 0, 0, .23);
 	}
