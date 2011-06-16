@@ -103,40 +103,50 @@ body {
 
 /* Main container */
 	.container {		
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-box-pack: justify;
+		width: 100%;
 		height: 100%;
-		margin: 0 40px;
+		margin: 0 auto;
+		position: relative;
 	}
 	.container.intro {
-		margin: 0 auto;
 		width: 835px;
 	}
 /* Header */
-	header h1 {
+	.container > header {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		display: -webkit-box;
+		-webkit-box-pack: center;
+		-webkit-box-align: center;
+	}
+	.container.intro > header {
+		height: 169px;
+	}
+	.container > header h1 {
 		text-align: center;
 		color: #fff;
 		font: normal 5.3em/1 prowin, monospace;
-		padding: 51px 0;
+		margin: 0;
 		text-shadow: #004a86 0 6px;
 	}
 /* Canvas */
 	.canvas-view {
-		position: relative;
+		position: absolute;
+		left: 0;
+		right: 0;
 		background: url(imgs/trans.png);
 		text-align: center;
-		line-height: 1;
-		-webkit-box-flex: 1;
 		display: -webkit-box;
 		-webkit-box-pack: center;
 		-webkit-box-align: center;
 		overflow: auto;
+		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
 	}
 	.container.intro .canvas-view {
 		height: 170px;
-		-webkit-box-flex: 0;
-		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+		top: 169px;
 	}
 	.sprite-canvas-container {
 		position: relative;
@@ -156,34 +166,53 @@ body {
 		box-sizing: border-box;
 		display: none;
 	}
-/* Upload button */
-	.upload-input {
-		position: absolute;
-		top: -5000px;
-		left: -5000px;
-	}
-	.select-btn {
-		position: absolute;
-		top: 54px;
-		left: 295px;
-		border-radius: 100px;
-		color: #fff;
-		font: normal 2.4em/1 prowin, monospace;
-		padding: 13px 28px;
-		background: -webkit-linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
-		box-shadow: inset 0 0 6px rgba(255, 108, 0, 1), 0 3px 6px rgba(0, 0, 0, 0.7);
-		cursor: pointer;
-		text-shadow: rgba(0,0,0,0.5) 0 2px 0;
-	}
+	/* Upload button */
+		.upload-input {
+			position: absolute;
+			top: -5000px;
+			left: -5000px;
+		}
+		.select-btn {
+			position: absolute;
+			top: 54px;
+			left: 295px;
+			border-radius: 100px;
+			color: #fff;
+			font: normal 2.4em/1 prowin, monospace;
+			padding: 13px 28px;
+			background: -webkit-linear-gradient(top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%);
+			box-shadow: inset 0 0 6px rgba(255, 108, 0, 1), 0 3px 6px rgba(0, 0, 0, 0.7);
+			cursor: pointer;
+			text-shadow: rgba(0,0,0,0.5) 0 2px 0;
+		}
 /* Further detail */
 	.further-detail {
-		/* Odd webkit bug... doesn't like going back to 0 */
-		-webkit-box-flex: 0.1;
-		height: auto;
+		position: absolute;
+		left: 0;
+		right: 0;
+		overflow: hidden;
 	}
 	.container.intro .further-detail {
-		-webkit-box-flex: 1;
+		top: 339px;
+		bottom: 40px;
 	}
+	/* Intro copy */
+		.intro-copy {
+			display: table-row;
+		}
+		.intro-copy > section {
+			display: table-cell;
+			padding: 37px;
+			width: 50%;
+		}
+		.intro-copy h1 {
+			font: normal 3.1em/1 prowin, monospace;
+			margin: 0;
+			text-shadow: #004a86 0 4px;
+		}
+		.intro-copy p {
+			font: normal 1.1em/1.5 sans-serif;
+		}
 /* Code ouput */
 	.css-output {
 		display: block;
@@ -192,5 +221,10 @@ body {
 
 /* Footer */
 	.container > footer {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 40px;
 		background: rgba(0, 0, 0, .23);
 	}
