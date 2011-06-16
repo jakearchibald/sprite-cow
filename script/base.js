@@ -392,7 +392,7 @@
 		}
 		
 		function CssOutput($appendTo) {
-			this._$container = $('<code class="css-output"/>').appendTo( $appendTo );
+			this._$container = $('<code class="css-output">CSS code</code>').appendTo( $appendTo );
 			this.backgroundFileName = '';
 			this.path = 'images/';
 			this.rect = new Rect(0, 0, 0, 0);
@@ -457,5 +457,5 @@
 	
 	
 	// here we go...
-	var spriteSelector = new SpriteSelector('.canvas-view', '.further-detail');
+	var spriteSelector = new SpriteSelector('.canvas-inner', '.further-detail');
 })(document);
