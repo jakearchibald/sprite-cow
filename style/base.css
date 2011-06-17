@@ -252,7 +252,7 @@ body {
 	}
 	.toolbar {
 		overflow: hidden;
-		padding: 5px;
+		padding: 5px 6px;
 		position: relative;
 		z-index: 1;
 		border-style: solid;
@@ -285,6 +285,7 @@ body {
 		float: left;
 		padding: 5px 10px;
 		color: #555;
+		opacity: 0;
 	}
 	.toolbar .select-sprite div {
 		background: url('imgs/wand.png') 6px 50% no-repeat;

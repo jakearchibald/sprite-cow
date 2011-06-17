@@ -196,22 +196,62 @@
 		return SpriteCanvas;
 	})();
 	
-	var SelectPoint = (function() {
-		function SelectPoint() {
-			// YOU ARE HERE
+	var SelectColor = (function() {
+		
+		function SelectColor($canvas) {
+			this._$canvas = $canvas;
+			this._context = $canvas[0].getContext('2d');
+			this._listeners = [];
 		}
 		
-		var SelectPointProto = SelectPoint.prototype = new MicroEvent;
+		var SelectColorProto = SelectColor.prototype = new MicroEvent;
 		
-		SelectPointProto.activate = function() {
+		SelectColorProto.activate = function() {
+			var selectColor = this,
+				canvasX, canvasY,
+				context = selectColor._context,
+				$canvas = selectColor._$canvas;
 			
+			selectColor._listeners.push([
+				$canvas, 'mousedown', function(event) {
+					//if (event.which !== 0) { return; }
+					var color = selectColor._getColourAtMouse(event.pageX, event.pageY);
+					selectColor.trigger( 'select', color );
+					event.preventDefault();
+				}
+			]);
+			
+			selectColor._listeners.push([
+				$canvas, 'mousemove', function(event) {
+					var color = selectColor._getColourAtMouse(event.pageX, event.pageY);
+					selectColor.trigger( 'move', color );
+				}
+			]);
+			
+			selectColor._listeners.forEach(function(set) {
+				set[0].bind.apply( set[0], set.slice(1) );
+			});
+			
+			return selectColor;
 		};
 		
-		SelectPointProto.deactivate = function() {
+		SelectColorProto.deactivate = function() {
+			this._listeners.forEach(function(set) {
+				set[0].unbind.apply( set[0], set.slice(1) );
+			});
 			
+			return this;
 		};
 		
-		return SelectPoint;
+		SelectColorProto._getColourAtMouse = function(pageX, pageY) {
+			var offset = this._$canvas.offset(),
+				x = pageX - Math.floor(offset.left),
+				y = pageY - Math.floor(offset.top);
+			
+			return this._context.getImageData(x, y, 1, 1).data;
+		};
+		
+		return SelectColor;
 	})();
 	
 	var SelectArea = (function() {
@@ -231,9 +271,10 @@
 				isDragging,
 				$document = $(document);
 			
+			
 			selectArea._listeners.push([
 				selectArea._$area, 'mousedown', function(event) {
-					if (event.which !== 0) { return; }
+					//if (event.which !== 0) { return; }
 					var offset = selectArea._$area.offset();
 					startX = event.pageX;
 					startY = event.pageY;
@@ -313,27 +354,45 @@
 					'</div>' +
 				'').appendTo( $appendToElm ),
 				$children = $container.children(),
-				events = [
+				toolNames = [
 					'selectSprite',
 					'selectBg',
 					'copyCss'
 				];
 				
-			events.forEach(function(eventName, i) {
+			toolNames.forEach(function(toolName, i) {
 				$children.eq(i).click(function(event) {
-					toolbar.trigger(eventName);
+					toolbar.trigger(toolName);
 					event.preventDefault();
 				});
 			});
 			
 			toolbar._$feedback = $children.slice(-1);
+			toolbar._toolNames = toolNames;
+			toolbar._$children = $children;
 		}
 		
 		var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new MicroEvent;
 		
 		SpriteCowToolbarProto.feedback = function(msg) {
-			this._$feedback.text(msg);
+			// opacity 0.999 to avoid antialiasing differences when 1
+			this._$feedback.stop(true, true).text(msg).css('opacity', 0.999).animate({
+				// should be using delay() here, but http://bugs.jquery.com/ticket/6150 makes it not work
+				// need to specify a dummy property to animate, cuh!
+				_:0
+			}, 3000).animate({
+				opacity: 0
+			}, 2000);
+			
 			return this;
+		};
+		
+		SpriteCowToolbarProto.activate = function(toolName) {
+			console.log(this._toolNames.indexOf(toolName))
+			this._$children.removeClass('active')
+				.eq( this._toolNames.indexOf(toolName) )
+				.addClass('active');
+			
 		};
 		
 		return SpriteCowToolbar;
@@ -345,13 +404,15 @@
 				$container = $('<div class="sprite-canvas-container"/>'),
 				$canvas = $( spriteCanvas.canvas ),
 				$highlight = $('<div class="highlight"/>'),
-				selectArea = new SelectArea($canvas, $highlight);
+				selectArea = new SelectArea($canvas, $highlight),
+				selectColor = new SelectColor($canvas);
 				
 			this._$container = $container;
 			this._spriteCanvas = spriteCanvas;
 			this._$highlight = $highlight;
 			this.currentRect = new Rect(0, 0, 0, 0);
 			this._selectArea = selectArea;
+			this._selectColor = selectColor;
 			
 			$container.append( $canvas ).append( this._$highlight ).appendTo( $appendToElm );
 			
@@ -364,6 +425,10 @@
 					spriteCanvasView._highlightRect(rect);
 				}
 				spriteCanvasView._setCurrentRect(spriteRect);
+			});
+			
+			selectColor.bind('move', function(color) {
+				spriteCanvasView.trigger('bgColorHover', color);
 			});
 		}
 		
@@ -386,12 +451,18 @@
 		};
 		
 		SpriteCanvasViewProto.setTool = function(mode) {
-			var selectArea = this._selectArea;
+			var selectArea = this._selectArea,
+				selectColor = this._selectColor;
+			
 			selectArea.deactivate();
+			selectColor.deactivate();
 			
 			switch (mode) {
-				case 'sprite':
+				case 'selectSprite':
 					selectArea.activate();
+					break;
+				case 'selectBg':
+					selectColor.activate();
 					break;
 			}
 		};
@@ -485,6 +556,13 @@
 	
 	// init
 	(function() {
+		function colourBytesToCss(color) {
+			if (color[3] === 0) {
+				return 'transparent';
+			}
+			return 'rgba(' + color[0] + ', ' + color[1] + ', ' + color[2] + ', ' + String( color[3] / 255 ).slice(0, 5) + ')';
+		}
+		
 		var $canvasContainer  = $('.canvas-inner'),
 			$codeContainer    = $('.further-detail'),
 			$pageContainer    = $('.container'),
@@ -494,14 +572,12 @@
 			imgInput          = new ImgInput( $canvasContainer ),
 			cssOutput         = new CssOutput( $codeContainer ),
 			toolbar           = new SpriteCowToolbar( $toolbarContainer );
-		
-		// YOU ARE HERE
-		// Give a the toolbar a gradient and move it inside the element with drop shadow, but not overflow
-		// Add 'open' button
+			
+		// TODO: open button
 		
 		imgInput.bind('load', function(img) {
 			spriteCanvas.setImg(img);
-			spriteCanvasView.setTool('sprite');
+			spriteCanvasView.setTool('selectSprite');
 			cssOutput.backgroundFileName = imgInput.fileName;
 			$pageContainer.removeClass('intro');
 		});
@@ -509,6 +585,16 @@
 		spriteCanvasView.bind('rectChange', function(rect) {
 			cssOutput.rect = rect;
 			cssOutput.update();
+		});
+		
+		spriteCanvasView.bind('bgColorHover', function(color) {
+			toolbar.feedback( colourBytesToCss(color) );
+		});
+		
+		toolbar.bind('selectBg', function() {
+			var toolName = 'selectBg';
+			spriteCanvasView.setTool(toolName);
+			toolbar.activate(toolName)
 		});
 	})();
 	
