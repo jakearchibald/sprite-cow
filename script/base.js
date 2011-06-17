@@ -94,6 +94,8 @@
 		SpriteCanvasProto.trimBg = function(rect) {
 			var edgeBgResult;
 			
+			rect = this._restrictRectToBoundry(rect);
+			
 			do {
 				edgeBgResult = this._edgesAreBg(rect);
 				rect = this._contractRect(rect, edgeBgResult);
@@ -101,6 +103,16 @@
 			
 			return rect;
 		};
+		
+		SpriteCanvasProto._restrictRectToBoundry = function(rect) {
+			var canvas = this.canvas;
+			
+			rect.x = Math.max(rect.x, 0);
+			rect.y = Math.max(rect.y, 0);
+			rect.width  = Math.min(rect.width,  canvas.width  - rect.x);
+			rect.height = Math.min(rect.height, canvas.height - rect.y);
+			return rect;
+		}
 		
 		SpriteCanvasProto.expandToSpriteBoundry = function(rect, callback) {
 			var edgeBgResult = this._edgesAreBg(rect),
@@ -418,13 +430,18 @@
 			
 			selectArea.bind('select', function(rect) {
 				var spriteRect = spriteCanvas.trimBg(rect);
-				if (spriteRect.width && spriteRect.height) { // false if clicked on transparent pixel
+				if (spriteRect.width && spriteRect.height) { // false if clicked on bg pixel
 					spriteRect = spriteCanvas.expandToSpriteBoundry(rect);
 				}
 				else {
 					spriteCanvasView._highlightRect(rect);
 				}
 				spriteCanvasView._setCurrentRect(spriteRect);
+			});
+			
+			selectColor.bind('select', function(color) {
+				spriteCanvasView.trigger('bgColorSelect', color);
+				spriteCanvas.setBg(color);
 			});
 			
 			selectColor.bind('move', function(color) {
@@ -441,19 +458,25 @@
 		};
 		
 		SpriteCanvasViewProto._highlightRect = function(rect) {
-			this._$highlight.css({
-				left: rect.x,
-				top: rect.y,
-				width: rect.width,
-				height: rect.height,
-				display: 'block'
-			});
+			if (rect && rect.width && rect.height) {
+				this._$highlight.css({
+					left: rect.x,
+					top: rect.y,
+					width: rect.width,
+					height: rect.height,
+					display: 'block'
+				});				
+			}
+			else {
+				this._$highlight.css('display', 'none');
+			}
 		};
 		
 		SpriteCanvasViewProto.setTool = function(mode) {
 			var selectArea = this._selectArea,
 				selectColor = this._selectColor;
 			
+			this._highlightRect();
 			selectArea.deactivate();
 			selectColor.deactivate();
 			
@@ -520,7 +543,7 @@
 		}
 		
 		function CssOutput($appendTo) {
-			this._$container = $('<code class="css-output">CSS code</code>').appendTo( $appendTo );
+			this._$container = $('<code class="css-output">\n\n\n\n\n</code>').appendTo( $appendTo );
 			this.backgroundFileName = '';
 			this.path = 'images/';
 			this.rect = new Rect(0, 0, 0, 0);
@@ -591,10 +614,17 @@
 			toolbar.feedback( colourBytesToCss(color) );
 		});
 		
+		spriteCanvasView.bind('bgColorSelect', function(color) {
+			var toolName = 'selectSprite';
+			spriteCanvasView.setTool(toolName);
+			toolbar.activate(toolName);
+			toolbar.feedback( colourBytesToCss(color) );
+		});
+		
 		toolbar.bind('selectBg', function() {
 			var toolName = 'selectBg';
 			spriteCanvasView.setTool(toolName);
-			toolbar.activate(toolName)
+			toolbar.activate(toolName);
 		});
 		
 		toolbar.bind('selectSprite', function() {
