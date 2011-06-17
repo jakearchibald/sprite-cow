@@ -596,6 +596,12 @@
 			spriteCanvasView.setTool(toolName);
 			toolbar.activate(toolName)
 		});
+		
+		toolbar.bind('selectSprite', function() {
+			var toolName = 'selectSprite';
+			spriteCanvasView.setTool(toolName);
+			toolbar.activate(toolName)
+		});
 	})();
 	
 })(document);
