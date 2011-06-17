@@ -196,6 +196,24 @@
 		return SpriteCanvas;
 	})();
 	
+	var SelectPoint = (function() {
+		function SelectPoint() {
+			// YOU ARE HERE
+		}
+		
+		var SelectPointProto = SelectPoint.prototype = new MicroEvent;
+		
+		SelectPointProto.activate = function() {
+			
+		};
+		
+		SelectPointProto.deactivate = function() {
+			
+		};
+		
+		return SelectPoint;
+	})();
+	
 	var SelectArea = (function() {
 		function SelectArea($area, $highlight) {
 			this._$area = $area;
