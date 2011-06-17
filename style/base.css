@@ -121,7 +121,7 @@ body {
 	.container > header {
 		display: table-cell;
 		vertical-align: middle;
-		height: 100px;
+		height: 79px;
 	}
 	.container.intro > header {
 		height: 169px;
@@ -132,6 +132,10 @@ body {
 		font: normal 5.3em/1 prowin, monospace;
 		margin: 0;
 		text-shadow: #004a86 0 6px;
+		-webkit-transform: scale(0.7);
+	}
+	.container.intro > header h1 {
+		-webkit-transform: scale(1);
 	}
 /* Canvas */
 	.canvas-view {
@@ -148,9 +152,11 @@ body {
 		background: url(imgs/trans.png);
 		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
 		height: 100%;
+		/*cursor: crosshair; meh, difficult to see */
 	}
 	.container.intro .canvas-cell {
 		height: 170px;
+		cursor: auto;
 	}
 	.sprite-canvas-container {
 		position: absolute;
@@ -242,19 +248,57 @@ body {
 /* Toolbar */
 	.toolbar-container {
 		display: table-row;
-		background: #ccc;
-		overflow: hidden;
 		position: relative;
-		z-index: 1;
 	}
 	.toolbar {
+		overflow: hidden;
 		padding: 5px;
+		position: relative;
+		z-index: 1;
+		border-style: solid;
+		border-width: 1px 0;
+		border-color: #e2e2e2 #000 #888;
+		color: #333;
+		border-radius: 5px 5px 0 0;
+		background-image: -webkit-linear-gradient(top, #d0d0d0, #a7a7a7);
 	}
 	.toolbar-container [role='button'] {
 		float: left;
+		border: 1px solid #888;
+		border-left-width: 0;
+		background: -webkit-linear-gradient(top, #fefefe, #b8b8b8);
+		cursor: pointer;
+	}
+	.toolbar-container [role='button'] div {
+		padding: 4px 10px 4px 26px;
+	}
+	.toolbar-container [role='button']:first-child {
+		border-width: 1px;
+		border-radius: 4px 0 0 4px;
+	}
+	.toolbar-container [role='button'].active {
+		background: #707070;
+		box-shadow: inset 0 3px 7px rgba(0,0,0,0.6);
+		color: #fff;
 	}
 	.toolbar-container .feedback {
-		float: right;
+		float: left;
+		padding: 5px 10px;
+		color: #555;
+	}
+	.toolbar .select-sprite div {
+		background: url('imgs/wand.png') 6px 50% no-repeat;
+	}
+	.toolbar .pick-bg {
+		border-radius: 0 4px 4px 0;
+		margin-right: 5px;
+	}
+	.toolbar .pick-bg div {
+		background: url('imgs/color-picker.png') 6px 50% no-repeat;
+	}
+	.toolbar .copy-css {
+		border-width: 1px;
+		border-radius: 4px;
 	}
 	.container.intro .toolbar-container {
 		display: none;

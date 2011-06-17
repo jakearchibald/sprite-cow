@@ -233,6 +233,7 @@
 			
 			selectArea._listeners.push([
 				selectArea._$area, 'mousedown', function(event) {
+					if (event.which !== 0) { return; }
 					var offset = selectArea._$area.offset();
 					startX = event.pageX;
 					startY = event.pageY;
@@ -305,10 +306,10 @@
 			var toolbar = this,
 				$container = $('' +
 					'<div class="toolbar">' +
-						'<div role="button" class="select-sprite active" title="Select sprite"></div>' +
-						'<div role="button" class="pick-bg" title="Pick background colour"></div>' +
-						'<div role="button" class="copy-css" title="Copy CSS"></div>' +
-						'<div class="feedback">Select sprite</div>' +
+						'<div role="button" class="select-sprite active"><div>Select Sprite</div></div>' +
+						'<div role="button" class="pick-bg"><div>Pick Background</div></div>' +
+						'<div role="button" class="copy-css"><div>Copy CSS</div></div>' +
+						'<span class="feedback"></span>' +
 					'</div>' +
 				'').appendTo( $appendToElm ),
 				$children = $container.children(),
