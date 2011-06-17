@@ -232,14 +232,33 @@ body {
 			display: block;
 			white-space: pre;
 			background: rgba(0, 0, 0, .23);
-			margin: 14px 0 10px;
+			margin: 0 0 10px;
 			padding: 16px 24px;
 			font: normal 1.2em/1 prowin, monospace;
 		}
 		.container.intro .css-output {
 			display: none;
 		}
-
+/* Toolbar */
+	.toolbar-container {
+		display: table-row;
+		background: #ccc;
+		overflow: hidden;
+		position: relative;
+		z-index: 1;
+	}
+	.toolbar {
+		padding: 5px;
+	}
+	.toolbar-container [role='button'] {
+		float: left;
+	}
+	.toolbar-container .feedback {
+		float: right;
+	}
+	.container.intro .toolbar-container {
+		display: none;
+	}
 /* Footer */
 	.container > footer {
 		display: table-row;

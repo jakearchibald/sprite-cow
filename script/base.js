@@ -300,15 +300,42 @@
 		return SelectArea;
 	})();
 	
-	var SpriteCanvasToolbar = (function() {
-		function SpriteCanvasToolbar($appendToElm) {
-			// YOU ARE HERE
-			// display bg colour
+	var SpriteCowToolbar = (function() {
+		function SpriteCowToolbar($appendToElm) {
+			var toolbar = this,
+				$container = $('' +
+					'<div class="toolbar">' +
+						'<div role="button" class="select-sprite active" title="Select sprite"></div>' +
+						'<div role="button" class="pick-bg" title="Pick background colour"></div>' +
+						'<div role="button" class="copy-css" title="Copy CSS"></div>' +
+						'<div class="feedback">Select sprite</div>' +
+					'</div>' +
+				'').appendTo( $appendToElm ),
+				$children = $container.children(),
+				events = [
+					'selectSprite',
+					'selectBg',
+					'copyCss'
+				];
+				
+			events.forEach(function(eventName, i) {
+				$children.eq(i).click(function(event) {
+					toolbar.trigger(eventName);
+					event.preventDefault();
+				});
+			});
+			
+			toolbar._$feedback = $children.slice(-1);
 		}
 		
-		var SpriteCanvasToolbarProto = SpriteCanvasToolbar.prototype = new MicroEvent;
+		var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new MicroEvent;
 		
-		return SpriteCanvasToolbar;
+		SpriteCowToolbarProto.feedback = function(msg) {
+			this._$feedback.text(msg);
+			return this;
+		};
+		
+		return SpriteCowToolbar;
 	})();
 	
 	var SpriteCanvasView = (function() {
@@ -455,38 +482,33 @@
 		return CssOutput;
 	})();
 	
-	var SpriteSelector = (function() {
+	// init
+	(function() {
+		var $canvasContainer  = $('.canvas-inner'),
+			$codeContainer    = $('.further-detail'),
+			$pageContainer    = $('.container'),
+			$toolbarContainer = $('.toolbar-container'),
+			spriteCanvas      = new SpriteCanvas(),
+			spriteCanvasView  = new SpriteCanvasView( spriteCanvas, $canvasContainer ),
+			imgInput          = new ImgInput( $canvasContainer ),
+			cssOutput         = new CssOutput( $codeContainer ),
+			toolbar           = new SpriteCowToolbar( $toolbarContainer );
 		
-		function SpriteSelector($pageContainer, $canvasContainer, $codeContainer) {
-			$canvasContainer = $( $canvasContainer );
-			$codeContainer = $( $codeContainer );
-			$pageContainer = $( $pageContainer );
-			
-			var spriteSelector = this,
-				spriteCanvas = new SpriteCanvas(),
-				spriteCanvasView = new SpriteCanvasView( spriteCanvas, $canvasContainer ),
-				imgInput = new ImgInput( $canvasContainer ),
-				cssOutput = new CssOutput( $codeContainer );
-			
-			imgInput.bind('load', function(img) {
-				spriteCanvas.setImg(img);
-				spriteCanvasView.setTool('sprite');
-				cssOutput.backgroundFileName = imgInput.fileName;
-				$pageContainer.removeClass('intro');
-			});
-			
-			spriteCanvasView.bind('rectChange', function(rect) {
-				cssOutput.rect = rect;
-				cssOutput.update();
-			})
-		}
+		// YOU ARE HERE
+		// Give a the toolbar a gradient and move it inside the element with drop shadow, but not overflow
+		// Add 'open' button
 		
-		var SpriteSelectorProto = SpriteSelector.prototype;
+		imgInput.bind('load', function(img) {
+			spriteCanvas.setImg(img);
+			spriteCanvasView.setTool('sprite');
+			cssOutput.backgroundFileName = imgInput.fileName;
+			$pageContainer.removeClass('intro');
+		});
 		
-		return SpriteSelector;
+		spriteCanvasView.bind('rectChange', function(rect) {
+			cssOutput.rect = rect;
+			cssOutput.update();
+		});
 	})();
 	
-	
-	// here we go...
-	var spriteSelector = new SpriteSelector('.container', '.canvas-inner', '.further-detail');
 })(document);
