@@ -122,8 +122,9 @@
 	})();
 	
 	var SelectArea = (function() {
-		function SelectArea($area, highlight) {
+		function SelectArea($eventArea, $area, highlight) {
 			this._$area = $area;
+			this._$eventArea = $eventArea;
 			this._highlight = highlight;
 			this._listeners = [];
 		}
@@ -140,7 +141,7 @@
 			
 			
 			selectArea._listeners.push([
-				selectArea._$area, 'mousedown', function(event) {
+				selectArea._$eventArea, 'mousedown', function(event) {
 					if (event.button !== 0) { return; }
 					var offset = selectArea._$area.offset();
 					startX = event.pageX;
@@ -205,7 +206,7 @@
 				$container = $('<div class="sprite-canvas-container"/>'),
 				$canvas = $( spriteCanvas.canvas ).appendTo( $container ),
 				highlight = new Highlight( $container ),
-				selectArea = new SelectArea($canvas, highlight),
+				selectArea = new SelectArea($appendToElm, $canvas, highlight),
 				selectColor = new SelectColor($canvas);
 				
 			this._$container = $container;
