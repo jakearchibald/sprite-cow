@@ -9,7 +9,7 @@
 		}
 		
 		var $canvasContainer  = $('.canvas-inner'),
-			$codeContainer    = $('.further-detail'),
+			$codeContainer    = $('.code-container'),
 			$pageContainer    = $('.container'),
 			$toolbarContainer = $('.toolbar-container'),
 			spriteCanvas      = new spriteCow.SpriteCanvas(),
@@ -17,14 +17,15 @@
 			imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer ),
 			cssOutput         = new spriteCow.CssOutput( $codeContainer ),
 			toolbar           = new spriteCow.Toolbar( $toolbarContainer );
-			
-		// TODO: open button
 		
+		spriteCow.pageLayout.init();
+		
+		// listeners
 		imgInput.bind('load', function(img) {
 			spriteCanvas.setImg(img);
 			spriteCanvasView.setTool('selectSprite');
 			cssOutput.backgroundFileName = imgInput.fileName;
-			$pageContainer.removeClass('intro');
+			spriteCow.pageLayout.toAppView();
 		});
 		
 		spriteCanvasView.bind('rectChange', function(rect) {
@@ -73,6 +74,7 @@
 	// Hover effects on toolbar buttons?
 	// favicon
 	// Move far future cached files into numbered directories
+	// Humans text
 	// Get domain
 	// Fab script & deploy
 })(spriteCow);

@@ -167,8 +167,14 @@ body {
 		height: 170px;
 		cursor: auto;
 	}
+	.container.intro .canvas-inner {
+		overflow: hidden;
+	}
 	.sprite-canvas-container {
 		position: absolute;
+	}
+	.container.intro .sprite-canvas-container {
+		opacity: 0;
 	}
 	.sprite-canvas-container canvas {
 		display: block;
@@ -195,7 +201,8 @@ body {
 		.select-btn {
 			position: absolute;
 			top: 54px;
-			left: 293px;
+			left: 50%;
+			margin: 0 0 0 -121px;
 			border-radius: 100px;
 			color: #fff;
 			font: normal 2.4em/1 prowin, monospace;
@@ -266,9 +273,12 @@ body {
 			margin: 0 0 10px;
 			padding: 17px 20px;
 			font: normal 1.2em/1 prowin, monospace;
+			overflow: hidden;
 		}
 		.container.intro .css-output {
-			display: none;
+			height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
 		}
 /* Toolbar */
 	.toolbar-container {
@@ -290,6 +300,13 @@ body {
 		background-image:     -ms-linear-gradient(top, #d0d0d0, #a7a7a7);
 		background-image:      -o-linear-gradient(top, #d0d0d0, #a7a7a7);
 		background-image:         linear-gradient(top, #d0d0d0, #a7a7a7);
+	}
+	.container.intro .toolbar {
+		height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		border-top-width: 0;
+		border-bottom-width: 0;
 	}
 	.toolbar-container [role='button'] {
 		float: left;
@@ -340,9 +357,7 @@ body {
 	.toolbar .open-img div {
 		background: url('imgs/open.png') 6px 50% no-repeat;
 	}
-	.container.intro .toolbar-container {
-		display: none;
-	}
+	
 /* Footer */
 	.container > footer {
 		display: table-row;
