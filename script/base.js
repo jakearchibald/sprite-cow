@@ -62,16 +62,17 @@
 	
 	// todo:
 	// Copy button
-	// Drag & drop files
 	// Layout animation
+	// Create example sprite / tutorial
 	// Sprite images
-	// Maybe resize listener to center the canvas... maybe?
 	// Footer
-	// Some responsive design on homepage
-	// Get domain
-	// Feature test page (with random excuses!)
-	// Create example image
-	// Hover effects on toolbar buttons?
+	// Maybe resize listener to center the canvas... maybe?
 	// Better centering on select image button
+	// Some responsive design on homepage
+	// Feature test page (with random excuses!)
+	// Hover effects on toolbar buttons?
 	// favicon
+	// Move far future cached files into numbered directories
+	// Get domain
+	// Fab script & deploy
 })(spriteCow);
