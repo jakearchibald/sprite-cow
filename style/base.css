@@ -323,6 +323,7 @@ body {
 	}
 	.toolbar-container [role='button'] div {
 		padding: 4px 10px 4px 26px;
+		background: url('imgs/sprites1.png') no-repeat;
 	}
 	.toolbar-container [role='button'].active {
 		background: #707070;
@@ -341,7 +342,7 @@ body {
 		margin-right: 0;
 	}
 	.toolbar .select-sprite div {
-		background: url('imgs/wand.png') 6px 50% no-repeat;
+		background-position: -863px 3px;
 	}
 	.toolbar .pick-bg {
 		border-radius: 0 4px 4px 0;
@@ -349,19 +350,48 @@ body {
 		border-left-width: 0;
 	}
 	.toolbar .pick-bg div {
-		background: url('imgs/color-picker.png') 6px 50% no-repeat;
-	}
-	.toolbar .copy-css div {
-		background: url('imgs/copy.png') 6px 50% no-repeat;
+		background-position: -864px -79px;
 	}
 	.toolbar .open-img div {
-		background: url('imgs/open.png') 6px 50% no-repeat;
+		background-position: -865px -37px;
 	}
 	
 /* Footer */
-	.container > footer {
+	footer.main {
 		display: table-row;
-		height: 40px;
+		overflow: hidden;
 		background: rgba(0, 0, 0, .23);
-		
+	}
+	footer.main p {
+		float: right;
+		padding: 14px 30px 0;
+		margin: 0;
+	}
+	footer.main .the-team-logo {
+		background: url('imgs/sprites1.png') no-repeat -154px -8px;
+		width: 88px;
+		height: 22px;
+		display: inline-block;
+		text-indent: -5000px;
+		vertical-align: middle;
+	}
+	footer.main ul {
+		float: left;
+		padding: 16px 30px;
+	}
+	footer.main li {
+		display: inline;
+	}
+	footer.main li a:link, footer.main li a:visited {
+		font-weight: normal;
+		color: #fff;
+		float: left;
+		padding: 0 10px 0 0;
+		margin: 0 10px 0 0;
+		border-right: 1px solid #fff;
+	}
+	footer.main li:last-child a:link, footer.main li:last-child a:visited {
+		padding: 0;
+		margin: 0;
+		border: none;
 	}

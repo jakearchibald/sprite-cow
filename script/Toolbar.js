@@ -6,7 +6,6 @@ spriteCow.Toolbar = (function() {
 					'<div role="button" class="open-img"><div>Open</div></div>' +
 					'<div role="button" class="select-sprite active"><div>Select Sprite</div></div>' +
 					'<div role="button" class="pick-bg"><div>Pick Background</div></div>' +
-					'<div role="button" class="copy-css"><div>Copy CSS</div></div>' +
 					'<span class="feedback"></span>' +
 				'</div>' +
 			'').appendTo( $appendToElm ),
@@ -14,8 +13,7 @@ spriteCow.Toolbar = (function() {
 			toolNames = [
 				'openImg',
 				'selectSprite',
-				'selectBg',
-				'copyCss'
+				'selectBg'
 			];
 			
 		toolNames.forEach(function(toolName, i) {

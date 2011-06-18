@@ -13,7 +13,7 @@ spriteCow.CssOutput = (function() {
 		this.rect = new spriteCow.Rect(0, 0, 0, 0);
 		this.useTabs = true;
 		this.useBgUrl = true;
-		this.selector = '.whatever';
+		this.selector = '.sprite';
 	}
 	
 	var CssOutputProto = CssOutput.prototype;

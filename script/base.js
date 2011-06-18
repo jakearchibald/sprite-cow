@@ -62,11 +62,9 @@
 	})();
 	
 	// todo:
-	// Copy button
-	// Layout animation
+	// Footer
 	// Create example sprite / tutorial
 	// Sprite images
-	// Footer
 	// Maybe resize listener to center the canvas... maybe?
 	// Better centering on select image button
 	// Some responsive design on homepage
