@@ -40,7 +40,7 @@
 			var toolName = 'selectSprite';
 			spriteCanvasView.setTool(toolName);
 			toolbar.activate(toolName);
-			toolbar.feedback( colourBytesToCss(color) );
+			toolbar.feedback( 'Background set to: ' + colourBytesToCss(color) );
 		});
 		
 		toolbar.bind('selectBg', function() {
@@ -54,6 +54,23 @@
 			spriteCanvasView.setTool(toolName);
 			toolbar.activate(toolName)
 		});
+		
+		toolbar.bind('openImg', function() {
+			imgInput.openDialog();
+		});
 	})();
 	
+	// todo:
+	// Copy button
+	// Expanding animation
+	// Drag & drop files
+	// Layout animation
+	// Maybe resize listener to center the canvas... maybe?
+	// Footer
+	// Some responsive design on homepage
+	// Get domain
+	// Feature test page (with random excuses!)
+	// Create example image
+	// Hover effects on toolbar buttons?
+	// Better centering on select image button 
 })(spriteCow);

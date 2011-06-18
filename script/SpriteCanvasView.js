@@ -1,4 +1,68 @@
 (function() {
+	var Highlight = (function() {
+		// TODO: consider using <cavnas> to render the highlight, will allow for subpixel rendering
+		
+		function Highlight($appendTo) {
+			this._$container = $('<div class="highlight"/>').appendTo( $appendTo );
+		}
+		
+		var HighlightProto = Highlight.prototype;
+		
+		HighlightProto.moveTo = function(rect, animate) {
+			var $container = this._$container.transitionStop(true),
+				destination = {
+					left: rect.x,
+					top: rect.y,
+					width: rect.width,
+					height: rect.height,
+					opacity: 1
+				};
+			
+			
+			if (rect.width && rect.height) {
+				$container.css('display', 'block');
+				
+				if (animate) {
+					$container.transition(destination, {
+						duration: 300,
+						easing: 'easeOutQuad'
+					});
+				}
+				else {					
+					$container.vendorCss(destination);				
+				}
+			}
+			else {
+				this.hide(animate);
+			}
+		};
+		
+		HighlightProto.hide = function(animate) {
+			var $container = this._$container.transitionStop(true);
+			
+			if (animate) {
+				var currentLeft = parseInt( $container.css('left') ),
+					currentTop = parseInt( $container.css('top') );
+				
+				$container.transition({
+					left: currentLeft + $container.width()  / 2,
+					top:  currentTop  + $container.height() / 2,
+					width: 0,
+					height: 0,
+					opacity: 0
+				}, {
+					duration: 300,
+					easing: 'easeInQuad'
+				});
+			}
+			else {
+				$container.css('display', 'none');
+			}
+		};
+		
+		return Highlight;
+	})();
+	
 	var SelectColor = (function() {
 		
 		function SelectColor($canvas) {
@@ -58,9 +122,9 @@
 	})();
 	
 	var SelectArea = (function() {
-		function SelectArea($area, $highlight) {
+		function SelectArea($area, highlight) {
 			this._$area = $area;
-			this._$highlight = $highlight;
+			this._highlight = highlight;
 			this._listeners = [];
 		}
 		
@@ -91,8 +155,7 @@
 						1, 1
 					);
 					
-					selectArea._highlightRect(rect);
-					selectArea._$highlight.css('display', 'block');
+					selectArea._highlight.moveTo(rect);
 					isDragging = true;
 					event.preventDefault();
 				}
@@ -106,7 +169,7 @@
 					rect.y = startPositionY + Math.min(event.pageY - startY, 0);
 					rect.width = Math.abs(event.pageX - startX) || 1;
 					rect.height = Math.abs(event.pageY - startY) || 1;
-					selectArea._highlightRect(rect);
+					selectArea._highlight.moveTo(rect);
 				}
 			]);
 			
@@ -133,15 +196,6 @@
 			return this;
 		};
 		
-		SelectAreaProto._highlightRect = function(rect) {
-			this._$highlight.css({
-				left: rect.x,
-				top: rect.y,
-				width: rect.width,
-				height: rect.height
-			});
-		};
-		
 		return SelectArea;
 	})();
 	
@@ -149,29 +203,28 @@
 		function SpriteCanvasView(spriteCanvas, $appendToElm) {
 			var spriteCanvasView = this,
 				$container = $('<div class="sprite-canvas-container"/>'),
-				$canvas = $( spriteCanvas.canvas ),
-				$highlight = $('<div class="highlight"/>'),
-				selectArea = new SelectArea($canvas, $highlight),
+				$canvas = $( spriteCanvas.canvas ).appendTo( $container ),
+				highlight = new Highlight( $container ),
+				selectArea = new SelectArea($canvas, highlight),
 				selectColor = new SelectColor($canvas);
 				
 			this._$container = $container;
 			this._spriteCanvas = spriteCanvas;
-			this._$highlight = $highlight;
-			this.currentRect = new spriteCow.Rect(0, 0, 0, 0);
+			this._highlight = highlight;
 			this._selectArea = selectArea;
 			this._selectColor = selectColor;
 			
-			$container.append( $canvas ).append( this._$highlight ).appendTo( $appendToElm );
+			$container.appendTo( $appendToElm );
 			
 			selectArea.bind('select', function(rect) {
 				var spriteRect = spriteCanvas.trimBg(rect);
 				if (spriteRect.width && spriteRect.height) { // false if clicked on bg pixel
 					spriteRect = spriteCanvas.expandToSpriteBoundry(rect);
+					spriteCanvasView._setCurrentRect(spriteRect);
 				}
 				else {
-					spriteCanvasView._highlightRect(rect);
+					highlight.hide(true);
 				}
-				spriteCanvasView._setCurrentRect(spriteRect);
 			});
 			
 			selectColor.bind('select', function(color) {
@@ -187,31 +240,15 @@
 		var SpriteCanvasViewProto = SpriteCanvasView.prototype = new spriteCow.MicroEvent;
 		
 		SpriteCanvasViewProto._setCurrentRect = function(rect) {
-			this.currentRect = rect;
-			this._highlightRect(rect);
+			this._highlight.moveTo(rect, true);
 			this.trigger('rectChange', rect);
-		};
-		
-		SpriteCanvasViewProto._highlightRect = function(rect) {
-			if (rect && rect.width && rect.height) {
-				this._$highlight.css({
-					left: rect.x,
-					top: rect.y,
-					width: rect.width,
-					height: rect.height,
-					display: 'block'
-				});				
-			}
-			else {
-				this._$highlight.css('display', 'none');
-			}
 		};
 		
 		SpriteCanvasViewProto.setTool = function(mode) {
 			var selectArea = this._selectArea,
 				selectColor = this._selectColor;
 			
-			this._highlightRect();
+			this._highlight.hide();
 			selectArea.deactivate();
 			selectColor.deactivate();
 			

@@ -261,7 +261,7 @@ body {
 	}
 	.toolbar {
 		overflow: hidden;
-		padding: 5px 6px;
+		padding: 5px 6px 0;
 		position: relative;
 		z-index: 1;
 		border-style: solid;
@@ -277,7 +277,7 @@ body {
 	}
 	.toolbar-container [role='button'] {
 		float: left;
-		margin: 0 5px 0 0;
+		margin: 0 5px 5px 0;
 		border: 1px solid #888;
 		border-radius: 4px;
 		
@@ -298,7 +298,7 @@ body {
 	}
 	.toolbar-container .feedback {
 		float: left;
-		padding: 5px 10px;
+		padding: 5px;
 		color: #555;
 		opacity: 0;
 	}
@@ -318,9 +318,11 @@ body {
 	.toolbar .pick-bg div {
 		background: url('imgs/color-picker.png') 6px 50% no-repeat;
 	}
-	.toolbar .copy-css {
-		border-width: 1px;
-		border-radius: 4px;
+	.toolbar .copy-css div {
+		background: url('imgs/copy.png') 6px 50% no-repeat;
+	}
+	.toolbar .open-img div {
+		background: url('imgs/open.png') 6px 50% no-repeat;
 	}
 	.container.intro .toolbar-container {
 		display: none;

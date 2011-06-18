@@ -15,9 +15,11 @@ spriteCow.ImgInput = (function() {
 		
 		// calling click on a file input needs a direct link to a user-triggered event, so we can't use jquery
 		$styledButton[0].addEventListener('click', function(event) {
+			imgInput.openDialog();
 			event.preventDefault();
-			$fileInput[0].click();
 		}, false);
+		
+		imgInput._fileInput = $fileInput[0];
 	}
 	
 	var ImgInputProto = ImgInput.prototype = new spriteCow.MicroEvent;
@@ -34,6 +36,10 @@ spriteCow.ImgInput = (function() {
 			img.src = reader.result;
 		};
 		reader.readAsDataURL(file);
+	};
+	
+	ImgInputProto.openDialog = function() {
+		this._fileInput.click();
 	};
 	
 	return ImgInput;

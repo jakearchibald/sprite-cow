@@ -3,6 +3,7 @@ spriteCow.Toolbar = (function() {
 		var toolbar = this,
 			$container = $('' +
 				'<div class="toolbar">' +
+					'<div role="button" class="open-img"><div>Open</div></div>' +
 					'<div role="button" class="select-sprite active"><div>Select Sprite</div></div>' +
 					'<div role="button" class="pick-bg"><div>Pick Background</div></div>' +
 					'<div role="button" class="copy-css"><div>Copy CSS</div></div>' +
@@ -11,16 +12,18 @@ spriteCow.Toolbar = (function() {
 			'').appendTo( $appendToElm ),
 			$children = $container.children(),
 			toolNames = [
+				'openImg',
 				'selectSprite',
 				'selectBg',
 				'copyCss'
 			];
 			
 		toolNames.forEach(function(toolName, i) {
-			$children.eq(i).click(function(event) {
+			// avoiding jquery's event system so file dialogs can be launched
+			$children.eq(i)[0].addEventListener('click', function(event) {
 				toolbar.trigger(toolName);
 				event.preventDefault();
-			});
+			}, false);
 		});
 		
 		toolbar._$feedback = $children.slice(-1);
