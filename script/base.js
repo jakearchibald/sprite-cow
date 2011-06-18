@@ -14,7 +14,7 @@
 			$toolbarContainer = $('.toolbar-container'),
 			spriteCanvas      = new spriteCow.SpriteCanvas(),
 			spriteCanvasView  = new spriteCow.SpriteCanvasView( spriteCanvas, $canvasContainer ),
-			imgInput          = new spriteCow.ImgInput( $canvasContainer ),
+			imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer ),
 			cssOutput         = new spriteCow.CssOutput( $codeContainer ),
 			toolbar           = new spriteCow.Toolbar( $toolbarContainer );
 			
@@ -62,9 +62,9 @@
 	
 	// todo:
 	// Copy button
-	// Expanding animation
 	// Drag & drop files
 	// Layout animation
+	// Sprite images
 	// Maybe resize listener to center the canvas... maybe?
 	// Footer
 	// Some responsive design on homepage
@@ -72,5 +72,6 @@
 	// Feature test page (with random excuses!)
 	// Create example image
 	// Hover effects on toolbar buttons?
-	// Better centering on select image button 
+	// Better centering on select image button
+	// favicon
 })(spriteCow);

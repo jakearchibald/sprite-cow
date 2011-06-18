@@ -213,6 +213,25 @@ body {
 		.container.intro .select-btn {
 			display: block;
 		}
+	/* Drop indicator */
+		.drop-indicator {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(37, 207, 28, 0.2);
+			box-shadow: inset 0 0 18px #175a00;
+			opacity: 0;
+			display: none;
+			pointer-events: none;
+			-webkit-transition: opacity 0.3s ease-out;
+			-moz-transition: opacity 0.3s ease-out;
+		}
+		.drag-over .drop-indicator {
+			display: block;
+			opacity: 1;
+		}
 /* Further detail */
 	.further-detail {
 		display: table-row;
