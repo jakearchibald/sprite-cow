@@ -18,7 +18,7 @@ body {
 	min-height: 100%;
 	margin: 0;
 	padding: 0 30px;
-	background: url(imgs/grid.png);
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA0CAYAAAA62j4JAAAAe0lEQVR42u3QMQ5AQABFQbWIaGiI6CjU7n+z9TdxCjvFO8CbrpSypTutaWqtCnClJ51pb60KsHzzc+pbqwKM6UhD6loLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/XvoS9OcMtc3PAAAAAElFTkSuQmCC');
 }
 
 /* Reset */
@@ -175,7 +175,7 @@ body {
 	.canvas-inner {
 		overflow: auto;
 		position: relative;
-		background: url(imgs/trans.png);
+		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX////MzMw46qqDAAAAEUlEQVQIHWP4z8CAFWEX/Q8Afr8P8WzDsvUAAAAASUVORK5CYII=');
 		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
 		height: 100%;
 		/*cursor: crosshair; meh, difficult to see */
