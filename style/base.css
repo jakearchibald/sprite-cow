@@ -113,6 +113,7 @@ body {
 		margin: 0 auto;
 		position: relative;
 		display: table;
+		table-layout:fixed;
 	}
 	.container.intro {
 		width: 835px;
@@ -133,9 +134,17 @@ body {
 		margin: 0;
 		text-shadow: #004a86 0 6px;
 		-webkit-transform: scale(0.7);
+		-moz-transform: scale(0.7);
+		-ms-transform: scale(0.7);
+		-o-transform: scale(0.7);
+		transform: scale(0.7);
 	}
 	.container.intro > header h1 {
 		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+		-ms-transform: scale(1);
+		-o-transform: scale(1);
+		transform: scale(1);
 	}
 /* Canvas */
 	.canvas-view {
@@ -239,7 +248,7 @@ body {
 			white-space: pre;
 			background: rgba(0, 0, 0, .23);
 			margin: 0 0 10px;
-			padding: 16px 24px;
+			padding: 17px 20px;
 			font: normal 1.2em/1 prowin, monospace;
 		}
 		.container.intro .css-output {
@@ -261,20 +270,26 @@ body {
 		color: #333;
 		border-radius: 5px 5px 0 0;
 		background-image: -webkit-linear-gradient(top, #d0d0d0, #a7a7a7);
+		background-image:    -moz-linear-gradient(top, #d0d0d0, #a7a7a7);
+		background-image:     -ms-linear-gradient(top, #d0d0d0, #a7a7a7);
+		background-image:      -o-linear-gradient(top, #d0d0d0, #a7a7a7);
+		background-image:         linear-gradient(top, #d0d0d0, #a7a7a7);
 	}
 	.toolbar-container [role='button'] {
 		float: left;
+		margin: 0 5px 0 0;
 		border: 1px solid #888;
-		border-left-width: 0;
+		border-radius: 4px;
+		
 		background: -webkit-linear-gradient(top, #fefefe, #b8b8b8);
+		background:    -moz-linear-gradient(top, #fefefe, #b8b8b8);
+		background:     -ms-linear-gradient(top, #fefefe, #b8b8b8);
+		background:      -o-linear-gradient(top, #fefefe, #b8b8b8);
+		background:         linear-gradient(top, #fefefe, #b8b8b8);
 		cursor: pointer;
 	}
 	.toolbar-container [role='button'] div {
 		padding: 4px 10px 4px 26px;
-	}
-	.toolbar-container [role='button']:first-child {
-		border-width: 1px;
-		border-radius: 4px 0 0 4px;
 	}
 	.toolbar-container [role='button'].active {
 		background: #707070;
@@ -287,12 +302,18 @@ body {
 		color: #555;
 		opacity: 0;
 	}
+	.toolbar-container .select-sprite {
+		border-width: 1px;
+		border-radius: 4px 0 0 4px;
+		margin-right: 0;
+	}
 	.toolbar .select-sprite div {
 		background: url('imgs/wand.png') 6px 50% no-repeat;
 	}
 	.toolbar .pick-bg {
 		border-radius: 0 4px 4px 0;
 		margin-right: 5px;
+		border-left-width: 0;
 	}
 	.toolbar .pick-bg div {
 		background: url('imgs/color-picker.png') 6px 50% no-repeat;
