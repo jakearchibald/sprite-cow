@@ -139,6 +139,23 @@ body {
 		-o-transform: scale(0.7);
 		transform: scale(0.7);
 	}
+	.container > header h1::before, .container > header h1::after {
+		background: url('imgs/sprites1.png') no-repeat -10px -6px;
+		width: 133px;
+		height: 89px;
+		display: inline-block;
+		vertical-align: middle;
+		content: '';
+		margin: 0 30px 0 0;
+	}
+	.container > header h1::after {
+		margin: 0 0 0 18px;
+		-webkit-transform: scaleX(-1);
+		-moz-transform: scaleX(-1);
+		-ms-transform: scaleX(-1);
+		-o-transform: scaleX(-1);
+		transform: scaleX(-1);
+	}
 	.container.intro > header h1 {
 		-webkit-transform: scale(1);
 		-moz-transform: scale(1);
@@ -353,7 +370,7 @@ body {
 		background-position: -864px -79px;
 	}
 	.toolbar .open-img div {
-		background-position: -865px -37px;
+		background-position: -864px -37px;
 	}
 	
 /* Footer */
@@ -374,6 +391,7 @@ body {
 		display: inline-block;
 		text-indent: -5000px;
 		vertical-align: middle;
+		margin: 0 0 0 4px;
 	}
 	footer.main ul {
 		float: left;

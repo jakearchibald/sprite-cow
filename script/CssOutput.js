@@ -9,7 +9,7 @@ spriteCow.CssOutput = (function() {
 	function CssOutput($appendTo) {
 		this._$container = $('<code class="css-output">\n\n\n\n\n</code>').appendTo( $appendTo );
 		this.backgroundFileName = '';
-		this.path = 'images/';
+		this.path = 'imgs/';
 		this.rect = new spriteCow.Rect(0, 0, 0, 0);
 		this.useTabs = true;
 		this.useBgUrl = true;

@@ -62,11 +62,8 @@
 	})();
 	
 	// todo:
-	// Footer
 	// Create example sprite / tutorial
-	// Sprite images
 	// Maybe resize listener to center the canvas... maybe?
-	// Better centering on select image button
 	// Some responsive design on homepage
 	// Feature test page (with random excuses!)
 	// Hover effects on toolbar buttons?

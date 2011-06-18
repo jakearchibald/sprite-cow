@@ -27,7 +27,7 @@ spriteCow.pageLayout = (function() {
 		transitions = [
 			{
 				duration: 500,
-				easing: 'swing',
+				easing: 'linear',
 				targets: [
 					[$selectBtn, { opacity: 0 }],
 					[$introCopy, { opacity: 0 }],
@@ -111,7 +111,6 @@ spriteCow.pageLayout = (function() {
 				i = 0;
 				
 			currentView = 'app';
-			
 			doAnimStep(steps, 0, function() {
 				var targets = [];
 				
