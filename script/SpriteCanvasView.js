@@ -65,8 +65,9 @@
 	
 	var SelectColor = (function() {
 		
-		function SelectColor($canvas) {
+		function SelectColor($eventArea, $canvas) {
 			this._$canvas = $canvas;
+			this._$eventArea = $eventArea;
 			this._context = $canvas[0].getContext('2d');
 			this._listeners = [];
 		}
@@ -77,10 +78,10 @@
 			var selectColor = this,
 				canvasX, canvasY,
 				context = selectColor._context,
-				$canvas = selectColor._$canvas;
+				$eventArea = selectColor._$eventArea;
 			
 			selectColor._listeners.push([
-				$canvas, 'mousedown', function(event) {
+				$eventArea, 'mousedown', function(event) {
 					if (event.button !== 0) { return; }
 					var color = selectColor._getColourAtMouse(event.pageX, event.pageY);
 					selectColor.trigger( 'select', color );
@@ -89,7 +90,7 @@
 			]);
 			
 			selectColor._listeners.push([
-				$canvas, 'mousemove', function(event) {
+				$eventArea, 'mousemove', function(event) {
 					var color = selectColor._getColourAtMouse(event.pageX, event.pageY);
 					selectColor.trigger( 'move', color );
 				}
@@ -209,7 +210,7 @@
 				$selectHitArea = $('<div class="select-hit-area"/>').appendTo( $container ),
 				highlight = new Highlight( $container ),
 				selectArea = new SelectArea($selectHitArea, $canvas, highlight),
-				selectColor = new SelectColor($canvas);
+				selectColor = new SelectColor($selectHitArea, $canvas);
 				
 			this._$container = $container;
 			this._spriteCanvas = spriteCanvas;
