@@ -132,7 +132,8 @@ body {
 		color: #fff;
 		font: normal 5.3em/1 prowin, monospace;
 		margin: 0;
-		text-shadow: #004a86 0 6px;
+		/* I don't really want a 1px blur, but it works around http://code.google.com/p/chromium/issues/detail?id=86702 */
+		text-shadow: #004a86 0 6px 1px;
 		-webkit-transform: scale(0.7);
 		-moz-transform: scale(0.7);
 		-ms-transform: scale(0.7);
@@ -288,7 +289,7 @@ body {
 			white-space: pre;
 			background: rgba(0, 0, 0, .23);
 			margin: 0 0 10px;
-			padding: 17px 20px;
+			padding: 20px 30px;
 			font: normal 1.2em/1 prowin, monospace;
 			overflow: hidden;
 		}
