@@ -31,11 +31,7 @@ spriteCow.ImgInput = (function() {
 			reader = new FileReader;
 		
 		reader.onload = function() {
-			var img = new Image;
-			img.onload = function() {
-				imgInput.trigger('load', img);
-			};
-			img.src = reader.result;
+			imgInput.loadImgUrl(reader.result);
 		};
 		reader.readAsDataURL(file);
 	};
@@ -75,6 +71,16 @@ spriteCow.ImgInput = (function() {
 	
 	ImgInputProto.openDialog = function() {
 		this._fileInput.click();
+	};
+	
+	ImgInputProto.loadImgUrl = function(url) {
+		var imgInput = this,
+			img = new Image;
+		
+		img.onload = function() {
+			imgInput.trigger('load', img);
+		};
+		img.src = url;
 	};
 	
 	return ImgInput;

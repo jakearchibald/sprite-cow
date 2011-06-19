@@ -12,6 +12,7 @@
 			$codeContainer    = $('.code-container'),
 			$pageContainer    = $('.container'),
 			$toolbarContainer = $('.toolbar-container'),
+			$tutorialLink     = $('.tutorial'),
 			spriteCanvas      = new spriteCow.SpriteCanvas(),
 			spriteCanvasView  = new spriteCow.SpriteCanvasView( spriteCanvas, $canvasContainer ),
 			imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer ),
@@ -59,10 +60,14 @@
 		toolbar.bind('openImg', function() {
 			imgInput.openDialog();
 		});
+		
+		$tutorialLink.click(function(event) {
+			imgInput.loadImgUrl( this.href );
+			event.preventDefault();
+		});
 	})();
 	
 	// todo:
-	// Create example sprite / tutorial
 	// Maybe resize listener to center the canvas... maybe?
 	// Some responsive design on homepage
 	// Feature test page (with random excuses!)
