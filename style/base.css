@@ -132,6 +132,7 @@ body {
 		color: #fff;
 		font: normal 5.3em/1 prowin, monospace;
 		margin: 0;
+		white-space: nowrap;
 		/* I don't really want a 1px blur, but it works around http://code.google.com/p/chromium/issues/detail?id=86702 */
 		text-shadow: #004a86 0 6px 1px;
 		-webkit-transform: scale(0.7);
@@ -139,6 +140,10 @@ body {
 		-ms-transform: scale(0.7);
 		-o-transform: scale(0.7);
 		transform: scale(0.7);
+	}
+	.container > header h1 span {
+		display: inline-block;
+		vertical-align: middle;
 	}
 	.container > header h1::before, .container > header h1::after {
 		background: url('imgs/sprites1.png') no-repeat -10px -6px;
@@ -279,7 +284,7 @@ body {
 		}
 		.intro-copy > section {
 			display: table-cell;
-			padding: 37px;
+			padding: 30px;
 			width: 50%;
 		}
 		.intro-copy h1 {
@@ -298,12 +303,13 @@ body {
 			margin: 0 0 10px;
 			padding: 20px 30px;
 			font: normal 1.2em/1 prowin, monospace;
-			overflow: hidden;
+			overflow: auto;
 		}
 		.container.intro .css-output {
 			height: 0;
 			padding-top: 0;
 			padding-bottom: 0;
+			overflow: hidden;
 		}
 /* Toolbar */
 	.toolbar-container {
@@ -421,3 +427,43 @@ body {
 		margin: 0;
 		border: none;
 	}
+	
+/* Being responsible... */
+@media screen and (max-width: 892px) {
+	.container.intro {
+		width: 100%;
+	}
+}
+@media screen and (max-width: 744px) {
+	.container > header h1::before, .container > header h1::after {
+		display: none;
+	}
+	.intro-copy > section {
+		padding: 20px;
+	}
+	footer.main p {
+		padding-right: 20px;
+	}
+	footer.main ul {
+		padding-left: 20px;
+	}
+	.css-output {
+		padding: 15px 20px;
+	}
+	body {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+@media screen and (max-width: 562px) {
+	body {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.container > header, .container.intro > header {
+		height: 10px;
+	}
+	footer.main, .container > header h1 {
+		display: none;
+	}
+}
