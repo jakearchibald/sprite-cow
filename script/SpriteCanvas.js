@@ -55,7 +55,7 @@ spriteCow.SpriteCanvas = (function() {
 		
 		rect = this._restrictRectToBoundry(rect);
 		
-		do {
+		if (rect.width && rect.height) do {
 			edgeBgResult = this._edgesAreBg(rect);
 			rect = this._contractRect(rect, edgeBgResult);
 		} while ( rect.height && rect.width && !allArrayFalse(edgeBgResult) );
@@ -64,11 +64,19 @@ spriteCow.SpriteCanvas = (function() {
 	};
 	
 	SpriteCanvasProto._restrictRectToBoundry = function(rect) {
-		var canvas = this.canvas;
+		var canvas = this.canvas,
+			restrictedX = Math.min( Math.max(rect.x, 0), canvas.width ),
+			restrictedY = Math.min( Math.max(rect.y, 0), canvas.height );
 		
-		rect.x = Math.max(rect.x, 0);
-		rect.y = Math.max(rect.y, 0);
-		rect.width  = Math.min(rect.width,  canvas.width  - rect.x);
+		if (restrictedX !== rect.x) {
+			rect.width -= restrictedX - rect.x;
+			rect.x = restrictedX;
+		}
+		if (restrictedY !== rect.y) {
+			rect.height -= restrictedY - rect.y;
+			rect.y = restrictedY;
+		}
+		rect.width  = Math.min(rect.width,  canvas.width - rect.x);
 		rect.height = Math.min(rect.height, canvas.height - rect.y);
 		return rect;
 	}
