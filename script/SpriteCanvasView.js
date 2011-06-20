@@ -207,10 +207,9 @@
 				$container = $('<div class="sprite-canvas-container"/>'),
 				$canvas = $( spriteCanvas.canvas ).appendTo( $container ),
 				// this cannot be $appendToElm, as browsers pick up clicks on scrollbars, some don't pick up mouseup http://code.google.com/p/chromium/issues/detail?id=14204#makechanges
-				$selectHitArea = $('<div class="select-hit-area"/>').appendTo( $container ),
 				highlight = new Highlight( $container ),
-				selectArea = new SelectArea($selectHitArea, $canvas, highlight),
-				selectColor = new SelectColor($selectHitArea, $canvas);
+				selectArea = new SelectArea( $container, $canvas, highlight ),
+				selectColor = new SelectColor( $canvas, $canvas );
 				
 			this._$container = $container;
 			this._spriteCanvas = spriteCanvas;
