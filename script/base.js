@@ -68,8 +68,8 @@
 	})();
 	
 	// todo:
+	// Optimising edge searching by only getting pixel data for edges... duh
 	// Maybe resize listener to center the canvas... maybe?
-	// Some responsive design on homepage
 	// Feature test page (with random excuses!)
 	// Hover effects on toolbar buttons?
 	// favicon

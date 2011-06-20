@@ -26,7 +26,9 @@ spriteCow.SpriteCanvas = (function() {
 	}
 	
 	function SpriteCanvas() {
-		this.canvas = $('<canvas/>')[0];
+		var canvas = $('<canvas/>')[0];
+		this.canvas = canvas;
+		this._context = canvas.getContext('2d');
 		this._bgData = [0, 0, 0, 0];
 	}
 	
@@ -34,7 +36,7 @@ spriteCow.SpriteCanvas = (function() {
 	
 	SpriteCanvasProto.setImg = function(img) {
 		var canvas = this.canvas,
-			context = canvas.getContext('2d');
+			context = this._context;
 		
 		canvas.width = img.width;
 		canvas.height = img.height;
@@ -92,13 +94,18 @@ spriteCow.SpriteCanvas = (function() {
 	SpriteCanvasProto._edgesAreBg = function(rect) {
 		// look at the pixels around the edges
 		var canvas = this.canvas,
-			pixels = canvas.getContext('2d').getImageData(rect.x, rect.y, rect.width, rect.height).data;
+			context = this._context,
+			top    = context.getImageData(rect.x, rect.y, rect.width, 1).data,
+			right  = context.getImageData(rect.x + rect.width - 1, rect.y, 1, rect.height).data,
+			bottom = context.getImageData(rect.x, rect.y + rect.height - 1, rect.width, 1).data,
+			left   = context.getImageData(rect.x, rect.y, 1, rect.height).data;
+			
 		
 		return [
-			this._pixelsContainOnlyBg(pixels, 0, 4, rect.width * 4),
-			this._pixelsContainOnlyBg(pixels, (rect.width - 1) * 4, rect.width * 4, pixels.length),
-			this._pixelsContainOnlyBg(pixels, rect.width * 4 * (rect.height - 1), 4, pixels.length),
-			this._pixelsContainOnlyBg(pixels, 0, rect.width * 4, pixels.length)
+			this._pixelsContainOnlyBg(top),
+			this._pixelsContainOnlyBg(right),
+			this._pixelsContainOnlyBg(bottom),
+			this._pixelsContainOnlyBg(left)
 		];
 	};
 	
@@ -113,10 +120,10 @@ spriteCow.SpriteCanvas = (function() {
 		];
 	};
 	
-	SpriteCanvasProto._pixelsContainOnlyBg = function(pixels, start, channelInterval, end) {
+	SpriteCanvasProto._pixelsContainOnlyBg = function(pixels) {
 		var bg = this._bgData;
 		
-		for (var i = start; i < end; i += channelInterval) {
+		for (var i = 0, len = pixels.length; i < len; i += 4) {
 			if ( !pixelsEquivalent(bg, 0, pixels, i) ) {
 				return false;
 			}
