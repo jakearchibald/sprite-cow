@@ -33,7 +33,7 @@ spriteCow.pageLayout = (function() {
 					[$introCopy, { opacity: 0 }]
 				],
 				before: function() {
-					$container.width(containerWidth)
+					$container.width(containerWidth);
 				}
 			},
 			{
