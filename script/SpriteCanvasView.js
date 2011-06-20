@@ -51,7 +51,7 @@
 					height: 0,
 					opacity: 0
 				}, {
-					duration: 300,
+					duration: 200,
 					easing: 'easeInQuad'
 				});
 			}
