@@ -30,16 +30,17 @@ spriteCow.pageLayout = (function() {
 				easing: 'linear',
 				targets: [
 					[$selectBtn, { opacity: 0 }],
-					[$introCopy, { opacity: 0 }],
-					[$container, { width: containerWidth }]
-				]
+					[$introCopy, { opacity: 0 }]
+				],
+				before: function() {
+					$container.width(containerWidth)
+				}
 			},
 			{
 				duration: 1000,
 				easing: 'swing',
 				targets: [
 					[$container, { width: '100%' }],
-					[$introCopy, { display: 'none' }],
 					[$header, { height: $header.height() }],
 					[$headerH1, { transform: $headerH1.vendorCss('transform') }],
 					[$cssOutput, {
@@ -57,7 +58,10 @@ spriteCow.pageLayout = (function() {
 						'border-top-width': $toolbar.css('border-top-width'),
 						'border-bottom-width': $toolbar.css('border-bottom-width')
 					}]				
-				]
+				],
+				before: function() {
+					$introCopy.css('display', 'none');
+				}
 			},
 			{
 				duration: 500,
@@ -87,6 +91,8 @@ spriteCow.pageLayout = (function() {
 				callback();
 			}
 		}
+		
+		step.before && step.before();
 		
 		step.targets.forEach(function(target, i, targets) {
 			target[0].transition(target[1], {
