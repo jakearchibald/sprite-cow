@@ -1,3 +1,9 @@
+@font-face {
+	font-family: 'prowin';
+	src: url('fonts/pro.woff') format('woff'),
+	     url('fonts/pro.ttf')  format('truetype');
+}
+
 html {
 	background: #004a86;
 	background: -webkit-radial-gradient(center center, circle cover, #0091d5 0%, #0091d5 15%, #004a86 100%);
