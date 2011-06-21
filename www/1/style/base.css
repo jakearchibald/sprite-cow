@@ -428,6 +428,49 @@ body {
 		margin: 0;
 		border: none;
 	}
+/* Feature tests */
+	.feature-test {
+		display: none;
+		width: 800px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.not-supported .feature-test {
+		display: block;
+	}
+	.not-supported .container {
+		display: none;
+	}
+	.feature-test h1 {
+		font: normal 2.5em sans-serif;
+		margin: 0;
+		padding: 40px 0;
+	}
+	.feature-test ul {
+		display: inline-block;
+		*display: inline;
+		zoom: 1;
+	}
+	.feature-test li {
+		margin: 10px auto;
+		font-size: 1.1em;
+		overflow: hidden;
+		text-align: left;
+	}
+	.feature-test p {
+		width: 600px;
+		margin: 0 auto 20px;
+		font-size: 1.1em;
+	}
+	.feature-test .pass, .feature-test .fail {
+		float: left;
+		width: 50px;
+		font-weight: bold;
+		color: #5f5;
+	}
+	.feature-test .fail {
+		color: #c00;
+	}
 	
 /* Being responsible... */
 @media screen and (max-width: 892px) {

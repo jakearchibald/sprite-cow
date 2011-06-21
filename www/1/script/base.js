@@ -8,6 +8,12 @@
 			return 'rgba(' + color[0] + ', ' + color[1] + ', ' + color[2] + ', ' + String( color[3] / 255 ).slice(0, 5) + ')';
 		}
 		
+		if ( !spriteCow.featureTests.allPassed ) {
+			document.documentElement.className += ' not-supported';
+			// bail
+			return;
+		}
+		
 		var $canvasContainer  = $('.canvas-inner'),
 			$codeContainer    = $('.code-container'),
 			$pageContainer    = $('.container'),
