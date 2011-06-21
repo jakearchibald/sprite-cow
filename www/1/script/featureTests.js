@@ -16,6 +16,7 @@ spriteCow.featureTests = (function() {
 	featureTests.addResult( canvas(), '<canvas> element' );
 	featureTests.addResult( fileApi(), 'File & FileReader' );
 	featureTests.addResult( w3EventListeners(), 'addEventListener on elements' );
+	featureTests.addResult( $.support.transition, 'CSS3 transitions' );
 	
 	if ($.browser.opera) { // I feel dirty
 		featureTests.addResult( false, 'Backgrounds on both html & body' );	
