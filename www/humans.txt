@@ -1,9 +1,9 @@
 Peoples
 =======
 
-Jake Archibald  (@jaffathecake)   - HTML/CSS/JS
-Alfredo Aguirre (@a_alfredo)      - Deploy scripts
-Phil Hawksworth (@philhawksworth) - Hosting
+Jake Archibald  (@jaffathecake)   - Frontend stuffs
+Alfredo Aguirre (@a_alfredo)      - Deploy script mastery
+Phil Hawksworth (@philhawksworth) - Hosting & testing
 Darian Moody    (@djm_)           - Pestering me to launch this
 
 Thanks
