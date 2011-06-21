@@ -43,7 +43,7 @@
 				// it's probably because the background is set wrong
 				// let's be kind...
 				toolbar.feedback(
-					'Background set to: ' + colourBytesToCss( spriteCanvas.getBg() ),
+					'Background set to ' + colourBytesToCss( spriteCanvas.getBg() ),
 					true
 				);
 			}
@@ -57,7 +57,7 @@
 			var toolName = 'selectSprite';
 			spriteCanvasView.setTool(toolName);
 			toolbar.activate(toolName);
-			toolbar.feedback( 'Background set to: ' + colourBytesToCss(color) );
+			toolbar.feedback( 'Background set to ' + colourBytesToCss(color) );
 		});
 		
 		toolbar.bind('selectBg', function() {
