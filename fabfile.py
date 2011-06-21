@@ -1,4 +1,4 @@
-# Fabric for deploying the vodafone app
+# Fabric for deploying the spritecow app
 import os
 import datetime
 import ConfigParser
