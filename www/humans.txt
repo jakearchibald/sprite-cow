@@ -1,0 +1,28 @@
+Peoples
+=======
+
+Jake Archibald  (@jaffathecake)   - HTML/CSS/JS
+Alfredo Aguirre (@a_alfredo)      - Deploy scripts
+Phil Hawksworth (@philhawksworth) - Hosting
+Darian Moody    (@djm_)           - Pestering me to launch this
+
+Thanks
+======
+
+Thanks to the Canadian weather for bringing out a red flag during the F1 race,
+it was a perfect moment to start developing this.
+
+Also, thanks to theTeam, who are paying for hosting.
+
+                                            _
+                                           <88
+                                            Y8b
+     do.      d8b                           `88
+     Y88b.   d888b                 ___       88[
+     d8PY88. d8PY8b    ,88888o.   888888b.   d8b
+     Y8b `8888b  Y8b   88'''Y88. d8P  '`88.   "
+     `88.  Y88'  Y88  d8P    88[ `88.  ,d88    __
+      88[   '    `88. Y88ooo88P   `Y8888P"    Y88
+      88[         Y8b  ``YPPP'      '`"'
+      88[         `88
+      YP           `
