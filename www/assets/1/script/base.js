@@ -38,6 +38,15 @@
 		spriteCanvasView.bind('rectChange', function(rect) {
 			cssOutput.rect = rect;
 			cssOutput.update();
+			if (rect.width === spriteCanvas.canvas.width && rect.height === spriteCanvas.canvas.height) {
+				// if the rect is the same size as the whole canvas,
+				// it's probably because the background is set wrong
+				// let's be kind...
+				toolbar.feedback(
+					'Background set to: ' + colourBytesToCss( spriteCanvas.getBg() ),
+					true
+				);
+			}
 		});
 		
 		spriteCanvasView.bind('bgColorHover', function(color) {

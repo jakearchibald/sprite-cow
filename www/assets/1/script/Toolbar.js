@@ -31,15 +31,36 @@ spriteCow.Toolbar = (function() {
 	
 	var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new spriteCow.MicroEvent;
 	
-	SpriteCowToolbarProto.feedback = function(msg) {
+	SpriteCowToolbarProto.feedback = function(msg, severe) {
+		var $feedback = this._$feedback,
+			initialColor = '#555';
+		
 		// opacity 0.999 to avoid antialiasing differences when 1
-		this._$feedback.stop(true, true).text(msg).css('opacity', 0.999).animate({
-			// should be using delay() here, but http://bugs.jquery.com/ticket/6150 makes it not work
-			// need to specify a dummy property to animate, cuh!
-			_:0
-		}, 3000).animate({
+		$feedback.transitionStop(true).text(msg).css({
+			opacity: 0.999,
+			color: initialColor
+		});
+		
+		if (severe) {
+			$feedback.transition({
+				color: 'red'
+			}, {
+				duration: 3000
+			});
+		}
+		else {
+			$feedback.animate({
+				// should be using delay() here, but http://bugs.jquery.com/ticket/6150 makes it not work
+				// need to specify a dummy property to animate, cuh!
+				_:0
+			}, 3000);
+		}
+		
+		$feedback.transition({
 			opacity: 0
-		}, 2000);
+		}, {
+			duration: 2000
+		});
 		
 		return this;
 	};

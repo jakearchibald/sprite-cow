@@ -50,6 +50,10 @@ spriteCow.SpriteCanvas = (function() {
 		this._bgData = pixelArr;
 	};
 	
+	SpriteCanvasProto.getBg = function() {
+		return this._bgData;
+	};
+	
 	SpriteCanvasProto.trimBg = function(rect) {
 		var edgeBgResult;
 		
