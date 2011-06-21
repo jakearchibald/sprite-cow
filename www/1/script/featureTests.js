@@ -20,7 +20,12 @@ spriteCow.featureTests = (function() {
 	featureTests.addResult( fileApi(), 'File & FileReader' );
 	featureTests.addResult( w3EventListeners(), 'addEventListener on elements' );
 	featureTests.addResult( tableLayout(), 'display: table' );
-	//featureTests.addResult( false, 'Random failure' );
+	
+	if ($.browser.opera) { // I feel dirty
+		featureTests.addResult( false, 'Backgrounds on both html & body' );	
+		featureTests.addResult( false, 'Opening file dialog from click() events' );	
+		featureTests.addResult( false, 'General layout & transition issue (Hope to work around these soon)' );	
+	}
 	
 	return featureTests;
 })();

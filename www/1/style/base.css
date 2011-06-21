@@ -26,6 +26,10 @@ body {
 	padding: 0 30px;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA0CAYAAAA62j4JAAAAe0lEQVR42u3QMQ5AQABFQbWIaGiI6CjU7n+z9TdxCjvFO8CbrpSypTutaWqtCnClJ51pb60KsHzzc+pbqwKM6UhD6loLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/XvoS9OcMtc3PAAAAAElFTkSuQmCC');
 }
+.not-supported body {
+	/* Working around an Opera bug */
+	background: none;
+}
 
 /* Reset */
 	ul, ol, li, form, dl, dt, dd {
@@ -269,9 +273,8 @@ body {
 		}
 /* Further detail */
 	.further-detail {
-		display: table-row;
+		display: table-cell;
 		overflow: hidden;
-		/*height: 100px;*/
 	}
 	.container.intro .further-detail {
 		height: 100%;
