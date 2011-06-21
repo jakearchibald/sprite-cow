@@ -1,8 +1,9 @@
 spriteCow.ImgInput = (function() {
-	function ImgInput($container, $dropZone) {
+	function ImgInput($container, $dropZone, tutorialUrl) {
 		var imgInput = this,
 			$fileInput = $('<input type="file" accept="image/*" class="upload-input">').appendTo( $container ),
-			$styledButton = $('<div role="button" class="select-btn">Select Image</div>').appendTo( $container ),
+			$selectButton = $('<div role="button" class="select-btn">Select Image</div>').appendTo( $container ),
+			$demoButton = $('<div role="button" class="demo-btn">Load Example</div>').appendTo( $container ),
 			$dropIndicator = $('<div class="drop-indicator"></div>').appendTo( $dropZone );
 		
 		// todo - handles drag & drop
@@ -15,10 +16,15 @@ spriteCow.ImgInput = (function() {
 		});
 		
 		// calling click on a file input needs a direct link to a user-triggered event, so we can't use jquery
-		$styledButton[0].addEventListener('click', function(event) {
+		$selectButton[0].addEventListener('click', function(event) {
 			imgInput.openDialog();
 			event.preventDefault();
 		}, false);
+		
+		$demoButton.click(function(event) {
+			imgInput.loadImgUrl( tutorialUrl );
+			event.preventDefault();
+		});
 		
 		imgInput._fileInput = $fileInput[0];
 		imgInput._addDropEvents($dropZone);

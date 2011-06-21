@@ -21,7 +21,7 @@
 			$tutorialLink     = $('.tutorial'),
 			spriteCanvas      = new spriteCow.SpriteCanvas(),
 			spriteCanvasView  = new spriteCow.SpriteCanvasView( spriteCanvas, $canvasContainer ),
-			imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer ),
+			imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer, $tutorialLink.attr('href') ),
 			cssOutput         = new spriteCow.CssOutput( $codeContainer ),
 			toolbar           = new spriteCow.Toolbar( $toolbarContainer );
 		
@@ -74,9 +74,7 @@
 	})();
 	
 	// todo:
-	// Big tutorial button on intro page
 	// Change font
-	// Fix open button
 	// Hover effects on toolbar buttons?
 	// favicon
 })(spriteCow);

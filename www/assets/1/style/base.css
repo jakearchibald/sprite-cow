@@ -233,10 +233,10 @@ body {
 			top: -5000px;
 			left: -5000px;
 		}
-		.select-btn {
+		.select-btn, .demo-btn {
 			position: absolute;
 			top: 54px;
-			left: 50%;
+			left: 33%;
 			margin: 0 0 0 -121px;
 			border-radius: 100px;
 			color: #fff;
@@ -252,7 +252,10 @@ body {
 			text-shadow: rgba(0,0,0,0.5) 0 2px 0;
 			display: none;
 		}
-		.container.intro .select-btn {
+		.demo-btn {
+			left: 66%;
+		}
+		.container.intro .select-btn, .container.intro .demo-btn {
 			display: block;
 		}
 	/* Drop indicator */
