@@ -74,9 +74,6 @@
 	})();
 	
 	// todo:
-	// Feature test page (with random excuses!)
 	// Hover effects on toolbar buttons?
 	// favicon
-	// Humans text
-	// Fab script & deploy
 })(spriteCow);
