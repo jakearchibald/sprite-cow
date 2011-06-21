@@ -6,13 +6,16 @@ Alfredo Aguirre (@a_alfredo)      - Deploy script mastery
 Phil Hawksworth (@philhawksworth) - Hosting & testing
 Darian Moody    (@djm_)           - Pestering me to launch this
 
-Thanks
-======
+Thankings
+=========
 
 Thanks to the Canadian weather for bringing out a red flag during the F1 race,
 it was a perfect moment to start developing this.
 
 Also, thanks to theTeam, who are paying for hosting.
+
+Hosted on S3, which is why the url's www.spritecow.com rather than just
+spritecow.com, can't do a cname for that :(
 
                                             _
                                            <88
