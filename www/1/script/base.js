@@ -68,13 +68,9 @@
 	})();
 	
 	// todo:
-	// Optimising edge searching by only getting pixel data for edges... duh
-	// Maybe resize listener to center the canvas... maybe?
 	// Feature test page (with random excuses!)
 	// Hover effects on toolbar buttons?
 	// favicon
-	// Move far future cached files into numbered directories
 	// Humans text
-	// Get domain
 	// Fab script & deploy
 })(spriteCow);
