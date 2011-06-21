@@ -3,6 +3,7 @@ spriteCow.pageLayout = (function() {
 		$header = $('.container > header'),
 		$headerH1 = $('.container > header h1'),
 		$canvasCell = $('.canvas-cell'),
+		$canvasInner = $('.canvas-inner'),
 		$introCopy = $('.intro-copy'),
 		$cssOutput,
 		$selectBtn,
@@ -34,6 +35,8 @@ spriteCow.pageLayout = (function() {
 				],
 				before: function() {
 					$container.width(containerWidth);
+					// stops browser reverting to previous scroll position
+					$canvasInner.scrollTop(0);
 				}
 			},
 			{
