@@ -74,6 +74,9 @@
 	})();
 	
 	// todo:
+	// Big tutorial button on intro page
+	// Change font
+	// Fix open button
 	// Hover effects on toolbar buttons?
 	// favicon
 })(spriteCow);
