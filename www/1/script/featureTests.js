@@ -10,16 +10,12 @@ spriteCow.featureTests = (function() {
 	function w3EventListeners() {
 		return !!testElm.addEventListener;
 	}
-	function tableLayout() {
-		testElm.style.display = 'table';
-		return testElm.style.display === 'table';
-	}
 	
 	var featureTests = new spriteCow.FeatureTest( $('.feature-test') );
+	
 	featureTests.addResult( canvas(), '<canvas> element' );
 	featureTests.addResult( fileApi(), 'File & FileReader' );
 	featureTests.addResult( w3EventListeners(), 'addEventListener on elements' );
-	featureTests.addResult( tableLayout(), 'display: table' );
 	
 	if ($.browser.opera) { // I feel dirty
 		featureTests.addResult( false, 'Backgrounds on both html & body' );	

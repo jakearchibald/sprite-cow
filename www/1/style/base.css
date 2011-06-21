@@ -464,6 +464,7 @@ body {
 		width: 600px;
 		margin: 0 auto 20px;
 		font-size: 1.1em;
+		text-align: left;
 	}
 	.feature-test .pass, .feature-test .fail {
 		float: left;
@@ -472,7 +473,7 @@ body {
 		color: #5f5;
 	}
 	.feature-test .fail {
-		color: #c00;
+		color: #f55;
 	}
 	
 /* Being responsible... */
