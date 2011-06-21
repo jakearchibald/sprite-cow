@@ -20,7 +20,7 @@ spriteCow.featureTests = (function() {
 	
 	if ($.browser.opera) { // I feel dirty
 		featureTests.addResult( false, 'Backgrounds on both html & body' );	
-		featureTests.addResult( false, 'Opening file dialog from click() events' );	
+		featureTests.addResult( false, 'Opening file dialog from click() listeners' );	
 		featureTests.addResult( false, 'General layout & transition issue (Hope to work around these soon)' );	
 	}
 	
