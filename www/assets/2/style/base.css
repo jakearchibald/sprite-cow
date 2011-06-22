@@ -234,10 +234,6 @@ body {
 			left: -5000px;
 		}
 		.select-btn, .demo-btn {
-			position: absolute;
-			top: 54px;
-			left: 33%;
-			margin: 0 0 0 -121px;
 			border-radius: 100px;
 			color: #fff;
 			font: normal 2.4em/1 prowin, monospace;
@@ -252,11 +248,18 @@ body {
 			text-shadow: rgba(0,0,0,0.5) 0 2px 0;
 			display: none;
 		}
-		.demo-btn {
-			left: 66%;
+		.select-btn {
+			margin: 0 48px 0 0;
 		}
 		.container.intro .select-btn, .container.intro .demo-btn {
-			display: block;
+			display: inline-block;
+		}
+		.start-buttons {
+			position: absolute;
+			top: 53px;
+			left: 0;
+			width: 100%;
+			text-align: center;
 		}
 	/* Drop indicator */
 		.drop-indicator {
@@ -504,6 +507,17 @@ body {
 	body {
 		padding-left: 20px;
 		padding-right: 20px;
+	}
+	.select-btn, .demo-btn {
+		font-size: 1.6em;
+		padding: 11px 22px;
+		
+	}
+	.select-btn {
+		margin: 0 21px 0 0;
+	}
+	.start-buttons {
+		top: 64px;
 	}
 }
 @media screen and (max-width: 562px) {

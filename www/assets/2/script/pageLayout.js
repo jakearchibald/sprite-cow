@@ -6,8 +6,7 @@ spriteCow.pageLayout = (function() {
 		$canvasInner = $('.canvas-inner'),
 		$introCopy = $('.intro-copy'),
 		$cssOutput,
-		$selectBtn,
-		$demoBtn,
+		$startButtons,
 		$spriteCanvasContainer,
 		$window = $(window),
 		$toolbar,
@@ -31,8 +30,7 @@ spriteCow.pageLayout = (function() {
 				duration: 500,
 				easing: 'linear',
 				targets: [
-					[$selectBtn, { opacity: 0 }],
-					[$demoBtn, { opacity: 0 }],
+					[$startButtons, { opacity: 0 }],
 					[$introCopy, { opacity: 0 }]
 				],
 				before: function() {
@@ -111,8 +109,7 @@ spriteCow.pageLayout = (function() {
 	return {
 		init: function() {
 			$toolbar = $('.toolbar');
-			$selectBtn = $('.select-btn');
-			$demoBtn = $('.demo-btn');
+			$startButtons = $('.start-buttons');
 			$cssOutput = $('.css-output');
 			$spriteCanvasContainer = $('.sprite-canvas-container');
 		},

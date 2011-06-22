@@ -2,11 +2,11 @@ spriteCow.ImgInput = (function() {
 	function ImgInput($container, $dropZone, tutorialUrl) {
 		var imgInput = this,
 			$fileInput = $('<input type="file" accept="image/*" class="upload-input">').appendTo( $container ),
-			$selectButton = $('<div role="button" class="select-btn">Select Image</div>').appendTo( $container ),
-			$demoButton = $('<div role="button" class="demo-btn">Load Example</div>').appendTo( $container ),
+			$buttons = $('<div class="start-buttons"/>').appendTo( $container ),
+			$selectButton = $('<div role="button" class="select-btn">Select Image</div>').appendTo( $buttons ),
+			$demoButton = $('<div role="button" class="demo-btn">Load Example</div>').appendTo( $buttons ),
 			$dropIndicator = $('<div class="drop-indicator"></div>').appendTo( $dropZone );
 		
-		// todo - handles drag & drop
 		imgInput.fileName = '';
 		
 		$fileInput.change(function(event) {
