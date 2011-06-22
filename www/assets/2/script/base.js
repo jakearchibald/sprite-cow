@@ -80,6 +80,8 @@
 	})();
 	
 	// todo:
+	// Allow user to change the CSS output constants
+	// 'Select all' on the CSS
 	// Change font
 	// Hover effects on toolbar buttons?
 	// favicon
