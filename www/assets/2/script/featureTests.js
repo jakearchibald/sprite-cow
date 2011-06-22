@@ -19,7 +19,7 @@ spriteCow.featureTests = (function() {
 	featureTests.addResult( $.support.transition, 'CSS3 transitions' );
 	
 	if ($.browser.opera) { // I feel dirty
-		featureTests.addResult( false, 'Backgrounds on both html & body' );	
+		featureTests.addResult( false, "Survives jQuery's attempt to break backgrounds on <body>" );	
 		featureTests.addResult( false, 'Opening file dialog from click() listeners' );	
 		featureTests.addResult( false, 'General layout & transition issue (Hope to work around these soon)' );	
 	}
