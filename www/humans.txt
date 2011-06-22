@@ -9,13 +9,14 @@ Darian Moody    (@djm_)           - Pestering me to launch this
 Thankings
 =========
 
-Thanks to the Canadian weather for bringing out a red flag during the F1 race,
+The Canadian weather for bringing out a red flag during the F1 race,
 it was a perfect moment to start developing this.
 
-Also, thanks to theTeam, who are paying for hosting.
+theTeam, who are paying for hosting. Hosted on S3, which is why the url's
+www.spritecow.com rather than just spritecow.com, can't do a cname for that :(
 
-Hosted on S3, which is why the url's www.spritecow.com rather than just
-spritecow.com, can't do a cname for that :(
+The 08:03 Southern service from Haywards Heath to London Bridge for always
+having a table seat, where the majority of this was developed.
 
                                             _
                                            <88
