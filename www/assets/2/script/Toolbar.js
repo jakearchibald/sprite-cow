@@ -38,13 +38,12 @@ spriteCow.Toolbar = (function() {
 		// opacity 0.999 to avoid antialiasing differences when 1
 		$feedback.transitionStop(true).text(msg).css({
 			opacity: 0.999,
-			color: initialColor
+			color: initialColor,
+			'font-weight': 'normal'
 		});
 		
 		if (severe) {
-			$feedback.transition({
-				color: 'red'
-			}, {
+			$feedback.css('font-weight', 'bold').transition({ color: 'red' }, {
 				duration: 3000
 			});
 		}
@@ -56,9 +55,7 @@ spriteCow.Toolbar = (function() {
 			}, 3000);
 		}
 		
-		$feedback.transition({
-			opacity: 0
-		}, {
+		$feedback.transition({ opacity: 0 }, {
 			duration: 2000
 		});
 		

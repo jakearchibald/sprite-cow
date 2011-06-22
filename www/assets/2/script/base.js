@@ -42,10 +42,7 @@
 				// if the rect is the same size as the whole canvas,
 				// it's probably because the background is set wrong
 				// let's be kind...
-				toolbar.feedback(
-					'Background set to ' + colourBytesToCss( spriteCanvas.getBg() ),
-					true
-				);
+				toolbar.feedback( 'Incorrect background colour set?', true );
 			}
 		});
 		
