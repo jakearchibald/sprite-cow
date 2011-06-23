@@ -1,7 +1,5 @@
 (function() {
 	var Highlight = (function() {
-		// TODO: consider using <cavnas> to render the highlight, will allow for subpixel rendering
-		
 		function Highlight($appendTo) {
 			this._$container = $('<div class="highlight"/>').appendTo( $appendTo );
 		}
@@ -59,6 +57,11 @@
 				$container.css('display', 'none');
 			}
 		};
+		
+		HighlightProto.setHighVisOnDark = function(highVis) {
+			this._$container[highVis ? 'addClass' : 'removeClass']('high-vis');
+			return this;
+		}
 		
 		return Highlight;
 	})();
@@ -269,7 +272,9 @@
 		SpriteCanvasViewProto.setBg = function(color) {
 			this._$bgElm.transition({ 'background-color': color }, {
 				duration: 500
-			})
+			});
+			
+			this._highlight.setHighVisOnDark( color === '#000' );
 		};
 		
 		return SpriteCanvasView;
