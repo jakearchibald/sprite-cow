@@ -191,7 +191,7 @@ body {
 	.canvas-inner {
 		overflow: auto;
 		position: relative;
-		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX////MzMw46qqDAAAAEUlEQVQIHWP4z8CAFWEX/Q8Afr8P8WzDsvUAAAAASUVORK5CYII=');
+		background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMzMz0oyR4AAAARSURBVAgdY/jPwIAVYRf9DwB+vw/xbMOy9QAAAABJRU5ErkJggg==');
 		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
 		height: 100%;
 		/*cursor: crosshair; meh, difficult to see */
@@ -371,6 +371,11 @@ body {
 		box-shadow: inset 0 3px 7px rgba(0,0,0,0.6);
 		color: #fff;
 	}
+	.toolbar-container [role='button'].no-label div {
+		width: 26px;
+		padding: 4px 0;
+		text-indent: -5000px;
+	}
 	.toolbar-container .feedback {
 		float: left;
 		padding: 5px;
@@ -395,6 +400,9 @@ body {
 	}
 	.toolbar .open-img div {
 		background-position: -864px -37px;
+	}
+	.toolbar .invert-bg div {
+		background-position: -867px -121px;
 	}
 	
 /* Footer */

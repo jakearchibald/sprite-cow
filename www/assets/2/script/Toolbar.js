@@ -6,6 +6,7 @@ spriteCow.Toolbar = (function() {
 					'<div role="button" class="open-img"><div>Select Image</div></div>' +
 					'<div role="button" class="select-sprite active"><div>Select Sprite</div></div>' +
 					'<div role="button" class="pick-bg"><div>Pick Background</div></div>' +
+					'<div role="button" class="no-label invert-bg"><div>Invert Background</div></div>' +
 					'<span class="feedback"></span>' +
 				'</div>' +
 			'').appendTo( $appendToElm ),
@@ -13,7 +14,8 @@ spriteCow.Toolbar = (function() {
 			toolNames = [
 				'openImg',
 				'selectSprite',
-				'selectBg'
+				'selectBg',
+				'invertBg',
 			];
 			
 		toolNames.forEach(function(toolName, i) {
@@ -63,10 +65,22 @@ spriteCow.Toolbar = (function() {
 	};
 	
 	SpriteCowToolbarProto.activate = function(toolName) {
-		this._$children.removeClass('active')
-			.eq( this._toolNames.indexOf(toolName) )
+		this._$children.eq( this._toolNames.indexOf(toolName) )
 			.addClass('active');
-		
+			
+		return this;
+	};
+	
+	SpriteCowToolbarProto.deactivate = function(toolName) {
+		this._$children.eq( this._toolNames.indexOf(toolName) )
+			.removeClass('active');
+			
+		return this;
+	};
+	
+	SpriteCowToolbarProto.isActive = function(toolName) {
+		return this._$children.eq( this._toolNames.indexOf(toolName) )
+			.hasClass('active');
 	};
 	
 	return SpriteCowToolbar;

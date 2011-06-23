@@ -53,24 +53,36 @@
 		spriteCanvasView.bind('bgColorSelect', function(color) {
 			var toolName = 'selectSprite';
 			spriteCanvasView.setTool(toolName);
-			toolbar.activate(toolName);
+			toolbar.deactivate('selectBg').activate(toolName);
 			toolbar.feedback( 'Background set to ' + colourBytesToCss(color) );
 		});
 		
 		toolbar.bind('selectBg', function() {
 			var toolName = 'selectBg';
 			spriteCanvasView.setTool(toolName);
-			toolbar.activate(toolName);
+			toolbar.deactivate('selectSprite').activate(toolName);
 		});
 		
 		toolbar.bind('selectSprite', function() {
 			var toolName = 'selectSprite';
 			spriteCanvasView.setTool(toolName);
-			toolbar.activate(toolName)
+			toolbar.deactivate('selectBg').activate(toolName)
 		});
 		
 		toolbar.bind('openImg', function() {
 			imgInput.openDialog();
+		});
+		
+		toolbar.bind('invertBg', function() {
+			var toolName = 'invertBg';
+			if ( toolbar.isActive(toolName) ) {
+				toolbar.deactivate(toolName);
+				spriteCanvasView.setBg('#fff');
+			}
+			else {
+				toolbar.activate(toolName);
+				spriteCanvasView.setBg('#000');
+			}
 		});
 		
 		$tutorialLink.click(function(event) {

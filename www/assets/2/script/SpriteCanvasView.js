@@ -212,6 +212,7 @@
 				selectColor = new SelectColor( $canvas, $canvas );
 				
 			this._$container = $container;
+			this._$bgElm = $appendToElm;
 			this._spriteCanvas = spriteCanvas;
 			this._highlight = highlight;
 			this._selectArea = selectArea;
@@ -263,6 +264,12 @@
 					selectColor.activate();
 					break;
 			}
+		};
+		
+		SpriteCanvasViewProto.setBg = function(color) {
+			this._$bgElm.transition({ 'background-color': color }, {
+				duration: 500
+			})
 		};
 		
 		return SpriteCanvasView;
