@@ -6,7 +6,7 @@ spriteCow.Toolbar = (function() {
 					'<div role="button" class="open-img"><div>Select Image</div></div>' +
 					'<div role="button" class="select-sprite active"><div>Select Sprite</div></div>' +
 					'<div role="button" class="pick-bg"><div>Pick Background</div></div>' +
-					'<div role="button" class="no-label invert-bg"><div>Invert Background</div></div>' +
+					'<div role="button" class="no-label invert-bg"><div>Toggle Dark Background</div></div>' +
 					'<span class="feedback"></span>' +
 				'</div>' +
 			'').appendTo( $appendToElm ),
@@ -24,6 +24,11 @@ spriteCow.Toolbar = (function() {
 				toolbar.trigger(toolName);
 				event.preventDefault();
 			}, false);
+		});
+		
+		$container.delegate('div[role=button]', 'mouseenter', function() {
+			var $button = $(this);
+			toolbar.feedback( $button.hasClass('no-label') ? $button.text() : '' );
 		});
 		
 		toolbar._$feedback = $children.slice(-1);
