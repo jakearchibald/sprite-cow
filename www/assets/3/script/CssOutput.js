@@ -21,21 +21,29 @@ spriteCow.CssOutput = (function() {
 	CssOutputProto.update = function() {
 		var indent = this.useTabs ? '\t' : '    ',
 			rect = this.rect,
-			output = this.selector + ' {\n';
-			
+			$container = this._$container;
+		
+		$container.empty()
+			.append( $('<span class="selector"/>').text(this.selector) )
+			.append(' {\n');
+		
 		if (this.useBgUrl && this.backgroundFileName) {
-			output += indent + "background: url('" + this.path + this.backgroundFileName + "') no-repeat";
+			$container.append( indent + "background: url('" )
+				.append( $('<span class="path"/>').text( this.path ) )
+				.append( $('<span class="file"/>').text( this.backgroundFileName ) )
+				.append("') no-repeat");
 		}
 		else {
-			output += indent + "background-position:";
+			$container.append( indent + "background-position:" );
 		}
 		
-		output += bgPosVal(rect.x) + bgPosVal(rect.y) + ';\n';
-		output += indent + 'width: ' + rect.width + 'px;\n';
-		output += indent + 'height: ' + rect.height + 'px;\n';
-		output += '}';
+		$container.append(
+			bgPosVal(rect.x) + bgPosVal(rect.y) + ';\n' +
+			indent + 'width: ' + rect.width + 'px;\n' +
+			indent + 'height: ' + rect.height + 'px;\n' +
+			'}'
+		);
 		
-		this._$container.text(output);
 	};
 	
 	return CssOutput;
