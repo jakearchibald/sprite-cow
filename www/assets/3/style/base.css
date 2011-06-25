@@ -257,6 +257,7 @@ body {
 			left: -5000px;
 		}
 		.select-btn, .demo-btn {
+			width: 192px;
 			border-radius: 100px;
 			color: #fff;
 			font: normal 2.4em/1 prowin, monospace;

@@ -3,7 +3,7 @@ spriteCow.Toolbar = (function() {
 		var toolbar = this,
 			$container = $('' +
 				'<div class="toolbar">' +
-					'<div role="button" class="open-img"><div>Select Image</div></div>' +
+					'<div role="button" class="open-img"><div>Open</div></div>' +
 					'<div role="button" class="select-sprite active"><div>Select Sprite</div></div>' +
 					'<div role="button" class="pick-bg"><div>Pick Background</div></div>' +
 					'<div role="button" class="no-label invert-bg"><div>Toggle Dark Background</div></div>' +
