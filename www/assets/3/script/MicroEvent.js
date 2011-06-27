@@ -2,7 +2,7 @@ spriteCow.MicroEvent = function(){};
 spriteCow.MicroEvent.prototype = {
 	bind: function(event, fct){
 		this._events = this._events || {};
-		this._events[event] = this._events[event]	|| [];
+		this._events[event] = this._events[event] || [];
 		this._events[event].push(fct);
 	},
 	unbind: function(event, fct){
