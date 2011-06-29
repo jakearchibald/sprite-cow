@@ -336,14 +336,39 @@ body {
 			background: rgba(0, 0, 0, .23);
 			margin: 0 0 10px;
 			padding: 20px 30px;
-			font: normal 1.2em/1 prowin, monospace;
 			overflow: auto;
+			position: relative;
+		}
+		.css-output code {
+			font: normal 1.2em/1 prowin, monospace;
 		}
 		.container.intro .css-output {
 			height: 0;
 			padding-top: 0;
 			padding-bottom: 0;
 			overflow: hidden;
+		}
+		.css-output .path {
+			cursor: pointer;
+			position: relative;
+		}
+		.css-output .path:hover::before {
+			outline: 1px dotted #fff;
+			position: absolute;
+			top: -3px;
+			left: 0;
+			bottom: -4px;
+			right: 0;
+			content: "";
+		}
+		.css-output input[type='text'] {
+			position: absolute;
+			border: 1px solid #ccc;
+			background: #fff;
+			color: #333;
+			font: normal 1.2em/1 prowin, monospace;
+			padding: 3px;
+			outline: none;
 		}
 /* Toolbar */
 	.toolbar-container {

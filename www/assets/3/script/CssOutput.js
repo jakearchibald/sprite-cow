@@ -7,13 +7,16 @@ spriteCow.CssOutput = (function() {
 	}
 	
 	function CssOutput($appendTo) {
-		this._$container = $('<code class="css-output">\n\n\n\n\n</code>').appendTo( $appendTo );
+		var $container = $('<div class="css-output"></div>').appendTo( $appendTo );
+		this._$container = $container;
+		this._$code = $('<code>\n\n\n\n\n</code>').appendTo( $container );
 		this.backgroundFileName = '';
 		this.path = 'imgs/';
 		this.rect = new spriteCow.Rect(0, 0, 0, 0);
 		this.useTabs = true;
 		this.useBgUrl = true;
 		this.selector = '.sprite';
+		this._addEditEvents();
 	}
 	
 	var CssOutputProto = CssOutput.prototype;
@@ -21,29 +24,70 @@ spriteCow.CssOutput = (function() {
 	CssOutputProto.update = function() {
 		var indent = this.useTabs ? '\t' : '    ',
 			rect = this.rect,
-			$container = this._$container;
+			$code = this._$code;
 		
-		$container.empty()
+		$code.empty()
 			.append( $('<span class="selector"/>').text(this.selector) )
 			.append(' {\n');
 		
 		if (this.useBgUrl && this.backgroundFileName) {
-			$container.append( indent + "background: url('" )
+			$code.append( indent + "background: url('" )
 				.append( $('<span class="path"/>').text( this.path ) )
 				.append( $('<span class="file"/>').text( this.backgroundFileName ) )
 				.append("') no-repeat");
 		}
 		else {
-			$container.append( indent + "background-position:" );
+			$code.append( indent + "background-position:" );
 		}
 		
-		$container.append(
+		$code.append(
 			bgPosVal(rect.x) + bgPosVal(rect.y) + ';\n' +
 			indent + 'width: ' + rect.width + 'px;\n' +
 			indent + 'height: ' + rect.height + 'px;\n' +
 			'}'
 		);
+	};
+	
+	CssOutputProto._addEditEvents = function() {
+		var cssOutput = this,
+			$container = cssOutput._$container,
+			$input = $('<input type="text"/>').appendTo( $container ).hide(),
+			inputTopPadding  = parseInt( $input.css('padding-top') ),
+			inputTopBorder   = parseInt( $input.css('border-top-width') ),
+			inputLeftPadding = parseInt( $input.css('padding-left') ),
+			inputLeftBorder  = parseInt( $input.css('border-left-width') ),
+			isEditingPath;
 		
+		$input.hide();
+		
+		$container.delegate('.path', 'click', function() {
+			var $path = $(this),
+				position = $path.position();
+				
+			if (isEditingPath) { return; }
+			isEditingPath = true;
+			
+			$input.show().css({
+				top:  position.top  - inputTopPadding  - inputTopBorder,
+				left: position.left - inputLeftPadding - inputLeftBorder,
+				width: Math.max( $path.width(), 50 )
+			}).val( $path.text() ).focus();
+		});
+		
+		function endPathEdit() {
+			var newVal = $input.val();
+			$input.hide();
+			cssOutput.path = newVal;
+			cssOutput.update();
+			isEditingPath = false;
+		}
+		
+		$input.blur(endPathEdit).keyup(function(event) {
+			if (event.keyCode === 13) {
+				endPathEdit();
+				event.preventDefault();
+			}
+		});
 	};
 	
 	return CssOutput;
