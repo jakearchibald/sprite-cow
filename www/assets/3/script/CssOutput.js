@@ -11,7 +11,7 @@ spriteCow.CssOutput = (function() {
 		this._$container = $container;
 		this._$code = $('<code>\n\n\n\n\n</code>').appendTo( $container );
 		this.backgroundFileName = '';
-		this.path = 'imgs/';
+		this.path = localStorage.getItem('cssOutputPath') || 'imgs/';
 		this.rect = new spriteCow.Rect(0, 0, 0, 0);
 		this.useTabs = true;
 		this.useBgUrl = true;
@@ -79,12 +79,13 @@ spriteCow.CssOutput = (function() {
 			$input.hide();
 			cssOutput.path = newVal;
 			cssOutput.update();
+			localStorage.setItem('cssOutputPath', newVal);
 			isEditingPath = false;
 		}
 		
 		$input.blur(endPathEdit).keyup(function(event) {
 			if (event.keyCode === 13) {
-				endPathEdit();
+				$input.blur();
 				event.preventDefault();
 			}
 		});
