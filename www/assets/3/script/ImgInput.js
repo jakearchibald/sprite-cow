@@ -7,7 +7,9 @@ spriteCow.ImgInput = (function() {
 			$demoButton = $('<div role="button" class="demo-btn">Load Example</div>').appendTo( $buttons ),
 			$dropIndicator = $('<div class="drop-indicator"></div>').appendTo( $dropZone );
 		
-		imgInput.fileName = '';
+		imgInput.fileName = 'example.png';
+		imgInput._fileInput = $fileInput[0];
+		imgInput._addDropEvents($dropZone);
 		
 		$fileInput.change(function(event) {
 			var file = this.files[0];
@@ -26,8 +28,6 @@ spriteCow.ImgInput = (function() {
 			event.preventDefault();
 		});
 		
-		imgInput._fileInput = $fileInput[0];
-		imgInput._addDropEvents($dropZone);
 	}
 	
 	var ImgInputProto = ImgInput.prototype = new spriteCow.MicroEvent;
