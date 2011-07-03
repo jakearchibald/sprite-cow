@@ -348,11 +348,14 @@ body {
 			padding-bottom: 0;
 			overflow: hidden;
 		}
-		.css-output .path {
-			cursor: pointer;
+		.css-output .file-path {
 			position: relative;
+			display: inline-block;
 		}
-		.css-output .path:hover::before {
+		.css-output .file {
+			cursor: pointer;
+		}
+		.css-output .file:hover .file-path::before {
 			outline: 1px dotted #fff;
 			position: absolute;
 			top: -3px;

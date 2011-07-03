@@ -11,7 +11,7 @@ spriteCow.CssOutput = (function() {
 		this._$container = $container;
 		this._$code = $('<code>\n\n\n\n\n</code>').appendTo( $container );
 		this.backgroundFileName = '';
-		this.path = localStorage.getItem('cssOutputPath') || 'imgs/';
+		this.path = 'cssOutputPath' in localStorage ? localStorage.getItem('cssOutputPath') : 'imgs/';
 		this.rect = new spriteCow.Rect(0, 0, 0, 0);
 		this.useTabs = true;
 		this.useBgUrl = true;
@@ -24,17 +24,21 @@ spriteCow.CssOutput = (function() {
 	CssOutputProto.update = function() {
 		var indent = this.useTabs ? '\t' : '    ',
 			rect = this.rect,
-			$code = this._$code;
+			$code = this._$code,
+			$file;
 		
 		$code.empty()
 			.append( $('<span class="selector"/>').text(this.selector) )
 			.append(' {\n');
 		
 		if (this.useBgUrl && this.backgroundFileName) {
-			$code.append( indent + "background: url('" )
-				.append( $('<span class="path"/>').text( this.path ) )
-				.append( $('<span class="file"/>').text( this.backgroundFileName ) )
-				.append("') no-repeat");
+			$code.append( indent + "background: url('" );
+			$file = $('<span class="file"/>')
+				.append( $('<span class="file-path"/>').text( this.path ) )
+				.append( $('<span class="file-name"/>').text( this.backgroundFileName ) );
+				
+			
+			$code.append( $file ).append( "') no-repeat" );
 		}
 		else {
 			$code.append( indent + "background-position:" );
@@ -60,8 +64,8 @@ spriteCow.CssOutput = (function() {
 		
 		$input.hide();
 		
-		$container.delegate('.path', 'click', function() {
-			var $path = $(this),
+		$container.delegate('.file', 'click', function() {
+			var $path = $(this).find('.file-path'),
 				position = $path.position();
 				
 			if (isEditingPath) { return; }
