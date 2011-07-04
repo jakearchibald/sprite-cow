@@ -8,3 +8,12 @@ Automated spritesheet generators are pretty cool, but I prefer the control over 
 However, copying all the positions & sizes from graphics apps wasted a ton of my time, so I made this!
 
 Currently available online for you to use at http://spritecow.com
+
+Changes
+=======
+
+v1.1 2011-07-04
+---------------
+
+* FEATURE: Can change CSS path
+* FIX: Changing labels from 'Select' to 'Open' when opening files
