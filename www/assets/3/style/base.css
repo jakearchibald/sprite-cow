@@ -255,6 +255,7 @@ body {
 			position: absolute;
 			top: -5000px;
 			left: -5000px;
+			cursor: pointer;
 		}
 		.select-btn, .demo-btn {
 			width: 192px;

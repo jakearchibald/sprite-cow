@@ -7,33 +7,51 @@
 			left: 0
 		};
 		
-		$otherElm.css( hideCss ).css({
-			opacity: 0,
+		$clickTarget.css( hideCss ).css({
+			opacity: 1,
 			position: 'absolute'
 		});
 		
 		this.each(function() {
-			var $this = $(this);
+			var $this = $(this),
+				thisOffset,
+				thisWidth,
+				thisHeight;
 			
 			$this.mouseenter(function(event) {
-				$this.bind('mousemove', clickjack);
+				thisOffset = $this.offset();
+				thisWidth  = $this.width();
+				thisHeight = $this.height();
+				$this.bind('mousemove', onMove);
 				clickjack(event);
 			});
 			
-			$this.mouseleave(function() {
-				$this.unbind('mousemove', clickjack);
-				$clickTarget.css( hideCss );
-			});
-			
-			function clickjack(event) {
-				var targetPos = $clickTarget.position(),
-					targetOffset = $clickTarget.offset();
-					
-				$this.css({
-					top: targetPos.top - (targetOffset.top - event.pageY),
-					left: targetPos.left - (targetOffset.left - event.PageX)
-				});
+			function onMove(event) {
+				var inBounds = event.pageY > thisOffset.top &&
+				               event.pageX > thisOffset.left &&
+							   event.pageY < thisOffset.top + thisHeight &&
+							   event.pageX < thisOffset.left + thisWidth;
+				
+				if (inBounds) {
+					clickjack( event.pageX, event.pageY );
+				}
+				else {	
+					$this.unbind('mousemove', onMove);
+					$clickTarget.css( hideCss );
+				}
 			}
+			
 		});
+		
+		function clickjack(pageX, pageY) {
+			var targetPos = $clickTarget.position(),
+				targetOffset = $clickTarget.offset();
+				
+			$clickTarget.css({
+				top: targetPos.top - (targetOffset.top - pageY),
+				left: targetPos.left - (targetOffset.left - pageX)
+			});
+		}
 	};
+	
 })(jQuery);
