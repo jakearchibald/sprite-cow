@@ -1,10 +1,12 @@
 (function($) {
+	var $doc = $(document);
+	
 	$.fn.clickjack = function($clickTarget) {
 		$clickTarget = $( $clickTarget );
 		
 		var hideCss = {
-			top: -5000,
-			left: 0
+			/*top: -5000,
+			left: 0*/
 		};
 		
 		$clickTarget.css( hideCss ).css({
@@ -20,10 +22,10 @@
 			
 			$this.mouseenter(function(event) {
 				thisOffset = $this.offset();
-				thisWidth  = $this.width();
-				thisHeight = $this.height();
-				$this.bind('mousemove', onMove);
-				clickjack(event);
+				thisWidth  = $this.outerWidth();
+				thisHeight = $this.outerHeight();
+				$doc.bind('mousemove', onMove);
+				clickjack( event.pageX, event.pageY );
 			});
 			
 			function onMove(event) {
@@ -36,7 +38,7 @@
 					clickjack( event.pageX, event.pageY );
 				}
 				else {	
-					$this.unbind('mousemove', onMove);
+					$doc.unbind('mousemove', onMove);
 					$clickTarget.css( hideCss );
 				}
 			}
@@ -45,12 +47,14 @@
 		
 		function clickjack(pageX, pageY) {
 			var targetPos = $clickTarget.position(),
-				targetOffset = $clickTarget.offset();
-				
-			$clickTarget.css({
-				top: targetPos.top - (targetOffset.top - pageY),
-				left: targetPos.left - (targetOffset.left - pageX)
-			});
+				targetOffset = $clickTarget.offset(),
+				newPos = {
+					top: targetPos.top - (targetOffset.top - pageY),
+					left: targetPos.left - (targetOffset.left - pageX)
+				};
+			
+			console.log(newPos);
+			$clickTarget.css( newPos );
 		}
 	};
 	
