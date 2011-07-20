@@ -20,7 +20,7 @@ spriteCow.Toolbar = (function() {
 			
 		toolNames.forEach(function(toolName, i) {
 			// avoiding jquery's event system so file dialogs can be launched
-			$children.eq(i).('click', function(event) {
+			$children.eq(i).click(function(event) {
 				toolbar.trigger(toolName);
 				event.preventDefault();
 			});

@@ -256,6 +256,7 @@ body {
 			top: -5000px;
 			left: -5000px;
 			cursor: pointer;
+			z-index: 10;
 		}
 		.select-btn, .demo-btn {
 			width: 192px;
