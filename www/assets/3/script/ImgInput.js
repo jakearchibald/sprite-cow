@@ -13,8 +13,7 @@ spriteCow.ImgInput = (function() {
 		
 		$fileInput.change(function(event) {
 			var file = this.files[0];
-			imgInput.fileName = file.fileName;
-			file && imgInput._fileToImg(file);
+			file && imgInput._openFileAsImg(file);
 		});
 		
 		// calling click on a file input needs a direct link to a user-triggered event, so we can't use jquery
@@ -32,9 +31,11 @@ spriteCow.ImgInput = (function() {
 	
 	var ImgInputProto = ImgInput.prototype = new spriteCow.MicroEvent;
 	
-	ImgInputProto._fileToImg = function(file) {
+	ImgInputProto._openFileAsImg = function(file) {
 		var imgInput = this,
 			reader = new FileReader;
+		
+		imgInput.fileName = file.fileName;
 		
 		reader.onload = function() {
 			imgInput.loadImgUrl(reader.result);
@@ -70,7 +71,7 @@ spriteCow.ImgInput = (function() {
 			var file = event.dataTransfer.files[0];
 			
 			if ( file && file.type.slice(0,5) === 'image' ) {
-				imgInput._fileToImg(file);
+				imgInput._openFileAsImg(file);
 			}
 		}, false);
 	};
