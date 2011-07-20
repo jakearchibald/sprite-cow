@@ -10,7 +10,7 @@
 		};
 		
 		$clickTarget.css( hideCss ).css({
-			opacity: 1,
+			opacity: 0,
 			position: 'absolute'
 		});
 		
