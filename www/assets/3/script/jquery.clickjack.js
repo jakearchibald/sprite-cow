@@ -5,8 +5,8 @@
 		$clickTarget = $( $clickTarget );
 		
 		var hideCss = {
-			/*top: -5000,
-			left: 0*/
+			top: -5000,
+			left: 0
 		};
 		
 		$clickTarget.css( hideCss ).css({
@@ -18,9 +18,12 @@
 			var $this = $(this),
 				thisOffset,
 				thisWidth,
-				thisHeight;
+				thisHeight,
+				pointerIsInside = false;
 			
 			$this.mouseenter(function(event) {
+				if (pointerIsInside) { return; }
+				pointerIsInside = true;
 				thisOffset = $this.offset();
 				thisWidth  = $this.outerWidth();
 				thisHeight = $this.outerHeight();
@@ -29,17 +32,18 @@
 			});
 			
 			function onMove(event) {
-				var inBounds = event.pageY > thisOffset.top &&
-				               event.pageX > thisOffset.left &&
-							   event.pageY < thisOffset.top + thisHeight &&
-							   event.pageX < thisOffset.left + thisWidth;
+				var inBounds = event.pageY >= thisOffset.top &&
+				               event.pageX >= thisOffset.left &&
+							   event.pageY <= thisOffset.top + thisHeight &&
+							   event.pageX <= thisOffset.left + thisWidth;
 				
 				if (inBounds) {
 					clickjack( event.pageX, event.pageY );
 				}
-				else {	
+				else {
 					$doc.unbind('mousemove', onMove);
 					$clickTarget.css( hideCss );
+					pointerIsInside = false;
 				}
 			}
 			
@@ -49,11 +53,10 @@
 			var targetPos = $clickTarget.position(),
 				targetOffset = $clickTarget.offset(),
 				newPos = {
-					top: targetPos.top - (targetOffset.top - pageY),
-					left: targetPos.left - (targetOffset.left - pageX)
+					top:  targetPos.top  - (targetOffset.top  - pageY) - 5,
+					left: targetPos.left - (targetOffset.left - pageX) - 5
 				};
 			
-			console.log(newPos);
 			$clickTarget.css( newPos );
 		}
 	};

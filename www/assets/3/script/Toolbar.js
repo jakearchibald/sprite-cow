@@ -20,10 +20,10 @@ spriteCow.Toolbar = (function() {
 			
 		toolNames.forEach(function(toolName, i) {
 			// avoiding jquery's event system so file dialogs can be launched
-			$children.eq(i)[0].addEventListener('click', function(event) {
+			$children.eq(i).('click', function(event) {
 				toolbar.trigger(toolName);
 				event.preventDefault();
-			}, false);
+			});
 		});
 		
 		$container.delegate('div[role=button]', 'mouseenter', function() {
@@ -34,6 +34,7 @@ spriteCow.Toolbar = (function() {
 		toolbar._$feedback = $children.slice(-1);
 		toolbar._toolNames = toolNames;
 		toolbar._$children = $children;
+		toolbar.$container = $container;
 	}
 	
 	var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new spriteCow.MicroEvent;

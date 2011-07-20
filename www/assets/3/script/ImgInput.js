@@ -73,10 +73,6 @@ spriteCow.ImgInput = (function() {
 		}, false);
 	};
 	
-	ImgInputProto.openDialog = function() {
-		this._fileInput.click();
-	};
-	
 	ImgInputProto.loadImgUrl = function(url) {
 		var imgInput = this,
 			img = new Image;
@@ -85,6 +81,10 @@ spriteCow.ImgInput = (function() {
 			imgInput.trigger('load', img);
 		};
 		img.src = url;
+	};
+	
+	ImgInputProto.clickjackFor = function( $elm ) {
+		$elm.clickjack( this._fileInput );
 	};
 	
 	return ImgInput;
