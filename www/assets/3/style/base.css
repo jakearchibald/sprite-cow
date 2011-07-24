@@ -192,14 +192,17 @@ body {
 	.canvas-cell {
 		display: table-cell;
 		height: 100%;
+		position: relative;
 	}
 	.canvas-inner {
 		overflow: auto;
-		position: relative;
+		position: absolute;
 		background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMzMz0oyR4AAAARSURBVAgdY/jPwIAVYRf9DwB+vw/xbMOy9QAAAABJRU5ErkJggg==');
 		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
-		height: 100%;
-		/*cursor: crosshair; meh, difficult to see */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
 	.container.intro .canvas-cell {
 		height: 170px;
