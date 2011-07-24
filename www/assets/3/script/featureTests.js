@@ -1,5 +1,6 @@
-spriteCow.featureTests = (function() {
-	var testElm = document.createElement('a');
+spriteCow.featureTests = (function(document) {
+	var testElm = document.createElement('a'),
+		docElm = document.documentElement;
 	
 	function canvas() {
 		return !!document.createElement('canvas').getContext;
@@ -18,9 +19,10 @@ spriteCow.featureTests = (function() {
 	featureTests.addResult( w3EventListeners(), 'addEventListener on elements' );
 	featureTests.addResult( $.support.transition, 'CSS3 transitions' );
 	
-	/*if ($.browser.opera) { // I feel dirty
+	if ($.browser.opera) { // I feel dirty
+		docElm.className += ' opera';
 		featureTests.addResult( false, 'General layout & transition issue (Hope to work around these soon)' );	
-	}*/
+	}
 	
 	return featureTests;
-})();
+})(document);

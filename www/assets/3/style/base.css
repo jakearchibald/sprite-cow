@@ -196,13 +196,25 @@ body {
 	}
 	.canvas-inner {
 		overflow: auto;
-		position: absolute;
 		background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMzMz0oyR4AAAARSURBVAgdY/jPwIAVYRf9DwB+vw/xbMOy9QAAAABJRU5ErkJggg==');
 		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+		position: relative;
+		height: 100%;
+	}
+	.opera .canvas-inner {
+		/*
+			Opera treats the 100% height as the height of the body element, not the
+			table cell. This absolute layout works around that. However, it works
+			because Opera recognises the position:relative on the table cell, which
+			it shouldn't really. Using this fix on all browsers breaks layout in
+			Firefox.
+		*/
+		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
+		height: auto;
 	}
 	.container.intro .canvas-cell {
 		height: 170px;
