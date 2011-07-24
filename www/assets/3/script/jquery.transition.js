@@ -119,7 +119,8 @@
 			
 			function complete() {
 				$elm.unbind(transitionend, complete);
-				$elm.css(transitionProp, '');
+				// Opera requires the transition duration set to 0, else transitions remain active *shrugs*
+				$elm.css(transitionProp, '').vendorCss('transition-duration', '0');
 				opts.complete();
 				// need to use set timeout else next animation won't transition
 				setTimeout(next,0);
