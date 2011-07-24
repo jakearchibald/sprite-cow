@@ -150,8 +150,6 @@ body {
 		-ms-transform: scale(0.7);
 		-o-transform: scale(0.7);
 		transform: scale(0.7);
-		/* Fixes flickering issue in Chrome */
-		-webkit-backface-visibility: hidden;
 	}
 	.container > header h1 span {
 		display: inline-block;
