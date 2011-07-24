@@ -21,7 +21,7 @@ spriteCow.featureTests = (function(document) {
 	
 	if ($.browser.opera) { // I feel dirty
 		docElm.className += ' opera';
-		featureTests.addResult( false, 'General layout & transition issue (Hope to work around these soon)' );	
+		//featureTests.addResult( false, 'Transition issues (Hope to work around these soon)' );	
 	}
 	
 	return featureTests;
