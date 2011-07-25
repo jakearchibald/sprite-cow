@@ -1,5 +1,6 @@
-spriteCow.featureTests = (function() {
-	var testElm = document.createElement('a');
+spriteCow.featureTests = (function(document) {
+	var testElm = document.createElement('a'),
+		docElm = document.documentElement;
 	
 	function canvas() {
 		return !!document.createElement('canvas').getContext;
@@ -16,13 +17,10 @@ spriteCow.featureTests = (function() {
 	featureTests.addResult( canvas(), '<canvas> element' );
 	featureTests.addResult( fileApi(), 'File & FileReader' );
 	featureTests.addResult( w3EventListeners(), 'addEventListener on elements' );
-	featureTests.addResult( $.support.transition, 'CSS3 transitions' );
 	
-	if ($.browser.opera) { // I feel dirty
-		featureTests.addResult( false, "Survives jQuery's attempt to break backgrounds on <body>" );	
-		featureTests.addResult( false, 'Opening file dialog from click() listeners' );	
-		featureTests.addResult( false, 'General layout & transition issue (Hope to work around these soon)' );	
+	if ($.browser.opera) { // I feel dirty, need these for some CSS tweaks
+		docElm.className += ' opera';	
 	}
 	
 	return featureTests;
-})();
+})(document);

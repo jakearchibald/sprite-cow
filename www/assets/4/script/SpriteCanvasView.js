@@ -270,9 +270,14 @@
 		};
 		
 		SpriteCanvasViewProto.setBg = function(color) {
-			this._$bgElm.transition({ 'background-color': color }, {
-				duration: 500
-			});
+			if ( $.support.transition ) {
+				this._$bgElm.transition({ 'background-color': color }, {
+					duration: 500
+				});								
+			}
+			else {
+				this._$bgElm.css({ 'background-color': color });
+			}
 			
 			this._highlight.setHighVisOnDark( color === '#000' );
 		};

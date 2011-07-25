@@ -38,7 +38,7 @@
 		transitionend = 'transitionend webkitTransitionEnd oTransitionEnd',
 		getCssPropName = (function() {
 			var style = $testElm[0].style,
-				prefixes = ['Webkit', 'O', 'Ie', 'Moz'],
+				prefixes = ['Webkit', 'O', 'ms', 'Moz'],
 				cache = {};
 	
 			return function(propertyName) {
@@ -119,7 +119,8 @@
 			
 			function complete() {
 				$elm.unbind(transitionend, complete);
-				$elm.css(transitionProp, '');
+				// Opera requires the transition duration set to 0, else transitions remain active *shrugs*
+				$elm.css(transitionProp, '').vendorCss('transition-duration', '0');
 				opts.complete();
 				// need to use set timeout else next animation won't transition
 				setTimeout(next,0);

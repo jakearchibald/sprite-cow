@@ -1,7 +1,7 @@
 spriteCow.ImgInput = (function() {
 	function ImgInput($container, $dropZone, tutorialUrl) {
 		var imgInput = this,
-			$fileInput = $('<input type="file" accept="image/*" class="upload-input">').appendTo( $container ),
+			$fileInput = $('<input type="file" accept="image/*" class="upload-input">').appendTo( document.body ),
 			$buttons = $('<div class="start-buttons"/>').appendTo( $container ),
 			$selectButton = $('<div role="button" class="select-btn">Open Image</div>').appendTo( $buttons ),
 			$demoButton = $('<div role="button" class="demo-btn">Load Example</div>').appendTo( $buttons ),
@@ -16,11 +16,7 @@ spriteCow.ImgInput = (function() {
 			file && imgInput._openFileAsImg(file);
 		});
 		
-		// calling click on a file input needs a direct link to a user-triggered event, so we can't use jquery
-		$selectButton[0].addEventListener('click', function(event) {
-			imgInput.openDialog();
-			event.preventDefault();
-		}, false);
+		imgInput.fileClickjackFor( $selectButton );
 		
 		$demoButton.click(function(event) {
 			imgInput.loadImgUrl( tutorialUrl );
@@ -76,10 +72,6 @@ spriteCow.ImgInput = (function() {
 		}, false);
 	};
 	
-	ImgInputProto.openDialog = function() {
-		this._fileInput.click();
-	};
-	
 	ImgInputProto.loadImgUrl = function(url) {
 		var imgInput = this,
 			img = new Image;
@@ -88,6 +80,10 @@ spriteCow.ImgInput = (function() {
 			imgInput.trigger('load', img);
 		};
 		img.src = url;
+	};
+	
+	ImgInputProto.fileClickjackFor = function( $elm ) {
+		$elm.fileClickjack( this._fileInput );
 	};
 	
 	return ImgInput;

@@ -12,6 +12,17 @@ Currently available online for you to use at http://spritecow.com
 Changes
 =======
 
+v1.2 2011-07-25
+---------------
+
+* FIX: Bits of CSS & JS that stopped things working in Opera
+* FIX: Bits of CSS & JS that stopped things working in IE10 (some remaining layout issues though)
+
+v1.2 2011-07-20
+---------------
+
+* FIX: Picks up the file name through drag & drop as well as the 'open' button
+
 v1.1 2011-07-04
 ---------------
 
