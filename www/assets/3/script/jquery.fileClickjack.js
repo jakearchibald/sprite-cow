@@ -31,6 +31,8 @@
 			return this;
 		}
 		
+		var fileInputWidth = $fileInput.width();
+		
 		this.each(function() {
 			var $this = $(this),
 				thisOffset,
@@ -71,7 +73,7 @@
 				targetOffset = $fileInput.offset(),
 				newPos = {
 					top:  targetPos.top  - (targetOffset.top  - pageY) - 5,
-					left: targetPos.left - (targetOffset.left - pageX) - 5
+					left: targetPos.left - (targetOffset.left - pageX) - fileInputWidth + 5
 				};
 			
 			$fileInput.css( newPos );
