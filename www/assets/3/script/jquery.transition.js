@@ -38,7 +38,7 @@
 		transitionend = 'transitionend webkitTransitionEnd oTransitionEnd',
 		getCssPropName = (function() {
 			var style = $testElm[0].style,
-				prefixes = ['Webkit', 'O', 'Ie', 'Moz'],
+				prefixes = ['Webkit', 'O', 'ms', 'Moz'],
 				cache = {};
 	
 			return function(propertyName) {

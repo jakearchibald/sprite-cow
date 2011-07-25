@@ -51,9 +51,16 @@ spriteCow.Toolbar = (function() {
 		});
 		
 		if (severe) {
-			$feedback.css('font-weight', 'bold').transition({ color: 'red' }, {
-				duration: 3000
-			});
+			$feedback.css('font-weight', 'bold')
+			
+			if ($.support.transition) {
+				$feedback.transition({ color: 'red' }, {
+					duration: 3000
+				});
+			}
+			else {
+				$feedback.css('color', 'red');
+			}
 		}
 		else {
 			$feedback.animate({

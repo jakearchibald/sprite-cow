@@ -17,7 +17,6 @@ spriteCow.featureTests = (function(document) {
 	featureTests.addResult( canvas(), '<canvas> element' );
 	featureTests.addResult( fileApi(), 'File & FileReader' );
 	featureTests.addResult( w3EventListeners(), 'addEventListener on elements' );
-	featureTests.addResult( $.support.transition, 'CSS3 transitions' );
 	
 	if ($.browser.opera) { // I feel dirty, need these for some CSS tweaks
 		docElm.className += ' opera';	
