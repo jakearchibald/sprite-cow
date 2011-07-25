@@ -16,8 +16,7 @@ spriteCow.ImgInput = (function() {
 			file && imgInput._openFileAsImg(file);
 		});
 		
-		// calling click on a file input needs a direct link to a user-triggered event, so we can't use jquery
-		$selectButton.clickjack( $fileInput );
+		imgInput.fileClickjackFor( $selectButton );
 		
 		$demoButton.click(function(event) {
 			imgInput.loadImgUrl( tutorialUrl );
@@ -83,8 +82,8 @@ spriteCow.ImgInput = (function() {
 		img.src = url;
 	};
 	
-	ImgInputProto.clickjackFor = function( $elm ) {
-		$elm.clickjack( this._fileInput );
+	ImgInputProto.fileClickjackFor = function( $elm ) {
+		$elm.fileClickjack( this._fileInput );
 	};
 	
 	return ImgInput;

@@ -1,18 +1,35 @@
 (function($) {
 	var $doc = $(document);
 	
-	$.fn.clickjack = function($clickTarget) {
-		$clickTarget = $( $clickTarget );
+	$.fn.fileClickjack = function($fileInput) {
+		$fileInput = $( $fileInput );
 		
 		var hideCss = {
-			top: -5000,
-			left: 0
-		};
+				top: -5000,
+				left: 0
+			},
+			// don't know how to feature detect this, but much better method for these browsers,
+			// means we can style the cursor etc
+			supportsClickMethod = $.browser.webkit || $.browser.mozilla;
 		
-		$clickTarget.css( hideCss ).css({
+		$fileInput.css( hideCss ).css({
 			opacity: 0,
 			position: 'absolute'
 		});
+		
+		if (supportsClickMethod) {
+			function openInput(event) {
+				$fileInput[0].click();
+				event.preventDefault();
+			}
+			
+			this.each(function() {
+				// must use addEventListener to keep the click listener in the stack
+				this.addEventListener('click', openInput, false);
+			});
+			
+			return this;
+		}
 		
 		this.each(function() {
 			var $this = $(this),
@@ -42,7 +59,7 @@
 				}
 				else {
 					$doc.unbind('mousemove', onMove);
-					$clickTarget.css( hideCss );
+					$fileInput.css( hideCss );
 					pointerIsInside = false;
 				}
 			}
@@ -50,15 +67,17 @@
 		});
 		
 		function clickjack(pageX, pageY) {
-			var targetPos = $clickTarget.position(),
-				targetOffset = $clickTarget.offset(),
+			var targetPos = $fileInput.position(),
+				targetOffset = $fileInput.offset(),
 				newPos = {
 					top:  targetPos.top  - (targetOffset.top  - pageY) - 5,
 					left: targetPos.left - (targetOffset.left - pageX) - 5
 				};
 			
-			$clickTarget.css( newPos );
+			$fileInput.css( newPos );
 		}
+		
+		return this;
 	};
 	
 })(jQuery);

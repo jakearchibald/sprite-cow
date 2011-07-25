@@ -69,7 +69,7 @@
 			toolbar.deactivate('selectBg').activate(toolName)
 		});
 		
-		imgInput.clickjackFor( toolbar.$container.find('div.open-img') );
+		imgInput.fileClickjackFor( toolbar.$container.find('div.open-img') );
 		
 		toolbar.bind('invertBg', function() {
 			var toolName = 'invertBg';
