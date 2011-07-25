@@ -19,9 +19,8 @@ spriteCow.featureTests = (function(document) {
 	featureTests.addResult( w3EventListeners(), 'addEventListener on elements' );
 	featureTests.addResult( $.support.transition, 'CSS3 transitions' );
 	
-	if ($.browser.opera) { // I feel dirty
-		docElm.className += ' opera';
-		//featureTests.addResult( false, 'Transition issues (Hope to work around these soon)' );	
+	if ($.browser.opera) { // I feel dirty, need these for some CSS tweaks
+		docElm.className += ' opera';	
 	}
 	
 	return featureTests;
