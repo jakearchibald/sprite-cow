@@ -10,6 +10,7 @@ spriteCow.ImgInput = (function() {
 		imgInput.fileName = 'example.png';
 		imgInput._fileInput = $fileInput[0];
 		imgInput._addDropEvents($dropZone);
+		//imgInput._lastFile = undefined;
 		
 		$fileInput.change(function(event) {
 			var file = this.files[0];
@@ -32,6 +33,7 @@ spriteCow.ImgInput = (function() {
 		var imgInput = this,
 			reader = new FileReader;
 		
+		imgInput._lastFile = file;
 		imgInput.fileName = file.fileName;
 		
 		reader.onload = function() {
@@ -81,6 +83,10 @@ spriteCow.ImgInput = (function() {
 			imgInput.trigger('load', img);
 		};
 		img.src = url;
+	};
+	
+	ImgInputProto.reloadLastFile = function() {
+		this._lastFile && this._openFileAsImg( this._lastFile );
 	};
 	
 	ImgInputProto.fileClickjackFor = function( $elm ) {

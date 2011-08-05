@@ -4,7 +4,7 @@ spriteCow.Toolbar = (function() {
 			$container = $('' +
 				'<div class="toolbar">' +
 					'<div role="button" class="open-img"><div>Open</div></div>' +
-					'<div role="button" class="no-label reload-img"><div>Toggle Dark Background</div></div>' +
+					'<div role="button" class="no-label reload-img"><div>Reload current image</div></div>' +
 					'<div role="button" class="select-sprite active"><div>Select Sprite</div></div>' +
 					'<div role="button" class="pick-bg"><div>Pick Background</div></div>' +
 					'<div role="button" class="no-label invert-bg"><div>Toggle Dark Background</div></div>' +
@@ -14,6 +14,7 @@ spriteCow.Toolbar = (function() {
 			$children = $container.children(),
 			toolNames = [
 				'openImg',
+				'reloadImg',
 				'selectSprite',
 				'selectBg',
 				'invertBg',
