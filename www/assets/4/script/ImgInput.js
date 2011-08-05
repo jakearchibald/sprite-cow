@@ -14,6 +14,7 @@ spriteCow.ImgInput = (function() {
 		$fileInput.change(function(event) {
 			var file = this.files[0];
 			file && imgInput._openFileAsImg(file);
+			this.value = '';
 		});
 		
 		imgInput.fileClickjackFor( $selectButton );
