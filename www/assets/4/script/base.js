@@ -69,6 +69,10 @@
 			toolbar.deactivate('selectBg').activate(toolName)
 		});
 		
+		toolbar.bind('reloadImg', function() {
+			imgInput.reloadLastFile();
+		});
+		
 		imgInput.fileClickjackFor( toolbar.$container.find('div.open-img') );
 		
 		toolbar.bind('invertBg', function() {

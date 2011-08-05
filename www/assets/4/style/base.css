@@ -478,6 +478,9 @@ body {
 	.toolbar .invert-bg div {
 		background-position: -867px -121px;
 	}
+	.toolbar .reload-img div {
+		background-position: -867px -164px;
+	}
 	
 /* Footer */
 	footer.main {
