@@ -12,6 +12,12 @@ Currently available online for you to use at http://spritecow.com
 Changes
 =======
 
+v2.0 2011-08-05
+---------------
+
+* FEATURE: Added "Reload image" button
+* FIX: If you open the same image twice, it now reloads the image
+
 v1.2 2011-07-25
 ---------------
 
