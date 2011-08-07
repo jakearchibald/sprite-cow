@@ -12,6 +12,11 @@ Currently available online for you to use at http://spritecow.com
 Changes
 =======
 
+v2.1 2011-08-07
+---------------
+
+* Adding Twitter details
+
 v2.0 2011-08-05
 ---------------
 
