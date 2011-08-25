@@ -351,8 +351,7 @@ body {
 		.css-output {
 			display: block;
 			white-space: pre;
-			background: rgba(0, 0, 0, .23);
-			margin: 0 0 10px;
+			background: rgba(0, 0, 0, 0.1);
 			padding: 20px 30px;
 			overflow: auto;
 			position: relative;

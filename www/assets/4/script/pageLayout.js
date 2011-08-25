@@ -20,6 +20,7 @@ spriteCow.pageLayout = (function() {
 	}
 	
 	function getAppViewTransitions() {
+		// Here we read all the destination styles to animate to when the intro class is removed
 		var transitions,
 			containerWidth = getContainerWidthPercent();
 		
@@ -64,7 +65,7 @@ spriteCow.pageLayout = (function() {
 						'padding-bottom': $toolbar.css('padding-bottom'),
 						'border-top-width': $toolbar.css('border-top-width'),
 						'border-bottom-width': $toolbar.css('border-bottom-width')
-					}]				
+					}]
 				],
 				before: function() {
 					$introCopy.css('display', 'none');
