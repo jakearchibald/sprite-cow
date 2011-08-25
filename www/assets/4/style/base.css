@@ -410,7 +410,6 @@ body {
 		border-width: 1px 0;
 		border-color: #e2e2e2 #000 #888;
 		color: #333;
-		border-radius: 5px 5px 0 0;
 		background-image: -webkit-linear-gradient(top, #d0d0d0, #a7a7a7);
 		background-image:    -moz-linear-gradient(top, #d0d0d0, #a7a7a7);
 		background-image:     -ms-linear-gradient(top, #d0d0d0, #a7a7a7);
@@ -575,9 +574,6 @@ body {
 	}
 }
 @media screen and (max-width: 744px) {
-	.container > header h1::before, .container > header h1::after {
-		display: none;
-	}
 	.intro-copy > section {
 		padding: 20px;
 	}
@@ -607,14 +603,7 @@ body {
 	}
 }
 @media screen and (max-width: 562px) {
-	body {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	.container > header, .container.intro > header {
-		height: 10px;
-	}
-	footer.main, .container > header h1 {
+	footer.main {
 		display: none;
 	}
 }
