@@ -45,7 +45,11 @@ spriteCow.pageLayout = (function() {
 				targets: [
 					[$container, { width: '100%' }],
 					[$header, { height: $header.height() }],
-					[$headerH1, $.support.transition ? { transform: $headerH1.vendorCss('transform') } : {}],
+					[$headerH1, $.support.transition ? {
+						transform: $headerH1.vendorCss('transform'),
+						opacity: $headerH1.css('opacity'),
+						top: $headerH1.css('top')
+					} : {}],
 					[$cssOutput, {
 						height: $cssOutput.height(),
 						'padding-top': $cssOutput.css('padding-top'),
