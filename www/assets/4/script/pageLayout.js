@@ -13,7 +13,7 @@ spriteCow.pageLayout = (function() {
 		currentView = 'intro';
 	
 	function getContainerWidthPercent() {
-		var bodyHorizontalPadding = 0,
+		var bodyHorizontalPadding = 40,
 			containerRelativeWidth = $container.width() / ( $window.width() - bodyHorizontalPadding );
 		
 		return Math.round(containerRelativeWidth * 10000) / 100 + '%';

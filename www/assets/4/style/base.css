@@ -23,7 +23,7 @@ body {
 	height: 100%;
 	min-height: 100%;
 	margin: 0;
-	padding: 0;
+	padding: 0 20px;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA0CAYAAAA62j4JAAAAe0lEQVR42u3QMQ5AQABFQbWIaGiI6CjU7n+z9TdxCjvFO8CbrpSypTutaWqtCnClJ51pb60KsHzzc+pbqwKM6UhD6loLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/XvoS9OcMtc3PAAAAAElFTkSuQmCC');
 }
 
@@ -138,7 +138,7 @@ body {
 		color: #fff;
 		font: normal 5.3em/1 prowin, monospace;
 		margin: 0;
-		height: 0;
+		height: 20px;
 		position: relative;
 		white-space: nowrap;
 		/* I don't really want a 1px blur, but it works around http://code.google.com/p/chromium/issues/detail?id=86702 */
