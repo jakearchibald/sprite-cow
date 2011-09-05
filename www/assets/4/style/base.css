@@ -409,6 +409,7 @@ body {
 		border-width: 1px 0;
 		border-color: #e2e2e2 #000 #888;
 		color: #333;
+		border-radius: 5px 5px 0 0;
 		background-image: -webkit-linear-gradient(top, #d0d0d0, #a7a7a7);
 		background-image:    -moz-linear-gradient(top, #d0d0d0, #a7a7a7);
 		background-image:     -ms-linear-gradient(top, #d0d0d0, #a7a7a7);
