@@ -12,6 +12,11 @@ Currently available online for you to use at http://spritecow.com
 Changes
 =======
 
+v3.0 2011-09-05
+---------------
+
+* Making more room for the spritesheet view
+
 v2.1 2011-08-07
 ---------------
 
@@ -20,22 +25,22 @@ v2.1 2011-08-07
 v2.0 2011-08-05
 ---------------
 
-* FEATURE: Added "Reload image" button
-* FIX: If you open the same image twice, it now reloads the image
+* Added "Reload image" button
+* If you open the same image twice, it now reloads the image
 
 v1.2 2011-07-25
 ---------------
 
-* FIX: Bits of CSS & JS that stopped things working in Opera
-* FIX: Bits of CSS & JS that stopped things working in IE10 (some remaining layout issues though)
+* Bits of CSS & JS that stopped things working in Opera
+* Bits of CSS & JS that stopped things working in IE10 (some remaining layout issues though)
 
 v1.2 2011-07-20
 ---------------
 
-* FIX: Picks up the file name through drag & drop as well as the 'open' button
+* Picks up the file name through drag & drop as well as the 'open' button
 
 v1.1 2011-07-04
 ---------------
 
-* FEATURE: Can change CSS path
-* FIX: Changing labels from 'Select' to 'Open' when opening files
+* Can change CSS path
+* Changing labels from 'Select' to 'Open' when opening files
