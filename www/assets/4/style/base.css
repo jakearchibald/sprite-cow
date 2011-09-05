@@ -23,12 +23,8 @@ body {
 	height: 100%;
 	min-height: 100%;
 	margin: 0;
-	padding: 0 30px;
+	padding: 0 20px;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA0CAYAAAA62j4JAAAAe0lEQVR42u3QMQ5AQABFQbWIaGiI6CjU7n+z9TdxCjvFO8CbrpSypTutaWqtCnClJ51pb60KsHzzc+pbqwKM6UhD6loLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/XvoS9OcMtc3PAAAAAElFTkSuQmCC');
-}
-.not-supported body {
-	/* Working around an Opera bug */
-	background: none;
 }
 
 /* Reset */
@@ -132,7 +128,7 @@ body {
 	.container > header {
 		display: table-cell;
 		vertical-align: middle;
-		height: 79px;
+		height: 0;
 	}
 	.container.intro > header {
 		height: 169px;
@@ -142,14 +138,17 @@ body {
 		color: #fff;
 		font: normal 5.3em/1 prowin, monospace;
 		margin: 0;
+		height: 20px;
+		position: relative;
 		white-space: nowrap;
 		/* I don't really want a 1px blur, but it works around http://code.google.com/p/chromium/issues/detail?id=86702 */
 		text-shadow: #004a86 0 6px 1px;
-		-webkit-transform: scale(0.7);
-		-moz-transform: scale(0.7);
-		-ms-transform: scale(0.7);
-		-o-transform: scale(0.7);
-		transform: scale(0.7);
+		-webkit-transform: scale(0.3);
+		-moz-transform: scale(0.3);
+		-ms-transform: scale(0.3);
+		-o-transform: scale(0.3);
+		transform: scale(0.3);
+		opacity: 0;
 	}
 	.container > header h1 span {
 		display: inline-block;
@@ -178,6 +177,8 @@ body {
 		-ms-transform: scale(1);
 		-o-transform: scale(1);
 		transform: scale(1);
+		opacity: 1;
+		top: -46px;
 	}
 /* Canvas */
 	.canvas-view {
@@ -350,8 +351,7 @@ body {
 		.css-output {
 			display: block;
 			white-space: pre;
-			background: rgba(0, 0, 0, .23);
-			margin: 0 0 10px;
+			background: rgba(0, 0, 0, 0.1);
 			padding: 20px 30px;
 			overflow: auto;
 			position: relative;
@@ -568,15 +568,12 @@ body {
 	}
 	
 /* Being responsible... */
-@media screen and (max-width: 892px) {
+@media screen and (max-width: 872px) {
 	.container.intro {
 		width: 100%;
 	}
 }
 @media screen and (max-width: 744px) {
-	.container > header h1::before, .container > header h1::after {
-		display: none;
-	}
 	.intro-copy > section {
 		padding: 20px;
 	}
@@ -593,27 +590,35 @@ body {
 		padding-left: 20px;
 		padding-right: 20px;
 	}
-	.select-btn, .demo-btn {
+	.container.intro .select-btn, .container.intro .demo-btn {
 		font-size: 1.6em;
 		padding: 11px 22px;
-		
+		display: block;
+		margin: 12px auto;
 	}
 	.select-btn {
 		margin: 0 21px 0 0;
 	}
 	.start-buttons {
-		top: 64px;
+		top: 23px;
+	}
+	.container.intro > header {
+		height: 91px;
+		-webkit-transform: scale(0.7);
+		-moz-transform: scale(0.7);
+		-ms-transform: scale(0.7);
+		-o-transform: scale(0.7);
+		transform: scale(0.7);
+	}
+	.container.intro > header h1 {
+		top: -32px;
+	}
+	.container > header h1:before, .container > header h1:after {
+		display: none;
 	}
 }
 @media screen and (max-width: 562px) {
-	body {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	.container > header, .container.intro > header {
-		height: 10px;
-	}
-	footer.main, .container > header h1 {
+	footer.main {
 		display: none;
 	}
 }
