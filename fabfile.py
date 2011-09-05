@@ -26,6 +26,5 @@ def deploy():
     """Deployment actions into S3 using s3put"""
     local('mkdir -p %(clone_path)s' % env)
     local('git clone %(git_url)s  %(clone_path)s' % env)
-    local('git checkout v1.1')
     local('./s3put.py -a %(access_key)s -s %(secret_key)s -b %(bucket)s -p %(htdocs)s -g public-read %(htdocs)s' % env)
     print yellow("Done?")

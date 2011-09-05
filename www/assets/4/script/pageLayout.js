@@ -13,13 +13,14 @@ spriteCow.pageLayout = (function() {
 		currentView = 'intro';
 	
 	function getContainerWidthPercent() {
-		var bodyHorizontalPadding = 60,
+		var bodyHorizontalPadding = 40,
 			containerRelativeWidth = $container.width() / ( $window.width() - bodyHorizontalPadding );
 		
 		return Math.round(containerRelativeWidth * 10000) / 100 + '%';
 	}
 	
 	function getAppViewTransitions() {
+		// Here we read all the destination styles to animate to when the intro class is removed
 		var transitions,
 			containerWidth = getContainerWidthPercent();
 		
@@ -45,7 +46,11 @@ spriteCow.pageLayout = (function() {
 				targets: [
 					[$container, { width: '100%' }],
 					[$header, { height: $header.height() }],
-					[$headerH1, $.support.transition ? { transform: $headerH1.vendorCss('transform') } : {}],
+					[$headerH1, $.support.transition ? {
+						transform: $headerH1.vendorCss('transform'),
+						opacity: $headerH1.css('opacity'),
+						top: $headerH1.css('top')
+					} : {}],
 					[$cssOutput, {
 						height: $cssOutput.height(),
 						'padding-top': $cssOutput.css('padding-top'),
@@ -60,7 +65,7 @@ spriteCow.pageLayout = (function() {
 						'padding-bottom': $toolbar.css('padding-bottom'),
 						'border-top-width': $toolbar.css('border-top-width'),
 						'border-bottom-width': $toolbar.css('border-bottom-width')
-					}]				
+					}]
 				],
 				before: function() {
 					$introCopy.css('display', 'none');
