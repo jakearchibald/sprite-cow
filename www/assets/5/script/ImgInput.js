@@ -34,7 +34,7 @@ spriteCow.ImgInput = (function() {
 			reader = new FileReader;
 		
 		imgInput._lastFile = file;
-		imgInput.fileName = file.fileName;
+		imgInput.fileName = file.fileName || file.name;
 		
 		reader.onload = function() {
 			imgInput.loadImgUrl(reader.result);
