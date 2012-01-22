@@ -29,8 +29,6 @@ import sys
 import time
 import mimetypes
 
-from boto.exception import S3ResponseError
-
 
 GZIP_EXTENSIONS = ['.css', '.js', '.ttf', '.appcache']
 
@@ -44,6 +42,9 @@ def get_headers(fullpath):
                          datetime.timedelta(days=365 * 2)).timetuple())))
         # HTTP/1.1
         headers['Cache-Control'] = 'max-age %d' % (3600 * 24 * 365 * 2)
+    else:
+        headers['Cache-Control'] = 'must-revalidate'
+
     return headers
 
 
