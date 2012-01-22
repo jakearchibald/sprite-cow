@@ -32,7 +32,8 @@ import mimetypes
 from boto.exception import S3ResponseError
 
 
-GZIP_EXTENSIONS = ['.css', '.js', '.ttf']
+GZIP_EXTENSIONS = ['.css', '.js', '.ttf', '.appcache']
+
 
 def get_headers(fullpath):
     headers = {}
@@ -40,7 +41,7 @@ def get_headers(fullpath):
         # HTTP/1.0
         headers['Expires'] = '%s GMT' % (email.Utils.formatdate(
             time.mktime((datetime.datetime.now() +
-                         datetime.timedelta(days=365*2)).timetuple())))
+                         datetime.timedelta(days=365 * 2)).timetuple())))
         # HTTP/1.1
         headers['Cache-Control'] = 'max-age %d' % (3600 * 24 * 365 * 2)
     return headers
@@ -48,7 +49,8 @@ def get_headers(fullpath):
 
 def compress_string(s):
     """Gzip a given string. Borrowed from django_extensions"""
-    import cStringIO, gzip
+    import cStringIO
+    import gzip
     zbuf = cStringIO.StringIO()
     zfile = gzip.GzipFile(mode='wb', compresslevel=6, fileobj=zbuf)
     zfile.write(s)
@@ -116,17 +118,28 @@ SYNOPSIS
      If the -n option is provided, no files will be transferred to S3 but
      informational messages will be printed about what would happen.
 """
+
+
 def usage():
     print usage_string
     sys.exit()
-  
+
+
 def submit_cb(bytes_so_far, total_bytes):
     print '%d bytes transferred / %d bytes total' % (bytes_so_far, total_bytes)
+
 
 def get_key_name(fullpath, prefix):
     key_name = fullpath[len(prefix):]
     l = key_name.split(os.sep)
     return '/'.join(l)
+
+
+def guess_mime_type(path):
+    if path.endswith('.appcache'):
+        return 'text/cache-manifest'
+    return mimetypes.guess_type(path)[0]
+
 
 def main():
     try:
@@ -214,7 +227,7 @@ def main():
                             k = b.new_key(key_name)
                             headers = get_headers(fullpath)
                             if is_gzip(fullpath):
-                                content_type = mimetypes.guess_type(fullpath)[0]
+                                content_type = guess_mime_type(fullpath)
                                 if content_type:
                                     headers['Content-Type'] = content_type
                                 file_obj = open(fullpath, 'rb')
@@ -222,7 +235,7 @@ def main():
                                 filedata = file_obj.read()
                                 filedata = compress_string(filedata)
                                 headers['Content-Encoding'] = 'gzip'
-                                print "\tgzipped: %dk to %dk" % (file_size/1024, len(filedata)/1024)
+                                print "\tgzipped: %dk to %dk" % (file_size / 1024, len(filedata) / 1024)
                                 k.set_contents_from_string(filedata, headers, replace=True)
                                 k.make_public()
                             else:
@@ -241,7 +254,7 @@ def main():
                 k = b.new_key(key_name)
                 headers = get_headers(fullpath)
                 if is_gzip(fullpath):
-                    content_type = mimetypes.guess_type(fullpath)[0]
+                    content_type = guess_mime_type(fullpath)
                     if content_type:
                         headers['Content-Type'] = content_type
                     file_obj = open(fullpath, 'rb')
@@ -249,7 +262,7 @@ def main():
                     filedata = file_obj.read()
                     filedata = compress_string(filedata)
                     headers['Content-Encoding'] = 'gzip'
-                    print "\tgzipped: %dk to %dk" % (file_size/1024, len(filedata)/1024)
+                    print "\tgzipped: %dk to %dk" % (file_size / 1024, len(filedata) / 1024)
                     k.set_contents_from_string(filedata, headers, replace=True)
                     k.make_public()
                 else:

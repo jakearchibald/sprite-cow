@@ -12,6 +12,12 @@ Currently available online for you to use at http://spritecow.com
 Changes
 =======
 
+v4.0 2011-12-05
+---------------
+
+* Fixed issue in Firefox that prevented filename being picked up
+* Added appcache for offline use & faster loading while offline
+
 v3.0 2011-09-05
 ---------------
 
