@@ -30,7 +30,7 @@ import time
 import mimetypes
 
 
-GZIP_EXTENSIONS = ['.css', '.js', '.ttf', '.appcache']
+GZIP_EXTENSIONS = ['.css', '.js', '.ttf', '.appcache', '.ico']
 
 
 def get_headers(fullpath):
