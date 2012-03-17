@@ -1,0 +1,5 @@
+<FilesMatch ".*$">
+	Header set Cache-Control "must-revalidate"
+</FilesMatch>
+
+AddType text/cache-manifest .appcache
