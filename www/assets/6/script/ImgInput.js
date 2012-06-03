@@ -4,7 +4,7 @@ spriteCow.ImgInput = (function() {
 			$fileInput = $('<input type="file" accept="image/*" class="upload-input">').appendTo( document.body ),
 			$buttons = $('<div class="start-buttons"/>').appendTo( $container ),
 			$selectButton = $('<div role="button" class="select-btn">Open Image</div>').appendTo( $buttons ),
-			$demoButton = $('<div role="button" class="demo-btn">Load Example</div>').appendTo( $buttons ),
+			$demoButton = $('<div role="button" class="demo-btn">Show Example</div>').appendTo( $buttons ),
 			$dropIndicator = $('<div class="drop-indicator"></div>').appendTo( $dropZone );
 		
 		imgInput.fileName = 'example.png';
