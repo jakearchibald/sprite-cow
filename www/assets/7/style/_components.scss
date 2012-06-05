@@ -1,0 +1,73 @@
+// Logo
+	.cow-logo {
+		background: url('imgs/sprites1.png') no-repeat -2px -66px;
+		width: 448px;
+		height: 388px;
+		margin: 0 auto;
+	}
+// Headings
+	.h-main {
+		font: normal 59px/1 oswald, sans-serif;
+		color: white;
+		text-shadow: #004A86 0 4px 1px;
+		text-align: center;
+	}
+// Canvas
+	.canvas-view {
+		text-align: center;
+		@include user-select(none);
+	}
+	.canvas-cell {
+		display: table-cell;
+		height: 100%;
+		position: relative;
+
+		.intro & {
+			height: 170px;
+			cursor: auto;
+		}
+	}
+	.canvas-inner {
+		overflow: auto;
+		background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMzMz0oyR4AAAARSURBVAgdY/jPwIAVYRf9DwB+vw/xbMOy9QAAAABJRU5ErkJggg==');
+		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+		position: relative;
+		height: 100%;
+
+		.opera & {
+			/*
+				Opera treats the 100% height as the height of the body element, not the
+				table cell. This absolute layout works around that. However, it works
+				because Opera recognises the position:relative on the table cell, which
+				it shouldn't really. Using this fix on all browsers breaks layout in
+				Firefox.
+			*/
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: auto;
+		}
+
+		.intro & {
+			overflow: hidden;
+		}
+	}
+	.sprite-canvas-container {
+		position: absolute;
+		min-width: 100%;
+		min-height: 100%;
+
+		& canvas {
+			display: block;
+		}
+
+		& .highlight {
+			// TODO
+		}
+
+		.intro & {
+			opacity: 0;
+		}
+	}

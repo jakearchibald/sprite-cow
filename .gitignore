@@ -4,3 +4,4 @@ bin/uglify
 fabric.cfg
 *.pyc
 tmp
+.sass-cache

@@ -1,0 +1,15 @@
+@mixin transform($transformation) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		#{$prefix}transform: $transformation;
+	}
+}
+@mixin radial-gradient($type) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		background: #{$prefix}radial-gradient($type);
+	}
+}
+@mixin user-select($type) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		#{$prefix}user-select: $type;
+	}
+}
