@@ -156,7 +156,7 @@ body {
   table-layout: fixed; }
   /* line 30, _structure.scss */
   .container.intro {
-    width: 835px; }
+    width: 635px; }
   /* line 33, _structure.scss */
   .container > * {
     display: table-row; }
@@ -195,25 +195,38 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none; }
+  /* line 20, _components.scss */
+  .canvas-view .upload-input {
+    position: absolute;
+    top: -5000px;
+    left: -5000px;
+    cursor: pointer;
+    z-index: 10; }
+  /* line 27, _components.scss */
+  .canvas-view .lg-button {
+    display: none; }
+    /* line 29, _components.scss */
+    .intro .canvas-view .lg-button {
+      display: inline-block; }
 
-/* line 20, _components.scss */
+/* line 34, _components.scss */
 .canvas-cell {
   display: table-cell;
   height: 100%;
   position: relative; }
-  /* line 25, _components.scss */
+  /* line 39, _components.scss */
   .intro .canvas-cell {
-    height: 170px;
+    height: 139px;
     cursor: auto; }
 
-/* line 30, _components.scss */
+/* line 44, _components.scss */
 .canvas-inner {
   overflow: auto;
   background: white url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMzMz0oyR4AAAARSURBVAgdY/jPwIAVYRf9DwB+vw/xbMOy9QAAAABJRU5ErkJggg==");
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
   position: relative;
   height: 100%; }
-  /* line 37, _components.scss */
+  /* line 51, _components.scss */
   .opera .canvas-inner {
     /*
     	Opera treats the 100% height as the height of the body element, not the
@@ -228,18 +241,88 @@ body {
     right: 0;
     bottom: 0;
     height: auto; }
-  /* line 53, _components.scss */
+  /* line 67, _components.scss */
   .intro .canvas-inner {
     overflow: hidden; }
 
-/* line 57, _components.scss */
+/* line 71, _components.scss */
 .sprite-canvas-container {
   position: absolute;
   min-width: 100%;
   min-height: 100%; }
-  /* line 62, _components.scss */
+  /* line 76, _components.scss */
   .sprite-canvas-container canvas {
     display: block; }
-  /* line 70, _components.scss */
+  /* line 80, _components.scss */
+  .sprite-canvas-container .highlight {
+    background: rgba(0, 90, 255, 0.25);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    pointer-events: none;
+    border: 1px solid rgba(0, 114, 255, 0.5);
+    box-sizing: border-box;
+    display: none;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -ms-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    -webkit-transition-property: border, background;
+    -moz-transition-property: border, background;
+    -ms-transition-property: border, background;
+    -o-transition-property: border, background;
+    transition-property: border, background; }
+    /* line 95, _components.scss */
+    .sprite-canvas-container .highlight.high-vis {
+      background-color: rgba(0, 255, 48, 0.25);
+      border-color: rgba(0, 255, 51, 0.5); }
+  /* line 101, _components.scss */
   .intro .sprite-canvas-container {
     opacity: 0; }
+
+/* line 105, _components.scss */
+.select-btn {
+  margin: 0 48px 0 0; }
+
+/* line 108, _components.scss */
+.start-buttons {
+  position: absolute;
+  top: 39px;
+  left: 0;
+  width: 100%;
+  text-align: center; }
+
+/* line 115, _components.scss */
+.drop-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(37, 207, 28, 0.2);
+  box-shadow: inset 0 0 18px #175a00;
+  display: none;
+  pointer-events: none; }
+  /* line 126, _components.scss */
+  .drag-over .drop-indicator {
+    display: block;
+    opacity: 1; }
+
+/* line 132, _components.scss */
+.lg-button {
+  width: 192px;
+  border-radius: 100px;
+  color: #fff;
+  font: normal 29px/1 oswald, sans-serif;
+  padding: 14px 20px;
+  box-shadow: inset 0 0 6px #ff6c00, 0 3px 6px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 2px 0;
+  background: -webkit-linear-gradient(top, #ffb95a 0%, #ff6c00 50%, #c73a00 100%);
+  background: -moz-linear-gradient(top, #ffb95a 0%, #ff6c00 50%, #c73a00 100%);
+  background: -ms-linear-gradient(top, #ffb95a 0%, #ff6c00 50%, #c73a00 100%);
+  background: -o-linear-gradient(top, #ffb95a 0%, #ff6c00 50%, #c73a00 100%);
+  background: linear-gradient(top, #ffb95a 0%, #ff6c00 50%, #c73a00 100%); }
