@@ -1,9 +1,11 @@
 // Logo
 	.cow-logo {
-		background: url('imgs/sprites1.png') no-repeat -2px -66px;
+		background: url("imgs/sprites1.png") no-repeat -2px -66px;
 		width: 448px;
 		height: 388px;
-		margin: 0 auto;
+		margin: 66px auto 29px;
+		position: relative;
+		left: 25px;
 	}
 // Headings
 	.h-main {
@@ -140,4 +142,179 @@
 		text-shadow: rgba(0,0,0,0.5) 0 2px 0;
 
 		@include linear-gradient((top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%));
+	}
+// CSS output
+	.css-output {
+		display: block;
+		white-space: pre;
+		background: rgba(0, 0, 0, 0.1);
+		padding: 20px 30px;
+		overflow: auto;
+		position: relative;
+
+		.intro & {
+			height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			overflow: hidden;
+		}
+
+		& code {
+			font-size: 1.2em;
+			line-height: 1;
+		}
+
+		& .file-path {
+			position: relative;
+			display: inline-block;
+
+			&::before {
+				outline: 1px dotted #fff;
+				position: absolute;
+				top: -3px;
+				left: 0;
+				bottom: -4px;
+				right: 0;
+				content: "";
+			}
+		}
+		& .file {
+			cursor: pointer;
+		}
+
+		& input[type='text'] {
+			position: absolute;
+			border: 1px solid #ccc;
+			background: #fff;
+			color: #333;
+			font: normal 12px/1 monospace;
+			padding: 3px;
+			outline: none;
+		}
+	}
+// Toolbar
+	.toolbar {
+		overflow: hidden;
+		padding: 5px 6px 0;
+		position: relative;
+		z-index: 1;
+		border-style: solid;
+		border-width: 1px 0;
+		border-color: #e2e2e2 #000 #888;
+		color: #333;
+		border-radius: 5px 5px 0 0;
+		@include linear-gradient((top, #d0d0d0, #a7a7a7));
+
+		.intro & {
+			height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			border-top-width: 0;
+			border-bottom-width: 0;
+		}
+
+		& [role=button] {
+			float: left;
+			margin: 0 5px 5px 0;
+			border: 1px solid #888;
+			border-radius: 4px;
+			cursor: pointer;
+			
+			@include linear-gradient((top, #fefefe, #b8b8b8));
+
+			&::before {
+				content: '';
+				padding: 4px 10px 4px 26px;
+				background: url('imgs/sprites1.png') no-repeat;
+			}
+			&.active {
+				background: #707070;
+				box-shadow: inset 0 3px 7px rgba(0,0,0,0.6);
+				color: #fff;	
+			}
+			&.no-label::before {
+				width: 26px;
+				padding: 4px 0;
+				text-indent: -5000px;
+			}
+			&.select-sprite {
+				border-width: 1px;
+				border-radius: 4px 0 0 4px;
+				margin-right: 0;
+			}
+			&.select-sprite::before {
+				background-position: -863px 3px;
+			}
+			&.pick-bg {
+				border-radius: 0 4px 4px 0;
+				margin-right: 5px;
+				border-left-width: 0;
+			}
+			&.pick-bg::before {
+				background-position: -864px -79px;
+			}
+			&.open-img::before {
+				background-position: -864px -37px;
+			}
+			&.invert-bg::before {
+				background-position: -867px -121px;
+			}
+			&.reload-img::before {
+				background-position: -867px -164px;
+			}
+		}
+		& .feedback {
+			float: left;
+			padding: 5px;
+			color: #555;
+			opacity: 0;
+		}
+	}
+// Footer
+	.main-footer {
+		display: table-row;
+		overflow: hidden;
+		background: rgba(0, 0, 0, .23);
+
+		& p {
+			float: right;
+			padding: 12px 16px 0;
+			margin: 0;
+		}
+		& .the-team-logo {
+			background: url('imgs/sprites1.png') no-repeat -4px -29px;
+			width: 88px;
+			height: 17px;
+			display: inline-block;
+			text-indent: -5000px;
+			vertical-align: top;
+			margin: -1px 0 0 4px;
+		}
+		& ul {
+			float: left;
+			padding: 13px 16px;
+		}
+		& li {
+			display: inline;
+
+			& a:link,
+			& a:visited {
+				font-weight: normal;
+				color: #fff;
+				float: left;
+				padding: 0 10px 0 0;
+				margin: 0 10px 0 0;
+				border-right: 1px solid #fff;
+			}
+			&:last-child a:link,
+			&:last-child a:visited {
+				padding: 0;
+				margin: 0;
+				border: none;
+			}
+		}
+	}
+// Feature tests
+	.feature-test {
+		display: none;
 	}
