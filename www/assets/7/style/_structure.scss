@@ -40,39 +40,14 @@
 		display: table-cell;
 		vertical-align: middle;
 		height: 0;
-
-		.intro & {
-			height: 169px;
-
-			& .h-main {
-				display: none;
-			}
+		
+		& .h-main {
+			display: none;
 		}
 	}
 // Further detail
 	.further-detail {
-		display: table-cell;
-		overflow: hidden;
-
-		.intro & {
-		}
-	}
-	.intro-copy {
 		display: none;
-
-		& > section {
-			display: table-cell;
-			padding: 30px;
-			width: 50%;
-		}
-		& h1 {
-			font: normal 30px/1 oswald, sans-serif;
-			margin: 0;
-			text-shadow: #004a86 0 4px;
-		}
-		& p {
-			font: normal 1.1em/1.5 sans-serif;
-		}
 	}
 // Toolbar
 	.toolbar-container {

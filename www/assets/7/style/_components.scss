@@ -1,11 +1,18 @@
 // Logo
 	.cow-logo {
 		background: url("imgs/sprites1.png") no-repeat -2px -66px;
-		width: 448px;
-		height: 388px;
-		margin: 66px auto 29px;
 		position: relative;
 		left: 25px;
+		height: 20px;
+		margin: 0;
+		opacity: 0;
+
+		.intro & {
+			width: 448px;
+			height: 388px;
+			margin: 66px auto 29px;
+			opacity: 1;
+		}
 	}
 // Headings
 	.h-main {

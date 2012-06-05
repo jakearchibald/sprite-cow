@@ -100,7 +100,9 @@ spriteCow.pageLayout = (function() {
 			}
 		}
 		
-		step.before && step.before();
+		if (step.before) {
+			step.before();
+		}
 		
 		step.targets.forEach(function(target, i, targets) {
 			target[0].transition(target[1], {
@@ -132,7 +134,7 @@ spriteCow.pageLayout = (function() {
 				
 				steps.forEach(function(step) {
 					targets = targets.concat( step.targets );
-				})
+				});
 				
 				targets.forEach(function(target) {
 					for ( var propName in target[1] ) {
@@ -141,5 +143,5 @@ spriteCow.pageLayout = (function() {
 				});
 			});
 		}
-	}
+	};
 })();
