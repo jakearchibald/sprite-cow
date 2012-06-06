@@ -165,17 +165,17 @@ body {
 /* line 39, _structure.scss */
 .main-header {
   display: table-cell;
-  vertical-align: middle;
+  text-align: center;
   height: 0; }
   /* line 44, _structure.scss */
   .main-header .h-main {
     display: none; }
 
-/* line 49, _structure.scss */
-.further-detail {
-  display: none; }
+/* line 51, _structure.scss */
+.intro .further-detail {
+  height: 0; }
 
-/* line 53, _structure.scss */
+/* line 56, _structure.scss */
 .toolbar-container {
   display: table-row;
   position: relative;
@@ -192,22 +192,40 @@ body {
   left: 25px;
   height: 20px;
   margin: 0;
-  opacity: 0; }
-  /* line 10, _components.scss */
+  opacity: 0;
+  overflow: hidden;
+  text-indent: -5000px;
+  display: inline-block;
+  -webkit-transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  transform: scale(0.1);
+  -webkit-transform-origin: 50% 0;
+  -moz-transform-origin: 50% 0;
+  -ms-transform-origin: 50% 0;
+  -o-transform-origin: 50% 0;
+  transform-origin: 50% 0; }
+  /* line 15, _components.scss */
   .intro .cow-logo {
     width: 448px;
     height: 388px;
-    margin: 66px auto 29px;
-    opacity: 1; }
+    margin: 66px 0 29px;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
 
-/* line 18, _components.scss */
+/* line 24, _components.scss */
 .h-main {
   font: normal 59px/1 oswald, sans-serif;
   color: white;
   text-shadow: #004A86 0 4px 1px;
   text-align: center; }
 
-/* line 25, _components.scss */
+/* line 31, _components.scss */
 .canvas-view {
   text-align: center;
   -webkit-user-select: none;
@@ -215,38 +233,38 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none; }
-  /* line 29, _components.scss */
+  /* line 35, _components.scss */
   .canvas-view .upload-input {
     position: absolute;
     top: -5000px;
     left: -5000px;
     cursor: pointer;
     z-index: 10; }
-  /* line 36, _components.scss */
+  /* line 42, _components.scss */
   .canvas-view .lg-button {
     display: none; }
-    /* line 38, _components.scss */
+    /* line 44, _components.scss */
     .intro .canvas-view .lg-button {
       display: inline-block; }
 
-/* line 43, _components.scss */
+/* line 49, _components.scss */
 .canvas-cell {
   display: table-cell;
   height: 100%;
   position: relative; }
-  /* line 48, _components.scss */
+  /* line 54, _components.scss */
   .intro .canvas-cell {
     height: 139px;
     cursor: auto; }
 
-/* line 53, _components.scss */
+/* line 59, _components.scss */
 .canvas-inner {
   overflow: auto;
   background: white url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMzMz0oyR4AAAARSURBVAgdY/jPwIAVYRf9DwB+vw/xbMOy9QAAAABJRU5ErkJggg==");
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
   position: relative;
   height: 100%; }
-  /* line 60, _components.scss */
+  /* line 66, _components.scss */
   .opera .canvas-inner {
     /*
     	Opera treats the 100% height as the height of the body element, not the
@@ -261,19 +279,19 @@ body {
     right: 0;
     bottom: 0;
     height: auto; }
-  /* line 76, _components.scss */
+  /* line 82, _components.scss */
   .intro .canvas-inner {
     overflow: hidden; }
 
-/* line 80, _components.scss */
+/* line 86, _components.scss */
 .sprite-canvas-container {
   position: absolute;
   min-width: 100%;
   min-height: 100%; }
-  /* line 85, _components.scss */
+  /* line 91, _components.scss */
   .sprite-canvas-container canvas {
     display: block; }
-  /* line 89, _components.scss */
+  /* line 95, _components.scss */
   .sprite-canvas-container .highlight {
     background: rgba(0, 90, 255, 0.25);
     position: absolute;
@@ -295,19 +313,19 @@ body {
     -ms-transition-property: border, background;
     -o-transition-property: border, background;
     transition-property: border, background; }
-    /* line 104, _components.scss */
+    /* line 110, _components.scss */
     .sprite-canvas-container .highlight.high-vis {
       background-color: rgba(0, 255, 48, 0.25);
       border-color: rgba(0, 255, 51, 0.5); }
-  /* line 110, _components.scss */
+  /* line 116, _components.scss */
   .intro .sprite-canvas-container {
     opacity: 0; }
 
-/* line 114, _components.scss */
+/* line 120, _components.scss */
 .select-btn {
   margin: 0 48px 0 0; }
 
-/* line 117, _components.scss */
+/* line 123, _components.scss */
 .start-buttons {
   position: absolute;
   top: 39px;
@@ -315,7 +333,7 @@ body {
   width: 100%;
   text-align: center; }
 
-/* line 124, _components.scss */
+/* line 130, _components.scss */
 .drop-indicator {
   position: absolute;
   top: 0;
@@ -326,12 +344,12 @@ body {
   box-shadow: inset 0 0 18px #175a00;
   display: none;
   pointer-events: none; }
-  /* line 135, _components.scss */
+  /* line 141, _components.scss */
   .drag-over .drop-indicator {
     display: block;
     opacity: 1; }
 
-/* line 141, _components.scss */
+/* line 147, _components.scss */
 .lg-button {
   width: 192px;
   border-radius: 100px;
@@ -347,7 +365,7 @@ body {
   background: -o-linear-gradient(top, #ffb95a 0%, #ff6c00 50%, #c73a00 100%);
   background: linear-gradient(top, #ffb95a 0%, #ff6c00 50%, #c73a00 100%); }
 
-/* line 154, _components.scss */
+/* line 160, _components.scss */
 .css-output {
   display: block;
   white-space: pre;
@@ -355,21 +373,21 @@ body {
   padding: 20px 30px;
   overflow: auto;
   position: relative; }
-  /* line 162, _components.scss */
+  /* line 168, _components.scss */
   .intro .css-output {
     height: 0;
     padding-top: 0;
     padding-bottom: 0;
     overflow: hidden; }
-  /* line 169, _components.scss */
+  /* line 175, _components.scss */
   .css-output code {
     font-size: 1.2em;
     line-height: 1; }
-  /* line 174, _components.scss */
+  /* line 180, _components.scss */
   .css-output .file-path {
     position: relative;
     display: inline-block; }
-    /* line 178, _components.scss */
+    /* line 184, _components.scss */
     .css-output .file-path::before {
       outline: 1px dotted #fff;
       position: absolute;
@@ -378,10 +396,10 @@ body {
       bottom: -4px;
       right: 0;
       content: ""; }
-  /* line 188, _components.scss */
+  /* line 194, _components.scss */
   .css-output .file {
     cursor: pointer; }
-  /* line 192, _components.scss */
+  /* line 198, _components.scss */
   .css-output input[type='text'] {
     position: absolute;
     border: 1px solid #ccc;
@@ -391,7 +409,7 @@ body {
     padding: 3px;
     outline: none; }
 
-/* line 203, _components.scss */
+/* line 209, _components.scss */
 .toolbar {
   overflow: hidden;
   padding: 5px 6px 0;
@@ -407,14 +425,14 @@ body {
   background: -ms-linear-gradient(top, #d0d0d0, #a7a7a7);
   background: -o-linear-gradient(top, #d0d0d0, #a7a7a7);
   background: linear-gradient(top, #d0d0d0, #a7a7a7); }
-  /* line 215, _components.scss */
+  /* line 221, _components.scss */
   .intro .toolbar {
     height: 0;
     padding-top: 0;
     padding-bottom: 0;
     border-top-width: 0;
     border-bottom-width: 0; }
-  /* line 223, _components.scss */
+  /* line 229, _components.scss */
   .toolbar [role=button] {
     float: left;
     margin: 0 5px 5px 0;
@@ -426,64 +444,67 @@ body {
     background: -ms-linear-gradient(top, #fefefe, #b8b8b8);
     background: -o-linear-gradient(top, #fefefe, #b8b8b8);
     background: linear-gradient(top, #fefefe, #b8b8b8); }
-    /* line 232, _components.scss */
+    /* line 238, _components.scss */
     .toolbar [role=button]::before {
       content: '';
       padding: 4px 10px 4px 26px;
       background: url("imgs/sprites1.png") no-repeat; }
-    /* line 237, _components.scss */
+    /* line 243, _components.scss */
     .toolbar [role=button].active {
       background: #707070;
       box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.6);
       color: #fff; }
-    /* line 242, _components.scss */
+    /* line 248, _components.scss */
     .toolbar [role=button].no-label::before {
       width: 26px;
       padding: 4px 0;
       text-indent: -5000px; }
-    /* line 247, _components.scss */
+    /* line 253, _components.scss */
     .toolbar [role=button].select-sprite {
       border-width: 1px;
       border-radius: 4px 0 0 4px;
       margin-right: 0; }
-    /* line 252, _components.scss */
+    /* line 258, _components.scss */
     .toolbar [role=button].select-sprite::before {
       background-position: -863px 3px; }
-    /* line 255, _components.scss */
+    /* line 261, _components.scss */
     .toolbar [role=button].pick-bg {
       border-radius: 0 4px 4px 0;
       margin-right: 5px;
       border-left-width: 0; }
-    /* line 260, _components.scss */
+    /* line 266, _components.scss */
     .toolbar [role=button].pick-bg::before {
       background-position: -864px -79px; }
-    /* line 263, _components.scss */
+    /* line 269, _components.scss */
     .toolbar [role=button].open-img::before {
       background-position: -864px -37px; }
-    /* line 266, _components.scss */
+    /* line 272, _components.scss */
     .toolbar [role=button].invert-bg::before {
       background-position: -867px -121px; }
-    /* line 269, _components.scss */
+    /* line 275, _components.scss */
     .toolbar [role=button].reload-img::before {
       background-position: -867px -164px; }
-  /* line 273, _components.scss */
+  /* line 279, _components.scss */
   .toolbar .feedback {
     float: left;
     padding: 5px;
     color: #555;
     opacity: 0; }
 
-/* line 281, _components.scss */
+/* line 287, _components.scss */
 .main-footer {
-  display: table-row;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.23); }
-  /* line 286, _components.scss */
+  /* line 291, _components.scss */
   .main-footer p {
     float: right;
-    padding: 12px 16px 0;
-    margin: 0; }
-  /* line 291, _components.scss */
+    padding: 15px 29px 0;
+    margin: 0;
+    white-space: nowrap; }
+    /* line 297, _components.scss */
+    .intro .main-footer p {
+      padding: 12px 16px 0; }
+  /* line 301, _components.scss */
   .main-footer .the-team-logo {
     background: url("imgs/sprites1.png") no-repeat -4px -29px;
     width: 88px;
@@ -492,14 +513,17 @@ body {
     text-indent: -5000px;
     vertical-align: top;
     margin: -1px 0 0 4px; }
-  /* line 300, _components.scss */
+  /* line 310, _components.scss */
   .main-footer ul {
     float: left;
-    padding: 13px 16px; }
-  /* line 304, _components.scss */
+    padding: 16px 30px; }
+    /* line 314, _components.scss */
+    .intro .main-footer ul {
+      padding: 13px 16px; }
+  /* line 318, _components.scss */
   .main-footer li {
     display: inline; }
-    /* line 308, _components.scss */
+    /* line 322, _components.scss */
     .main-footer li a:link, .main-footer li a:visited {
       font-weight: normal;
       color: #fff;
@@ -507,12 +531,16 @@ body {
       padding: 0 10px 0 0;
       margin: 0 10px 0 0;
       border-right: 1px solid #fff; }
-    /* line 317, _components.scss */
+    /* line 331, _components.scss */
     .main-footer li:last-child a:link, .main-footer li:last-child a:visited {
       padding: 0;
       margin: 0;
       border: none; }
 
-/* line 325, _components.scss */
+/* line 339, _components.scss */
 .feature-test {
+  display: none; }
+
+/* line 343, _components.scss */
+.intro-copy {
   display: none; }

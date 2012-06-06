@@ -1,10 +1,11 @@
 spriteCow.pageLayout = (function() {
 	var $container = $('.container'),
 		$header = $('.container > header'),
-		$headerH1 = $('.container > header h1'),
 		$canvasCell = $('.canvas-cell'),
 		$canvasInner = $('.canvas-inner'),
-		$introCopy = $('.intro-copy'),
+		$cowLogo = $('.cow-logo'),
+		$footerUl = $('.main-footer ul'),
+		$footerP = $('.main-footer p'),
 		$cssOutput,
 		$startButtons,
 		$spriteCanvasContainer,
@@ -28,11 +29,17 @@ spriteCow.pageLayout = (function() {
 		
 		transitions = [
 			{
-				duration: 500,
-				easing: 'linear',
+				duration: 300,
+				easing: 'easeInOutQuad',
 				targets: [
-					[$startButtons, { opacity: 0 }],
-					[$introCopy, { opacity: 0 }]
+					[$container, { width: '100%' }],
+					[$footerUl, {
+						padding: $footerUl.css('padding')
+					}],
+					[$footerP, {
+						padding: $footerP.css('padding')
+					}],
+					[$startButtons, { opacity: 0 }]
 				],
 				before: function() {
 					$container.width(containerWidth);
@@ -41,16 +48,17 @@ spriteCow.pageLayout = (function() {
 				}
 			},
 			{
-				duration: 1000,
-				easing: 'swing',
+				duration: 500,
+				easing: 'easeInOutQuad',
 				targets: [
+					[$cowLogo, {
+						transform: $cowLogo.vendorCss('transform'),
+						opacity: $cowLogo.css('opacity'),
+						height: $cowLogo.css('height'),
+						margin: 0
+					}],
 					[$container, { width: '100%' }],
 					[$header, { height: $header.height() }],
-					[$headerH1, $.support.transition ? {
-						transform: $headerH1.vendorCss('transform'),
-						opacity: $headerH1.css('opacity'),
-						top: $headerH1.css('top')
-					} : {}],
 					[$cssOutput, {
 						height: $cssOutput.height(),
 						'padding-top': $cssOutput.css('padding-top'),
@@ -68,7 +76,6 @@ spriteCow.pageLayout = (function() {
 					}]
 				],
 				before: function() {
-					$introCopy.css('display', 'none');
 				}
 			},
 			{

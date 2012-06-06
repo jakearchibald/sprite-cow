@@ -38,7 +38,7 @@
 // Main header
 	.main-header {
 		display: table-cell;
-		vertical-align: middle;
+		text-align: center;
 		height: 0;
 		
 		& .h-main {
@@ -47,7 +47,10 @@
 	}
 // Further detail
 	.further-detail {
-		display: none;
+
+		.intro & {
+			height: 0;
+		}
 	}
 // Toolbar
 	.toolbar-container {

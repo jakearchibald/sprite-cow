@@ -1,13 +1,19 @@
-@mixin transform($transformation) {
-	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
-		#{$prefix}transform: $transformation;
-	}
-}
 @mixin user-select($type) {
 	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
 		#{$prefix}user-select: $type;
 	}
 }
+// Transform
+	@mixin transform($transformation) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			#{$prefix}transform: $transformation;
+		}
+	}
+	@mixin transform-origin($val) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			#{$prefix}transform-origin: $val;
+		}
+	}
 // Gradients
 	@mixin radial-gradient($type) {
 		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {

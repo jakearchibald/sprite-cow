@@ -6,12 +6,18 @@
 		height: 20px;
 		margin: 0;
 		opacity: 0;
+		overflow: hidden;
+		text-indent: -5000px;
+		display: inline-block;
+		@include transform( scale(0.1) );
+		@include transform-origin(50% 0);
 
 		.intro & {
 			width: 448px;
 			height: 388px;
-			margin: 66px auto 29px;
+			margin: 66px 0 29px;
 			opacity: 1;
+			@include transform( scale(1) );
 		}
 	}
 // Headings
@@ -279,14 +285,18 @@
 	}
 // Footer
 	.main-footer {
-		display: table-row;
 		overflow: hidden;
 		background: rgba(0, 0, 0, .23);
 
 		& p {
 			float: right;
-			padding: 12px 16px 0;
+			padding: 15px 29px 0;
 			margin: 0;
+			white-space: nowrap;
+
+			.intro & {
+				padding: 12px 16px 0;
+			}
 		}
 		& .the-team-logo {
 			background: url('imgs/sprites1.png') no-repeat -4px -29px;
@@ -299,7 +309,11 @@
 		}
 		& ul {
 			float: left;
-			padding: 13px 16px;
+			padding: 16px 30px;
+
+			.intro & {
+				padding: 13px 16px;
+			}
 		}
 		& li {
 			display: inline;
@@ -323,5 +337,9 @@
 	}
 // Feature tests
 	.feature-test {
+		display: none;
+	}
+// Intro copy
+	.intro-copy {
 		display: none;
 	}
