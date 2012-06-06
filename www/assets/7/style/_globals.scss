@@ -1,0 +1,117 @@
+// Resets
+	html,
+	body,
+	ul,
+	ol,
+	li,
+	form,
+	dl,
+	dt,
+	dd {
+		padding: 0;
+		margin: 0;
+		display: block;
+	}
+	ul,
+	ol {
+		list-style: none;
+	}
+	article,
+	aside,
+	details,
+	figcaption,
+	figure,
+	footer,
+	header,
+	hgroup,
+	menu,
+	nav,
+	section {
+		display: block;
+	}
+// Forms
+	select,
+	input,
+	textarea,
+	button {
+		font-size: 100%;
+		margin: 0;
+		vertical-align: baseline;
+	}
+
+	button,
+	input {
+	    line-height: normal;
+	}
+	
+	button,
+	input[type="button"],
+	input[type="reset"],
+	input[type="submit"] {
+	    cursor: pointer;
+	    -webkit-appearance: button;
+	}
+	label {
+		cursor: pointer;
+	}
+
+	input, select {
+		vertical-align: middle;
+		_vertical-align: text-bottom;
+	}
+	
+	input[type="radio"] { vertical-align: text-bottom; }
+	input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
+	
+	button.custom {
+		padding: 0;
+		margin: 0;
+		border: 0;
+		background: none;
+		cursor: pointer;
+		overflow: visible;
+		vertical-align: middle;
+		font-size: 1em;
+		width: auto;
+	}
+	button.custom::-moz-focus-inner { 
+		border: 0;
+		padding: 0;
+	}
+// Typography
+	body {
+		font:13px/1.231 sans-serif;
+		color: #fff;
+	}
+	pre,
+	code,
+	kbd,
+	samp {
+		font-family: monospace, serif;
+		font-size: 1em;
+	}
+	p {
+		line-height: 1.4;
+	}
+	select,
+	input,
+	textarea {
+		color: #333;
+		font-family: sans-serif;
+	}
+// Links
+	a {
+		& img {
+			border: 0;
+		}
+		&:link,
+		&:visited {
+			text-decoration: none;
+			color: #ffb135;
+			font-weight: bold;
+		}
+		&:hover,
+		&:active {
+			text-decoration: underline;
+		}
+	}

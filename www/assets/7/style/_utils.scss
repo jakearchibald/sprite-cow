@@ -1,0 +1,38 @@
+@mixin user-select($type) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		#{$prefix}user-select: $type;
+	}
+}
+// Transform
+	@mixin transform($transformation) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			#{$prefix}transform: $transformation;
+		}
+	}
+	@mixin transform-origin($val) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			#{$prefix}transform-origin: $val;
+		}
+	}
+// Gradients
+	@mixin radial-gradient($type) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			background: #{$prefix}radial-gradient($type);
+		}
+	}
+	@mixin linear-gradient($type) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			background: #{$prefix}linear-gradient($type);
+		}
+	}
+// Transitions/Animation
+	@mixin transition($type) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			#{$prefix}transition: $type;
+		}
+	}
+	@mixin transition-property($type) {
+		@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+			#{$prefix}transition-property: $type;
+		}
+	}

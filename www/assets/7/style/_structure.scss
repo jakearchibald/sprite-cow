@@ -1,0 +1,63 @@
+// Background
+	html {
+		height: 100%;
+		background: #004a86;
+
+		@include radial-gradient((
+			center center,
+			circle cover,
+			#0091d5 0%,
+			#0091d5 15%,
+			#004a86 100%
+		));
+	}
+	body {
+		height: 100%;
+		min-height: 100%;
+		margin: 0;
+		padding: 0 20px;
+		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQAgMAAADzfxo+AAAADFBMVEX///////////8AAAD1GyhhAAAABHRSTlMoNhsAX8Wz8wAAAC5JREFUOMtjCMUCGOr///7/fz8qMWQEs1YtWrVKC5UY9dGoj0Z9NOqjUR8NckEAV3eSqNB2GKwAAAAASUVORK5CYII=');
+	}
+// Main container
+	.container {		
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		position: relative;
+		display: table;
+		table-layout: fixed;
+
+		&.intro {
+			width: 635px;
+			height: auto;
+		}
+		& > * {
+			display: table-row;
+		}
+		.not-supported & {
+			display: none;
+		}
+	}
+// Main header
+	.main-header {
+		display: table-cell;
+		text-align: center;
+		height: 0;
+		
+		& .h-main {
+			display: none;
+		}
+	}
+// Further detail
+	.further-detail {
+
+		.intro & {
+			height: 0;
+		}
+	}
+// Toolbar
+	.toolbar-container {
+		display: table-row;
+		position: relative;
+		@include user-select(none);
+	}

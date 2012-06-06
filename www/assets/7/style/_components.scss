@@ -1,0 +1,390 @@
+// Logo
+	.cow-logo {
+		background: url("imgs/sprites1.png") no-repeat -2px -66px;
+		position: relative;
+		left: 25px;
+		height: 20px;
+		margin: 0;
+		opacity: 0;
+		overflow: hidden;
+		text-indent: -5000px;
+		display: inline-block;
+		@include transform( scale(0.1) );
+		@include transform-origin(50% 0);
+
+		.intro & {
+			width: 448px;
+			height: 388px;
+			margin: 66px 0 29px;
+			opacity: 1;
+			@include transform( scale(1) );
+		}
+	}
+// Headings
+	.h-main {
+		font: normal 59px/1 oswald, sans-serif;
+		color: white;
+		text-shadow: #004A86 0 4px 1px;
+		text-align: center;
+	}
+// Canvas
+	.canvas-view {
+		text-align: center;
+		@include user-select(none);
+
+		& .upload-input {
+			position: absolute;
+			top: -5000px;
+			left: -5000px;
+			cursor: pointer;
+			z-index: 10;
+		}
+		& .lg-button {
+			display: none;
+			.intro & {
+				display: inline-block;
+			}
+		}
+	}
+	.canvas-cell {
+		display: table-cell;
+		height: 100%;
+		position: relative;
+
+		.intro & {
+			height: 139px;
+			cursor: auto;
+		}
+	}
+	.canvas-inner {
+		overflow: auto;
+		background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMzMz0oyR4AAAARSURBVAgdY/jPwIAVYRf9DwB+vw/xbMOy9QAAAABJRU5ErkJggg==');
+		box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+		position: relative;
+		height: 100%;
+
+		.opera & {
+			/*
+				Opera treats the 100% height as the height of the body element, not the
+				table cell. This absolute layout works around that. However, it works
+				because Opera recognises the position:relative on the table cell, which
+				it shouldn't really. Using this fix on all browsers breaks layout in
+				Firefox.
+			*/
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: auto;
+		}
+
+		.intro & {
+			overflow: hidden;
+		}
+	}
+	.sprite-canvas-container {
+		position: absolute;
+		min-width: 100%;
+		min-height: 100%;
+
+		& canvas {
+			display: block;
+		}
+
+		& .highlight {
+			background: rgba(0, 90, 255, 0.25);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 5px;
+			height: 5px;
+			pointer-events: none;
+			border: 1px solid rgba(0, 114, 255, 0.5);
+			box-sizing: border-box;
+			display: none;
+
+			@include transition(0.5s ease-in-out);
+			@include transition-property((border, background));
+
+			&.high-vis {
+				background-color: rgba(0, 255, 48, 0.25);
+				border-color: rgba(0, 255, 51, 0.5);
+			}
+		}
+
+		.intro & {
+			opacity: 0;
+		}
+	}
+	.select-btn {
+		margin: 0 48px 0 0;
+	}
+	.start-buttons {
+		position: absolute;
+		top: 39px;
+		left: 0;
+		width: 100%;
+		text-align: center;
+	}
+	.drop-indicator {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(37, 207, 28, 0.2);
+		box-shadow: inset 0 0 18px #175a00;
+		display: none;
+		pointer-events: none;
+
+		.drag-over & {
+			display: block;
+			opacity: 1;
+		}
+	}
+// Buttons
+	.lg-button {
+		width: 192px;
+		border-radius: 100px;
+		color: #fff;
+		font: normal 29px/1 oswald, sans-serif;
+		padding: 14px 20px;
+		box-shadow: inset 0 0 6px rgba(255, 108, 0, 1), 0 3px 6px rgba(0, 0, 0, 0.7);
+		cursor: pointer;
+		text-shadow: rgba(0,0,0,0.5) 0 2px 0;
+
+		@include linear-gradient((top, rgba(255,185,90,1) 0%, rgba(255,108,0,1) 50%, rgba(199,58,0,1) 100%));
+	}
+// CSS output
+	.css-output {
+		display: block;
+		white-space: pre;
+		background: rgba(0, 0, 0, 0.1);
+		padding: 20px 30px;
+		overflow: auto;
+		position: relative;
+		tab-size: 4;
+
+		.intro & {
+			height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			overflow: hidden;
+		}
+
+		& code {
+			font-size: 1.2em;
+			line-height: 1;
+		}
+
+		& .file-path {
+			position: relative;
+			display: inline-block;
+
+			&::before {
+				border-bottom: 1px dotted #fff;
+				position: absolute;
+				left: 0;
+				bottom: -3px;
+				right: 0;
+				content: "";
+			}
+		}
+		& .file {
+			cursor: pointer;
+		}
+
+		& input[type='text'] {
+			position: absolute;
+			border: 1px solid #ccc;
+			background: #fff;
+			color: #333;
+			font: normal 12px/1 monospace;
+			padding: 3px;
+			outline: none;
+		}
+	}
+// Toolbar
+	.toolbar {
+		overflow: hidden;
+		padding: 5px 6px 0;
+		position: relative;
+		z-index: 1;
+		border-style: solid;
+		border-width: 1px 0;
+		border-color: #e2e2e2 #000 #888;
+		color: #333;
+		border-radius: 5px 5px 0 0;
+		@include linear-gradient((top, #d0d0d0, #a7a7a7));
+
+		.intro & {
+			height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			border-top-width: 0;
+			border-bottom-width: 0;
+		}
+
+		& [role=button] {
+			float: left;
+			margin: 0 5px 5px 0;
+			border: 1px solid #888;
+			border-radius: 4px;
+			cursor: pointer;
+			padding: 4px 10px 4px 26px;
+			position: relative;
+			
+			@include linear-gradient((top, #fefefe, #b8b8b8));
+
+			&::before {
+				content: '';
+				width: 16px;
+				height: 17px;
+				position: absolute;
+				top: 4px;
+				left: 5px;
+				background: url('imgs/sprites1.png') no-repeat;
+			}
+			&.active {
+				background: #707070;
+				box-shadow: inset 0 3px 7px rgba(0,0,0,0.6);
+				color: #fff;	
+			}
+			&.no-label {
+				width: 26px;
+				padding: 4px 0;
+				text-indent: -5000px;
+			}
+			&.select-sprite {
+				border-width: 1px;
+				border-radius: 4px 0 0 4px;
+				margin-right: 0;
+			}
+			&.select-sprite::before {
+				background-position: -4px -2px;
+			}
+			&.pick-bg {
+				border-radius: 0 4px 4px 0;
+				margin-right: 5px;
+				border-left-width: 0;
+			}
+			&.pick-bg::before {
+				background-position: -50px -3px;
+			}
+			&.open-img::before {
+				background-position: -26px -2px;
+			}
+			&.invert-bg::before {
+				background-position: -99px -2px;
+			}
+			&.reload-img::before {
+				background-position: -75px -2px;
+			}
+		}
+		& .feedback {
+			float: left;
+			padding: 5px;
+			color: #555;
+			opacity: 0;
+		}
+	}
+// Footer
+	.main-footer {
+		overflow: hidden;
+		background: rgba(0, 0, 0, .23);
+
+		& p {
+			float: right;
+			padding: 15px 29px 0;
+			margin: 0;
+			white-space: nowrap;
+
+			.intro & {
+				padding: 12px 16px 0;
+			}
+		}
+		& .the-team-logo {
+			background: url('imgs/sprites1.png') no-repeat -4px -29px;
+			width: 88px;
+			height: 17px;
+			display: inline-block;
+			text-indent: -5000px;
+			vertical-align: top;
+			margin: -1px 0 0 4px;
+		}
+		& ul {
+			float: left;
+			padding: 16px 30px;
+
+			.intro & {
+				padding: 13px 16px;
+			}
+		}
+		& li {
+			display: inline;
+
+			& a:link,
+			& a:visited {
+				font-weight: normal;
+				color: #fff;
+				float: left;
+				padding: 0 10px 0 0;
+				margin: 0 10px 0 0;
+				border-right: 1px solid #fff;
+			}
+			&:last-child a:link,
+			&:last-child a:visited {
+				padding: 0;
+				margin: 0;
+				border: none;
+			}
+		}
+	}
+// Feature tests
+	.feature-test {
+		display: none;
+		width: 800px;
+		margin: 0 auto;
+		text-align: center;
+
+		.not-supported & {
+			display: block;
+		}
+		& h1 {
+			font: normal 2.5em sans-serif;
+			margin: 0;
+			padding: 40px 0;
+		}
+		& ul {
+			display: inline-block;
+			*display: inline;
+			zoom: 1;
+		}
+		& li {
+			margin: 10px auto;
+			font-size: 1.1em;
+			overflow: hidden;
+			text-align: left;
+		}
+		& p {
+			width: 600px;
+			margin: 0 auto 20px;
+			font-size: 1.1em;
+			text-align: left;
+		}
+		& .pass,
+		& .fail {
+			float: left;
+			width: 50px;
+			font-weight: bold;
+			color: #5f5;
+		}
+		& .fail {
+			color: #f55;
+		}
+	}
+// Intro copy
+	.intro-copy {
+		display: none;
+	}
