@@ -82,7 +82,7 @@ spriteCow.pageLayout = (function() {
 				duration: 500,
 				easing: 'swing',
 				targets: [
-					[$spriteCanvasContainer , {opacity: 1}]
+					[$spriteCanvasContainer, {opacity: 1}]
 				]
 			}
 		];
@@ -134,21 +134,28 @@ spriteCow.pageLayout = (function() {
 				i = 0;
 				
 			currentView = 'app';
-			doAnimStep(steps, 0, function() {
-				var targets = [];
-				
+
+			if ($.support.transition) {
+				doAnimStep(steps, 0, function() {
+					var targets = [];
+					
+					$container.removeClass('intro');
+					
+					steps.forEach(function(step) {
+						targets = targets.concat( step.targets );
+					});
+					
+					targets.forEach(function(target) {
+						for ( var propName in target[1] ) {
+							target[0].css(propName, '');
+						}
+					});
+				});
+			}
+			else {
 				$container.removeClass('intro');
-				
-				steps.forEach(function(step) {
-					targets = targets.concat( step.targets );
-				});
-				
-				targets.forEach(function(target) {
-					for ( var propName in target[1] ) {
-						target[0].css(propName, '');
-					}
-				});
-			});
+			}
+
 		}
 	};
 })();
