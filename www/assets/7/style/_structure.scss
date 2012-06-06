@@ -34,6 +34,9 @@
 		& > * {
 			display: table-row;
 		}
+		.not-supported & {
+			display: none;
+		}
 	}
 // Main header
 	.main-header {

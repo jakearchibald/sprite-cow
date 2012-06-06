@@ -164,6 +164,7 @@
 		padding: 20px 30px;
 		overflow: auto;
 		position: relative;
+		tab-size: 4;
 
 		.intro & {
 			height: 0;
@@ -182,11 +183,10 @@
 			display: inline-block;
 
 			&::before {
-				outline: 1px dotted #fff;
+				border-bottom: 1px dotted #fff;
 				position: absolute;
-				top: -3px;
 				left: 0;
-				bottom: -4px;
+				bottom: -3px;
 				right: 0;
 				content: "";
 			}
@@ -232,12 +232,18 @@
 			border: 1px solid #888;
 			border-radius: 4px;
 			cursor: pointer;
+			padding: 4px 10px 4px 26px;
+			position: relative;
 			
 			@include linear-gradient((top, #fefefe, #b8b8b8));
 
 			&::before {
 				content: '';
-				padding: 4px 10px 4px 26px;
+				width: 16px;
+				height: 17px;
+				position: absolute;
+				top: 4px;
+				left: 5px;
 				background: url('imgs/sprites1.png') no-repeat;
 			}
 			&.active {
@@ -245,7 +251,7 @@
 				box-shadow: inset 0 3px 7px rgba(0,0,0,0.6);
 				color: #fff;	
 			}
-			&.no-label::before {
+			&.no-label {
 				width: 26px;
 				padding: 4px 0;
 				text-indent: -5000px;
@@ -256,7 +262,7 @@
 				margin-right: 0;
 			}
 			&.select-sprite::before {
-				background-position: -863px 3px;
+				background-position: -4px -2px;
 			}
 			&.pick-bg {
 				border-radius: 0 4px 4px 0;
@@ -264,16 +270,16 @@
 				border-left-width: 0;
 			}
 			&.pick-bg::before {
-				background-position: -864px -79px;
+				background-position: -50px -3px;
 			}
 			&.open-img::before {
-				background-position: -864px -37px;
+				background-position: -26px -2px;
 			}
 			&.invert-bg::before {
-				background-position: -867px -121px;
+				background-position: -99px -2px;
 			}
 			&.reload-img::before {
-				background-position: -867px -164px;
+				background-position: -75px -2px;
 			}
 		}
 		& .feedback {
@@ -338,6 +344,45 @@
 // Feature tests
 	.feature-test {
 		display: none;
+		width: 800px;
+		margin: 0 auto;
+		text-align: center;
+
+		.not-supported & {
+			display: block;
+		}
+		& h1 {
+			font: normal 2.5em sans-serif;
+			margin: 0;
+			padding: 40px 0;
+		}
+		& ul {
+			display: inline-block;
+			*display: inline;
+			zoom: 1;
+		}
+		& li {
+			margin: 10px auto;
+			font-size: 1.1em;
+			overflow: hidden;
+			text-align: left;
+		}
+		& p {
+			width: 600px;
+			margin: 0 auto 20px;
+			font-size: 1.1em;
+			text-align: left;
+		}
+		& .pass,
+		& .fail {
+			float: left;
+			width: 50px;
+			font-weight: bold;
+			color: #5f5;
+		}
+		& .fail {
+			color: #f55;
+		}
 	}
 // Intro copy
 	.intro-copy {

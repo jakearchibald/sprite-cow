@@ -161,21 +161,24 @@ body {
   /* line 34, _structure.scss */
   .container > * {
     display: table-row; }
+  /* line 37, _structure.scss */
+  .not-supported .container {
+    display: none; }
 
-/* line 39, _structure.scss */
+/* line 42, _structure.scss */
 .main-header {
   display: table-cell;
   text-align: center;
   height: 0; }
-  /* line 44, _structure.scss */
+  /* line 47, _structure.scss */
   .main-header .h-main {
     display: none; }
 
-/* line 51, _structure.scss */
+/* line 54, _structure.scss */
 .intro .further-detail {
   height: 0; }
 
-/* line 56, _structure.scss */
+/* line 59, _structure.scss */
 .toolbar-container {
   display: table-row;
   position: relative;
@@ -372,28 +375,28 @@ body {
   background: rgba(0, 0, 0, 0.1);
   padding: 20px 30px;
   overflow: auto;
-  position: relative; }
-  /* line 168, _components.scss */
+  position: relative;
+  tab-size: 4; }
+  /* line 169, _components.scss */
   .intro .css-output {
     height: 0;
     padding-top: 0;
     padding-bottom: 0;
     overflow: hidden; }
-  /* line 175, _components.scss */
+  /* line 176, _components.scss */
   .css-output code {
     font-size: 1.2em;
     line-height: 1; }
-  /* line 180, _components.scss */
+  /* line 181, _components.scss */
   .css-output .file-path {
     position: relative;
     display: inline-block; }
-    /* line 184, _components.scss */
+    /* line 185, _components.scss */
     .css-output .file-path::before {
-      outline: 1px dotted #fff;
+      border-bottom: 1px dotted #fff;
       position: absolute;
-      top: -3px;
       left: 0;
-      bottom: -4px;
+      bottom: -3px;
       right: 0;
       content: ""; }
   /* line 194, _components.scss */
@@ -439,72 +442,78 @@ body {
     border: 1px solid #888;
     border-radius: 4px;
     cursor: pointer;
+    padding: 4px 10px 4px 26px;
+    position: relative;
     background: -webkit-linear-gradient(top, #fefefe, #b8b8b8);
     background: -moz-linear-gradient(top, #fefefe, #b8b8b8);
     background: -ms-linear-gradient(top, #fefefe, #b8b8b8);
     background: -o-linear-gradient(top, #fefefe, #b8b8b8);
     background: linear-gradient(top, #fefefe, #b8b8b8); }
-    /* line 238, _components.scss */
+    /* line 240, _components.scss */
     .toolbar [role=button]::before {
       content: '';
-      padding: 4px 10px 4px 26px;
+      width: 16px;
+      height: 17px;
+      position: absolute;
+      top: 4px;
+      left: 5px;
       background: url("imgs/sprites1.png") no-repeat; }
-    /* line 243, _components.scss */
+    /* line 249, _components.scss */
     .toolbar [role=button].active {
       background: #707070;
       box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.6);
       color: #fff; }
-    /* line 248, _components.scss */
-    .toolbar [role=button].no-label::before {
+    /* line 254, _components.scss */
+    .toolbar [role=button].no-label {
       width: 26px;
       padding: 4px 0;
       text-indent: -5000px; }
-    /* line 253, _components.scss */
+    /* line 259, _components.scss */
     .toolbar [role=button].select-sprite {
       border-width: 1px;
       border-radius: 4px 0 0 4px;
       margin-right: 0; }
-    /* line 258, _components.scss */
+    /* line 264, _components.scss */
     .toolbar [role=button].select-sprite::before {
-      background-position: -863px 3px; }
-    /* line 261, _components.scss */
+      background-position: -4px -2px; }
+    /* line 267, _components.scss */
     .toolbar [role=button].pick-bg {
       border-radius: 0 4px 4px 0;
       margin-right: 5px;
       border-left-width: 0; }
-    /* line 266, _components.scss */
-    .toolbar [role=button].pick-bg::before {
-      background-position: -864px -79px; }
-    /* line 269, _components.scss */
-    .toolbar [role=button].open-img::before {
-      background-position: -864px -37px; }
     /* line 272, _components.scss */
-    .toolbar [role=button].invert-bg::before {
-      background-position: -867px -121px; }
+    .toolbar [role=button].pick-bg::before {
+      background-position: -50px -3px; }
     /* line 275, _components.scss */
+    .toolbar [role=button].open-img::before {
+      background-position: -26px -2px; }
+    /* line 278, _components.scss */
+    .toolbar [role=button].invert-bg::before {
+      background-position: -99px -2px; }
+    /* line 281, _components.scss */
     .toolbar [role=button].reload-img::before {
-      background-position: -867px -164px; }
-  /* line 279, _components.scss */
+      background-position: -75px -2px; }
+  /* line 285, _components.scss */
   .toolbar .feedback {
     float: left;
     padding: 5px;
     color: #555;
     opacity: 0; }
 
-/* line 287, _components.scss */
+/* line 293, _components.scss */
 .main-footer {
   overflow: hidden;
   background: rgba(0, 0, 0, 0.23); }
-  /* line 291, _components.scss */
+  /* line 297, _components.scss */
   .main-footer p {
     float: right;
     padding: 15px 29px 0;
     margin: 0;
     white-space: nowrap; }
-    /* line 297, _components.scss */
+    /* line 303, _components.scss */
     .intro .main-footer p {
       padding: 12px 16px 0; }
-  /* line 301, _components.scss */
+  /* line 307, _components.scss */
   .main-footer .the-team-logo {
     background: url("imgs/sprites1.png") no-repeat -4px -29px;
     width: 88px;
@@ -513,17 +522,17 @@ body {
     text-indent: -5000px;
     vertical-align: top;
     margin: -1px 0 0 4px; }
-  /* line 310, _components.scss */
+  /* line 316, _components.scss */
   .main-footer ul {
     float: left;
     padding: 16px 30px; }
-    /* line 314, _components.scss */
+    /* line 320, _components.scss */
     .intro .main-footer ul {
       padding: 13px 16px; }
-  /* line 318, _components.scss */
+  /* line 324, _components.scss */
   .main-footer li {
     display: inline; }
-    /* line 322, _components.scss */
+    /* line 328, _components.scss */
     .main-footer li a:link, .main-footer li a:visited {
       font-weight: normal;
       color: #fff;
@@ -531,16 +540,53 @@ body {
       padding: 0 10px 0 0;
       margin: 0 10px 0 0;
       border-right: 1px solid #fff; }
-    /* line 331, _components.scss */
+    /* line 337, _components.scss */
     .main-footer li:last-child a:link, .main-footer li:last-child a:visited {
       padding: 0;
       margin: 0;
       border: none; }
 
-/* line 339, _components.scss */
+/* line 345, _components.scss */
 .feature-test {
-  display: none; }
+  display: none;
+  width: 800px;
+  margin: 0 auto;
+  text-align: center; }
+  /* line 351, _components.scss */
+  .not-supported .feature-test {
+    display: block; }
+  /* line 354, _components.scss */
+  .feature-test h1 {
+    font: normal 2.5em sans-serif;
+    margin: 0;
+    padding: 40px 0; }
+  /* line 359, _components.scss */
+  .feature-test ul {
+    display: inline-block;
+    *display: inline;
+    zoom: 1; }
+  /* line 364, _components.scss */
+  .feature-test li {
+    margin: 10px auto;
+    font-size: 1.1em;
+    overflow: hidden;
+    text-align: left; }
+  /* line 370, _components.scss */
+  .feature-test p {
+    width: 600px;
+    margin: 0 auto 20px;
+    font-size: 1.1em;
+    text-align: left; }
+  /* line 377, _components.scss */
+  .feature-test .pass, .feature-test .fail {
+    float: left;
+    width: 50px;
+    font-weight: bold;
+    color: #5f5; }
+  /* line 383, _components.scss */
+  .feature-test .fail {
+    color: #f55; }
 
-/* line 343, _components.scss */
+/* line 388, _components.scss */
 .intro-copy {
   display: none; }
