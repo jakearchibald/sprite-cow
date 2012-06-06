@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
 assets/7/script/mainmin.js
-assets/7/style/mainmin.css
-assets/7/style/fonts/pro.ttf
+assets/7/style/all-min.css
+assets/7/style/fonts/oswald.ttf
 assets/7/style/imgs/sprites1.png
 assets/7/tutorial-sprite.png
 assets/7/favicon.ico
