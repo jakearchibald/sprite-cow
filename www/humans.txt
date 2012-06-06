@@ -5,6 +5,7 @@ Jake Archibald  (@jaffathecake)   - Frontend stuffs
 Alfredo Aguirre (@a_alfredo)      - Deploy script mastery
 Phil Hawksworth (@philhawksworth) - Hosting & testing
 Darian Moody    (@djm_)           - Pestering me to launch this
+Stephen Waller  (@bruised_blood)  - Brilliant logo
 
 Thankings
 =========
