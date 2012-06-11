@@ -260,10 +260,10 @@
 			selectColor.deactivate();
 			
 			switch (mode) {
-				case 'selectSprite':
+				case 'select-sprite':
 					selectArea.activate();
 					break;
-				case 'selectBg':
+				case 'select-bg':
 					selectColor.activate();
 					break;
 			}

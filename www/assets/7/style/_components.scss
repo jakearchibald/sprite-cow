@@ -264,12 +264,12 @@
 			&.select-sprite::before {
 				background-position: -4px -2px;
 			}
-			&.pick-bg {
+			&.select-bg {
 				border-radius: 0 4px 4px 0;
 				margin-right: 5px;
 				border-left-width: 0;
 			}
-			&.pick-bg::before {
+			&.select-bg::before {
 				background-position: -50px -3px;
 			}
 			&.open-img::before {

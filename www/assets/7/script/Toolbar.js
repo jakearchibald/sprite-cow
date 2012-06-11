@@ -3,44 +3,52 @@ spriteCow.Toolbar = (function() {
 		var toolbar = this,
 			$container = $('' +
 				'<div class="toolbar">' +
-					'<div role="button" class="open-img">Open</div>' +
-					'<div role="button" class="no-label reload-img">Reload current image</div>' +
-					'<div role="button" class="select-sprite active">Select Sprite</div>' +
-					'<div role="button" class="pick-bg">Pick Background</div>' +
-					'<div role="button" class="no-label invert-bg">Toggle Dark Background</div>' +
 					'<span class="feedback"></span>' +
 				'</div>' +
-			'').appendTo( $appendToElm ),
-			$children = $container.children(),
-			toolNames = [
-				'openImg',
-				'reloadImg',
-				'selectSprite',
-				'selectBg',
-				'invertBg',
-			];
-			
-		toolNames.forEach(function(toolName, i) {
-			// avoiding jquery's event system so file dialogs can be launched
-			$children.eq(i).click(function(event) {
-				toolbar.trigger(toolName);
-				event.preventDefault();
-			});
-		});
+			'').appendTo( $appendToElm );
 		
-		$container.delegate('div[role=button]', 'mouseenter', function() {
+		$container.on('mouseenter', 'div[role=button]', function() {
 			var $button = $(this);
 			toolbar.feedback( $button.hasClass('no-label') ? $button.text() : '' );
 		});
+
+		$container.on('click', 'div[role=button]', function() {
+			var $button = $(this),
+				toolName = $button.data('toolName'),
+				event = new $.Event( toolName );
+			
+			event.isActive = $button.hasClass('active');
+
+			if ( !toolbar.trigger(event).isDefaultPrevented() ) {
+				$button.toggleClass('active');
+			}
+
+			event.preventDefault();
+		});
 		
-		toolbar._$feedback = $children.slice(-1);
-		toolbar._toolNames = toolNames;
-		toolbar._$children = $children;
 		toolbar.$container = $container;
+		toolbar._$feedback = $container.find('span.feedback');
 	}
 	
-	var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new spriteCow.MicroEvent;
+	var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new spriteCow.MicroEvent();
 	
+	SpriteCowToolbarProto.addItem = function(toolName, text, opts) {
+		opts = opts || {};
+
+		var $button = $('<div role="button"/>').addClass(toolName).text(text).data('toolName', toolName);
+
+		if (opts.noLabel) {
+			$button.addClass('no-label');
+		}
+		if (opts.active) {
+			$button.addClass('active');
+		}
+
+		this._$feedback.before( $button );
+
+		return this;
+	};
+
 	SpriteCowToolbarProto.feedback = function(msg, severe) {
 		var $feedback = this._$feedback,
 			initialColor = '#555';
@@ -53,7 +61,7 @@ spriteCow.Toolbar = (function() {
 		});
 		
 		if (severe) {
-			$feedback.css('font-weight', 'bold')
+			$feedback.css('font-weight', 'bold');
 			
 			if ($.support.transition) {
 				$feedback.transition({ color: 'red' }, {
@@ -80,22 +88,17 @@ spriteCow.Toolbar = (function() {
 	};
 	
 	SpriteCowToolbarProto.activate = function(toolName) {
-		this._$children.eq( this._toolNames.indexOf(toolName) )
-			.addClass('active');
-			
+		this.$container.find('.' + toolName + '[role=button]').addClass('active');
 		return this;
 	};
 	
 	SpriteCowToolbarProto.deactivate = function(toolName) {
-		this._$children.eq( this._toolNames.indexOf(toolName) )
-			.removeClass('active');
-			
+		this.$container.find('.' + toolName + '[role=button]').removeClass('active');
 		return this;
 	};
 	
 	SpriteCowToolbarProto.isActive = function(toolName) {
-		return this._$children.eq( this._toolNames.indexOf(toolName) )
-			.hasClass('active');
+		return this.$container.find('.' + toolName + '[role=button]').hasClass('active');
 	};
 	
 	return SpriteCowToolbar;

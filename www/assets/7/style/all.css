@@ -477,12 +477,12 @@ body {
     .toolbar [role=button].select-sprite::before {
       background-position: -4px -2px; }
     /* line 267, _components.scss */
-    .toolbar [role=button].pick-bg {
+    .toolbar [role=button].select-bg {
       border-radius: 0 4px 4px 0;
       margin-right: 5px;
       border-left-width: 0; }
     /* line 272, _components.scss */
-    .toolbar [role=button].pick-bg::before {
+    .toolbar [role=button].select-bg::before {
       background-position: -50px -3px; }
     /* line 275, _components.scss */
     .toolbar [role=button].open-img::before {

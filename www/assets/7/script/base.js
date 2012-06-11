@@ -23,8 +23,14 @@
 			spriteCanvasView  = new spriteCow.SpriteCanvasView( spriteCanvas, $canvasContainer ),
 			imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer, $tutorialLink.attr('href') ),
 			cssOutput         = new spriteCow.CssOutput( $codeContainer ),
-			toolbar           = new spriteCow.Toolbar( $toolbarContainer );
+			toolbarTop        = new spriteCow.Toolbar( $toolbarContainer );
 		
+		toolbarTop.addItem('open-img', 'Open').
+				   addItem('reload-img', 'Reload Current Image', {noLabel: true}).
+				   addItem('select-sprite', 'Select Sprite', {active: true}).
+				   addItem('select-bg', 'Pick Background').
+				   addItem('invert-bg', 'Toggle Dark Background', {noLabel: true});
+
 		spriteCow.pageLayout.init();
 		
 		// listeners
@@ -42,47 +48,48 @@
 				// if the rect is the same size as the whole canvas,
 				// it's probably because the background is set wrong
 				// let's be kind...
-				toolbar.feedback( 'Incorrect background colour set?', true );
+				toolbarTop.feedback( 'Incorrect background colour set?', true );
 			}
 		});
 		
 		spriteCanvasView.bind('bgColorHover', function(color) {
-			toolbar.feedback( colourBytesToCss(color) );
+			toolbarTop.feedback( colourBytesToCss(color) );
 		});
 		
 		spriteCanvasView.bind('bgColorSelect', function(color) {
-			var toolName = 'selectSprite';
+			var toolName = 'select-sprite';
 			spriteCanvasView.setTool(toolName);
-			toolbar.deactivate('selectBg').activate(toolName);
-			toolbar.feedback( 'Background set to ' + colourBytesToCss(color) );
+			toolbarTop.deactivate('select-bg').activate(toolName);
+			toolbarTop.feedback( 'Background set to ' + colourBytesToCss(color) );
 		});
 		
-		toolbar.bind('selectBg', function() {
-			var toolName = 'selectBg';
-			spriteCanvasView.setTool(toolName);
-			toolbar.deactivate('selectSprite').activate(toolName);
+		toolbarTop.bind('open-img', function(event) {
+			event.preventDefault();
+		});
+
+		toolbarTop.bind('select-bg', function() {
+			spriteCanvasView.setTool('select-bg');
+			toolbarTop.deactivate('select-sprite');
 		});
 		
-		toolbar.bind('selectSprite', function() {
-			var toolName = 'selectSprite';
-			spriteCanvasView.setTool(toolName);
-			toolbar.deactivate('selectBg').activate(toolName)
+		toolbarTop.bind('select-sprite', function() {
+			spriteCanvasView.setTool('select-sprite');
+			toolbarTop.deactivate('select-bg');
 		});
 		
-		toolbar.bind('reloadImg', function() {
+		toolbarTop.bind('reload-img', function(event) {
 			imgInput.reloadLastFile();
+			event.preventDefault();
 		});
 		
-		imgInput.fileClickjackFor( toolbar.$container.find('div.open-img') );
+		imgInput.fileClickjackFor( toolbarTop.$container.find('div.open-img') );
 		
-		toolbar.bind('invertBg', function() {
-			var toolName = 'invertBg';
-			if ( toolbar.isActive(toolName) ) {
-				toolbar.deactivate(toolName);
+		toolbarTop.bind('invert-bg', function() {
+			var toolName = 'invert-bg';
+			if ( toolbarTop.isActive(toolName) ) {
 				spriteCanvasView.setBg('#fff');
 			}
 			else {
-				toolbar.activate(toolName);
 				spriteCanvasView.setBg('#000');
 			}
 		});
