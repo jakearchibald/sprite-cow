@@ -178,8 +178,9 @@ body {
 .intro .further-detail {
   height: 0; }
 
-/* line 59, _structure.scss */
-.toolbar-container {
+/* line 60, _structure.scss */
+.toolbar-container,
+.toolbar-bottom-container {
   display: table-row;
   position: relative;
   -webkit-user-select: none;
@@ -422,20 +423,22 @@ body {
   border-width: 1px 0;
   border-color: #e2e2e2 #000 #888;
   color: #333;
-  border-radius: 5px 5px 0 0;
   background: -webkit-linear-gradient(top, #d0d0d0, #a7a7a7);
   background: -moz-linear-gradient(top, #d0d0d0, #a7a7a7);
   background: -ms-linear-gradient(top, #d0d0d0, #a7a7a7);
   background: -o-linear-gradient(top, #d0d0d0, #a7a7a7);
   background: linear-gradient(top, #d0d0d0, #a7a7a7); }
-  /* line 221, _components.scss */
+  /* line 220, _components.scss */
+  .toolbar.top {
+    border-radius: 5px 5px 0 0; }
+  /* line 224, _components.scss */
   .intro .toolbar {
     height: 0;
     padding-top: 0;
     padding-bottom: 0;
     border-top-width: 0;
     border-bottom-width: 0; }
-  /* line 229, _components.scss */
+  /* line 232, _components.scss */
   .toolbar [role=button] {
     float: left;
     margin: 0 5px 5px 0;
@@ -449,7 +452,7 @@ body {
     background: -ms-linear-gradient(top, #fefefe, #b8b8b8);
     background: -o-linear-gradient(top, #fefefe, #b8b8b8);
     background: linear-gradient(top, #fefefe, #b8b8b8); }
-    /* line 240, _components.scss */
+    /* line 243, _components.scss */
     .toolbar [role=button]::before {
       content: '';
       width: 16px;
@@ -458,66 +461,66 @@ body {
       top: 4px;
       left: 5px;
       background: url("imgs/sprites1.png") no-repeat; }
-    /* line 249, _components.scss */
+    /* line 252, _components.scss */
     .toolbar [role=button].active {
       background: #707070;
       box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.6);
       color: #fff; }
-    /* line 254, _components.scss */
+    /* line 257, _components.scss */
     .toolbar [role=button].no-label {
       width: 26px;
       padding: 4px 0;
       text-indent: -5000px; }
-    /* line 259, _components.scss */
+    /* line 262, _components.scss */
     .toolbar [role=button].select-sprite::before {
       background-position: -4px -2px; }
-    /* line 262, _components.scss */
+    /* line 265, _components.scss */
     .toolbar [role=button].select-bg::before {
       background-position: -50px -3px; }
-    /* line 265, _components.scss */
+    /* line 268, _components.scss */
     .toolbar [role=button].open-img::before {
       background-position: -26px -2px; }
-    /* line 268, _components.scss */
+    /* line 271, _components.scss */
     .toolbar [role=button].invert-bg::before {
       background-position: -99px -2px; }
-    /* line 271, _components.scss */
+    /* line 274, _components.scss */
     .toolbar [role=button].reload-img::before {
       background-position: -75px -2px; }
-  /* line 275, _components.scss */
+  /* line 278, _components.scss */
   .toolbar .feedback {
     float: left;
     padding: 5px;
     color: #555;
     opacity: 0; }
 
-/* line 283, _components.scss */
+/* line 286, _components.scss */
 .toolbar-group [role=button] {
   margin-right: 0;
   border-radius: 0;
   border-left-width: 0; }
-  /* line 288, _components.scss */
+  /* line 291, _components.scss */
   .toolbar-group [role=button]:first-child {
     border-left-width: 1px;
     border-radius: 4px 0 0 4px; }
-  /* line 292, _components.scss */
+  /* line 295, _components.scss */
   .toolbar-group [role=button]:last-child {
     margin-right: 5px;
     border-radius: 0 4px 4px 0; }
 
-/* line 298, _components.scss */
+/* line 301, _components.scss */
 .main-footer {
   overflow: hidden;
   background: rgba(0, 0, 0, 0.23); }
-  /* line 302, _components.scss */
+  /* line 305, _components.scss */
   .main-footer p {
     float: right;
     padding: 15px 29px 0;
     margin: 0;
     white-space: nowrap; }
-    /* line 308, _components.scss */
+    /* line 311, _components.scss */
     .intro .main-footer p {
       padding: 12px 16px 0; }
-  /* line 312, _components.scss */
+  /* line 315, _components.scss */
   .main-footer .the-team-logo {
     background: url("imgs/sprites1.png") no-repeat -4px -29px;
     width: 88px;
@@ -526,17 +529,17 @@ body {
     text-indent: -5000px;
     vertical-align: top;
     margin: -1px 0 0 4px; }
-  /* line 321, _components.scss */
+  /* line 324, _components.scss */
   .main-footer ul {
     float: left;
     padding: 16px 30px; }
-    /* line 325, _components.scss */
+    /* line 328, _components.scss */
     .intro .main-footer ul {
       padding: 13px 16px; }
-  /* line 329, _components.scss */
+  /* line 332, _components.scss */
   .main-footer li {
     display: inline; }
-    /* line 333, _components.scss */
+    /* line 336, _components.scss */
     .main-footer li a:link, .main-footer li a:visited {
       font-weight: normal;
       color: #fff;
@@ -544,53 +547,53 @@ body {
       padding: 0 10px 0 0;
       margin: 0 10px 0 0;
       border-right: 1px solid #fff; }
-    /* line 342, _components.scss */
+    /* line 345, _components.scss */
     .main-footer li:last-child a:link, .main-footer li:last-child a:visited {
       padding: 0;
       margin: 0;
       border: none; }
 
-/* line 350, _components.scss */
+/* line 353, _components.scss */
 .feature-test {
   display: none;
   width: 800px;
   margin: 0 auto;
   text-align: center; }
-  /* line 356, _components.scss */
+  /* line 359, _components.scss */
   .not-supported .feature-test {
     display: block; }
-  /* line 359, _components.scss */
+  /* line 362, _components.scss */
   .feature-test h1 {
     font: normal 2.5em sans-serif;
     margin: 0;
     padding: 40px 0; }
-  /* line 364, _components.scss */
+  /* line 367, _components.scss */
   .feature-test ul {
     display: inline-block;
     *display: inline;
     zoom: 1; }
-  /* line 369, _components.scss */
+  /* line 372, _components.scss */
   .feature-test li {
     margin: 10px auto;
     font-size: 1.1em;
     overflow: hidden;
     text-align: left; }
-  /* line 375, _components.scss */
+  /* line 378, _components.scss */
   .feature-test p {
     width: 600px;
     margin: 0 auto 20px;
     font-size: 1.1em;
     text-align: left; }
-  /* line 382, _components.scss */
+  /* line 385, _components.scss */
   .feature-test .pass, .feature-test .fail {
     float: left;
     width: 50px;
     font-weight: bold;
     color: #5f5; }
-  /* line 388, _components.scss */
+  /* line 391, _components.scss */
   .feature-test .fail {
     color: #f55; }
 
-/* line 393, _components.scss */
+/* line 396, _components.scss */
 .intro-copy {
   display: none; }

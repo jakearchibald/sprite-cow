@@ -56,7 +56,8 @@
 		}
 	}
 // Toolbar
-	.toolbar-container {
+	.toolbar-container,
+	.toolbar-bottom-container {
 		display: table-row;
 		position: relative;
 		@include user-select(none);

@@ -14,16 +14,15 @@
 			return;
 		}
 		
-		var $canvasContainer  = $('.canvas-inner'),
-			$codeContainer    = $('.code-container'),
-			$pageContainer    = $('.container'),
-			$toolbarContainer = $('.toolbar-container'),
-			$tutorialLink     = $('.tutorial'),
-			spriteCanvas      = new spriteCow.SpriteCanvas(),
-			spriteCanvasView  = new spriteCow.SpriteCanvasView( spriteCanvas, $canvasContainer ),
-			imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer, $tutorialLink.attr('href') ),
-			cssOutput         = new spriteCow.CssOutput( $codeContainer ),
-			toolbarTop        = new spriteCow.Toolbar( $toolbarContainer );
+		var $canvasContainer  = $('.canvas-inner');
+		var $codeContainer    = $('.code-container');
+		var $tutorialLink     = $('.tutorial');
+		var spriteCanvas      = new spriteCow.SpriteCanvas();
+		var spriteCanvasView  = new spriteCow.SpriteCanvasView( spriteCanvas, $canvasContainer );
+		var imgInput          = new spriteCow.ImgInput( $canvasContainer, $canvasContainer, $tutorialLink.attr('href') );
+		var cssOutput         = new spriteCow.CssOutput( $codeContainer );
+		var toolbarTop        = new spriteCow.Toolbar('.toolbar-container');
+		var toolbarBottom     = new spriteCow.Toolbar('.toolbar-bottom-container');
 		
 		toolbarTop.
 			addItem('open-img', 'Open').
@@ -34,6 +33,11 @@
 					addItem('select-bg', 'Pick Background')
 			).
 			addItem('invert-bg', 'Toggle Dark Background', {noLabel: true});
+
+		toolbarTop.$container.addClass('top');
+
+		//toolbarBottom.
+		//	addItem('percent', 'Percent');
 
 		spriteCow.pageLayout.init();
 		

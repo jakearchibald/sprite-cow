@@ -215,8 +215,11 @@
 		border-width: 1px 0;
 		border-color: #e2e2e2 #000 #888;
 		color: #333;
-		border-radius: 5px 5px 0 0;
 		@include linear-gradient((top, #d0d0d0, #a7a7a7));
+
+		&.top {
+			border-radius: 5px 5px 0 0;
+		}
 
 		.intro & {
 			height: 0;
