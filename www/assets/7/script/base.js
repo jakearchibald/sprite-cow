@@ -25,18 +25,22 @@
 			cssOutput         = new spriteCow.CssOutput( $codeContainer ),
 			toolbarTop        = new spriteCow.Toolbar( $toolbarContainer );
 		
-		toolbarTop.addItem('open-img', 'Open').
-				   addItem('reload-img', 'Reload Current Image', {noLabel: true}).
-				   addItem('select-sprite', 'Select Sprite', {active: true}).
-				   addItem('select-bg', 'Pick Background').
-				   addItem('invert-bg', 'Toggle Dark Background', {noLabel: true});
+		toolbarTop.
+			addItem('open-img', 'Open').
+			addItem('reload-img', 'Reload Current Image', {noLabel: true}).
+			addItem(
+				new spriteCow.ToolbarGroup().
+					addItem('select-sprite', 'Select Sprite', {active: true}).
+					addItem('select-bg', 'Pick Background')
+			).
+			addItem('invert-bg', 'Toggle Dark Background', {noLabel: true});
 
 		spriteCow.pageLayout.init();
 		
 		// listeners
 		imgInput.bind('load', function(img) {
 			spriteCanvas.setImg(img);
-			spriteCanvasView.setTool('selectSprite');
+			spriteCanvasView.setTool('select-sprite');
 			cssOutput.backgroundFileName = imgInput.fileName;
 			spriteCow.pageLayout.toAppView();
 		});
@@ -59,7 +63,7 @@
 		spriteCanvasView.bind('bgColorSelect', function(color) {
 			var toolName = 'select-sprite';
 			spriteCanvasView.setTool(toolName);
-			toolbarTop.deactivate('select-bg').activate(toolName);
+			toolbarTop.activate(toolName);
 			toolbarTop.feedback( 'Background set to ' + colourBytesToCss(color) );
 		});
 		
@@ -69,12 +73,10 @@
 
 		toolbarTop.bind('select-bg', function() {
 			spriteCanvasView.setTool('select-bg');
-			toolbarTop.deactivate('select-sprite');
 		});
 		
 		toolbarTop.bind('select-sprite', function() {
 			spriteCanvasView.setTool('select-sprite');
-			toolbarTop.deactivate('select-bg');
 		});
 		
 		toolbarTop.bind('reload-img', function(event) {

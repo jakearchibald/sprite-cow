@@ -256,18 +256,8 @@
 				padding: 4px 0;
 				text-indent: -5000px;
 			}
-			&.select-sprite {
-				border-width: 1px;
-				border-radius: 4px 0 0 4px;
-				margin-right: 0;
-			}
 			&.select-sprite::before {
 				background-position: -4px -2px;
-			}
-			&.select-bg {
-				border-radius: 0 4px 4px 0;
-				margin-right: 5px;
-				border-left-width: 0;
 			}
 			&.select-bg::before {
 				background-position: -50px -3px;
@@ -287,6 +277,21 @@
 			padding: 5px;
 			color: #555;
 			opacity: 0;
+		}
+	}
+
+	.toolbar-group [role=button] {
+		margin-right: 0;
+		border-radius: 0;
+		border-left-width: 0;
+
+		&:first-child {
+			border-left-width: 1px;
+			border-radius: 4px 0 0 4px;
+		}
+		&:last-child {
+			margin-right: 5px;
+			border-radius: 0 4px 4px 0;
 		}
 	}
 // Footer

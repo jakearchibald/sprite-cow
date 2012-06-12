@@ -469,51 +469,55 @@ body {
       padding: 4px 0;
       text-indent: -5000px; }
     /* line 259, _components.scss */
-    .toolbar [role=button].select-sprite {
-      border-width: 1px;
-      border-radius: 4px 0 0 4px;
-      margin-right: 0; }
-    /* line 264, _components.scss */
     .toolbar [role=button].select-sprite::before {
       background-position: -4px -2px; }
-    /* line 267, _components.scss */
-    .toolbar [role=button].select-bg {
-      border-radius: 0 4px 4px 0;
-      margin-right: 5px;
-      border-left-width: 0; }
-    /* line 272, _components.scss */
+    /* line 262, _components.scss */
     .toolbar [role=button].select-bg::before {
       background-position: -50px -3px; }
-    /* line 275, _components.scss */
+    /* line 265, _components.scss */
     .toolbar [role=button].open-img::before {
       background-position: -26px -2px; }
-    /* line 278, _components.scss */
+    /* line 268, _components.scss */
     .toolbar [role=button].invert-bg::before {
       background-position: -99px -2px; }
-    /* line 281, _components.scss */
+    /* line 271, _components.scss */
     .toolbar [role=button].reload-img::before {
       background-position: -75px -2px; }
-  /* line 285, _components.scss */
+  /* line 275, _components.scss */
   .toolbar .feedback {
     float: left;
     padding: 5px;
     color: #555;
     opacity: 0; }
 
-/* line 293, _components.scss */
+/* line 283, _components.scss */
+.toolbar-group [role=button] {
+  margin-right: 0;
+  border-radius: 0;
+  border-left-width: 0; }
+  /* line 288, _components.scss */
+  .toolbar-group [role=button]:first-child {
+    border-left-width: 1px;
+    border-radius: 4px 0 0 4px; }
+  /* line 292, _components.scss */
+  .toolbar-group [role=button]:last-child {
+    margin-right: 5px;
+    border-radius: 0 4px 4px 0; }
+
+/* line 298, _components.scss */
 .main-footer {
   overflow: hidden;
   background: rgba(0, 0, 0, 0.23); }
-  /* line 297, _components.scss */
+  /* line 302, _components.scss */
   .main-footer p {
     float: right;
     padding: 15px 29px 0;
     margin: 0;
     white-space: nowrap; }
-    /* line 303, _components.scss */
+    /* line 308, _components.scss */
     .intro .main-footer p {
       padding: 12px 16px 0; }
-  /* line 307, _components.scss */
+  /* line 312, _components.scss */
   .main-footer .the-team-logo {
     background: url("imgs/sprites1.png") no-repeat -4px -29px;
     width: 88px;
@@ -522,17 +526,17 @@ body {
     text-indent: -5000px;
     vertical-align: top;
     margin: -1px 0 0 4px; }
-  /* line 316, _components.scss */
+  /* line 321, _components.scss */
   .main-footer ul {
     float: left;
     padding: 16px 30px; }
-    /* line 320, _components.scss */
+    /* line 325, _components.scss */
     .intro .main-footer ul {
       padding: 13px 16px; }
-  /* line 324, _components.scss */
+  /* line 329, _components.scss */
   .main-footer li {
     display: inline; }
-    /* line 328, _components.scss */
+    /* line 333, _components.scss */
     .main-footer li a:link, .main-footer li a:visited {
       font-weight: normal;
       color: #fff;
@@ -540,53 +544,53 @@ body {
       padding: 0 10px 0 0;
       margin: 0 10px 0 0;
       border-right: 1px solid #fff; }
-    /* line 337, _components.scss */
+    /* line 342, _components.scss */
     .main-footer li:last-child a:link, .main-footer li:last-child a:visited {
       padding: 0;
       margin: 0;
       border: none; }
 
-/* line 345, _components.scss */
+/* line 350, _components.scss */
 .feature-test {
   display: none;
   width: 800px;
   margin: 0 auto;
   text-align: center; }
-  /* line 351, _components.scss */
+  /* line 356, _components.scss */
   .not-supported .feature-test {
     display: block; }
-  /* line 354, _components.scss */
+  /* line 359, _components.scss */
   .feature-test h1 {
     font: normal 2.5em sans-serif;
     margin: 0;
     padding: 40px 0; }
-  /* line 359, _components.scss */
+  /* line 364, _components.scss */
   .feature-test ul {
     display: inline-block;
     *display: inline;
     zoom: 1; }
-  /* line 364, _components.scss */
+  /* line 369, _components.scss */
   .feature-test li {
     margin: 10px auto;
     font-size: 1.1em;
     overflow: hidden;
     text-align: left; }
-  /* line 370, _components.scss */
+  /* line 375, _components.scss */
   .feature-test p {
     width: 600px;
     margin: 0 auto 20px;
     font-size: 1.1em;
     text-align: left; }
-  /* line 377, _components.scss */
+  /* line 382, _components.scss */
   .feature-test .pass, .feature-test .fail {
     float: left;
     width: 50px;
     font-weight: bold;
     color: #5f5; }
-  /* line 383, _components.scss */
+  /* line 388, _components.scss */
   .feature-test .fail {
     color: #f55; }
 
-/* line 388, _components.scss */
+/* line 393, _components.scss */
 .intro-copy {
   display: none; }

@@ -20,7 +20,12 @@ spriteCow.Toolbar = (function() {
 			event.isActive = $button.hasClass('active');
 
 			if ( !toolbar.trigger(event).isDefaultPrevented() ) {
-				$button.toggleClass('active');
+				if (event.isActive) {
+					toolbar.deactivate(toolName);
+				}
+				else {
+					toolbar.activate(toolName);
+				}
 			}
 
 			event.preventDefault();
@@ -30,9 +35,7 @@ spriteCow.Toolbar = (function() {
 		toolbar._$feedback = $container.find('span.feedback');
 	}
 	
-	var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new spriteCow.MicroEvent();
-	
-	SpriteCowToolbarProto.addItem = function(toolName, text, opts) {
+	SpriteCowToolbar.createButton = function(toolName, text, opts) {
 		opts = opts || {};
 
 		var $button = $('<div role="button"/>').addClass(toolName).text(text).data('toolName', toolName);
@@ -44,7 +47,18 @@ spriteCow.Toolbar = (function() {
 			$button.addClass('active');
 		}
 
-		this._$feedback.before( $button );
+		return $button;
+	};
+
+	var SpriteCowToolbarProto = SpriteCowToolbar.prototype = new spriteCow.MicroEvent();
+	
+	SpriteCowToolbarProto.addItem = function(toolName, text, opts) {
+		if (toolName instanceof spriteCow.ToolbarGroup) {
+			this._$feedback.before( toolName.$container );
+		}
+		else {
+			SpriteCowToolbar.createButton(toolName, text, opts).insertBefore( this._$feedback );
+		}
 
 		return this;
 	};
@@ -88,7 +102,9 @@ spriteCow.Toolbar = (function() {
 	};
 	
 	SpriteCowToolbarProto.activate = function(toolName) {
-		this.$container.find('.' + toolName + '[role=button]').addClass('active');
+		var $button = this.$container.find('.' + toolName + '[role=button]');
+		$button.closest('.toolbar-group').children().removeClass('active');
+		$button.addClass('active');
 		return this;
 	};
 	
@@ -104,4 +120,17 @@ spriteCow.Toolbar = (function() {
 	return SpriteCowToolbar;
 })();
 	
-	
+(function() {
+	function ToolbarGroup() {
+		this.$container = $('<div class="toolbar-group"/>');
+	}
+
+	var ToolbarGroupProto = ToolbarGroup.prototype;
+
+	ToolbarGroupProto.addItem = function(toolName, text, opts) {
+		spriteCow.Toolbar.createButton(toolName, text, opts).appendTo( this.$container );
+		return this;
+	};
+
+	spriteCow.ToolbarGroup = ToolbarGroup;
+})();
