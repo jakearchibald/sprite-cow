@@ -10,7 +10,8 @@ spriteCow.pageLayout = (function() {
 		$startButtons,
 		$spriteCanvasContainer,
 		$window = $(window),
-		$toolbar,
+		$toolbarTop,
+		$toolbarBottom,
 		currentView = 'intro';
 	
 	function getContainerWidthPercent() {
@@ -67,12 +68,19 @@ spriteCow.pageLayout = (function() {
 					[$canvasCell, {
 						height: $canvasCell.height()
 					}],
-					[$toolbar, {
-						height: $toolbar.height(),
-						'padding-top': $toolbar.css('padding-top'),
-						'padding-bottom': $toolbar.css('padding-bottom'),
-						'border-top-width': $toolbar.css('border-top-width'),
-						'border-bottom-width': $toolbar.css('border-bottom-width')
+					[$toolbarTop, {
+						height: $toolbarTop.height(),
+						'padding-top': $toolbarTop.css('padding-top'),
+						'padding-bottom': $toolbarTop.css('padding-bottom'),
+						'border-top-width': $toolbarTop.css('border-top-width'),
+						'border-bottom-width': $toolbarTop.css('border-bottom-width')
+					}],
+					[$toolbarBottom, {
+						height: $toolbarBottom.height(),
+						'padding-top': $toolbarBottom.css('padding-top'),
+						'padding-bottom': $toolbarBottom.css('padding-bottom'),
+						'border-top-width': $toolbarBottom.css('border-top-width'),
+						'border-bottom-width': $toolbarBottom.css('border-bottom-width')
 					}]
 				],
 				before: function() {
@@ -122,7 +130,8 @@ spriteCow.pageLayout = (function() {
 	
 	return {
 		init: function() {
-			$toolbar = $('.toolbar');
+			$toolbarTop = $('.toolbar.top');
+			$toolbarBottom = $('.toolbar.bottom');
 			$startButtons = $('.start-buttons');
 			$cssOutput = $('.css-output');
 			$spriteCanvasContainer = $('.sprite-canvas-container');

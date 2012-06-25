@@ -36,8 +36,10 @@
 
 		toolbarTop.$container.addClass('top');
 
-		//toolbarBottom.
-		//	addItem('percent', 'Percent');
+		toolbarBottom.
+			addItem('percent', 'Percent');
+
+		toolbarBottom.$container.addClass('bottom');
 
 		spriteCow.pageLayout.init();
 		
