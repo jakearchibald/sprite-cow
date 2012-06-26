@@ -1,9 +1,21 @@
 spriteCow.CssOutput = (function() {
-	function bgPosVal(offset) {
+	function bgPixelVal(offset) {
 		if (offset) {
 			return ' -' + offset + 'px';
 		}
 		return ' 0';
+	}
+
+	function bgPercentVal(offset) {
+		if (offset) {
+			return ' ' + round(offset * 100, 3) + '%';
+		}
+		return ' 0';
+	}
+
+	function round(num, afterDecimal) {
+		var multiplier = Math.pow(10, afterDecimal || 0);
+		return Math.round(num * multiplier) / multiplier;
 	}
 	
 	function CssOutput($appendTo) {
@@ -13,8 +25,11 @@ spriteCow.CssOutput = (function() {
 		this.backgroundFileName = '';
 		this.path = 'cssOutputPath' in localStorage ? localStorage.getItem('cssOutputPath') : 'imgs/';
 		this.rect = new spriteCow.Rect(0, 0, 0, 0);
+		this.imgWidth = 0;
+		this.imgHeight = 0;
 		this.useTabs = true;
 		this.useBgUrl = true;
+		this.percentPos = false;
 		this.selector = '.sprite';
 		this._addEditEvents();
 	}
@@ -36,16 +51,25 @@ spriteCow.CssOutput = (function() {
 			$file = $('<span class="file"/>')
 				.append( $('<span class="file-path"/>').text( this.path ) )
 				.append( $('<span class="file-name"/>').text( this.backgroundFileName ) );
-				
 			
 			$code.append( $file ).append( "') no-repeat" );
 		}
 		else {
 			$code.append( indent + "background-position:" );
 		}
+
+		if (this.percentPos) {
+			$code.append(
+				bgPercentVal( rect.x / -(rect.width - this.imgWidth) ) +
+				bgPercentVal( rect.y / -(rect.height - this.imgHeight) ) +
+				';\n'
+			);
+		}
+		else {
+			$code.append( bgPixelVal(rect.x) + bgPixelVal(rect.y) + ';\n' );
+		}
 		
 		$code.append(
-			bgPosVal(rect.x) + bgPosVal(rect.y) + ';\n' +
 			indent + 'width: ' + rect.width + 'px;\n' +
 			indent + 'height: ' + rect.height + 'px;\n' +
 			'}'

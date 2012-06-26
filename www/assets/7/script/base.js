@@ -53,6 +53,9 @@
 		
 		spriteCanvasView.bind('rectChange', function(rect) {
 			cssOutput.rect = rect;
+			cssOutput.imgWidth = spriteCanvas.canvas.width;
+			cssOutput.imgHeight = spriteCanvas.canvas.height;
+
 			cssOutput.update();
 			if (rect.width === spriteCanvas.canvas.width && rect.height === spriteCanvas.canvas.height) {
 				// if the rect is the same size as the whole canvas,
@@ -92,14 +95,18 @@
 		
 		imgInput.fileClickjackFor( toolbarTop.$container.find('div.open-img') );
 		
-		toolbarTop.bind('invert-bg', function() {
-			var toolName = 'invert-bg';
-			if ( toolbarTop.isActive(toolName) ) {
+		toolbarTop.bind('invert-bg', function(event) {
+			if ( event.isActive ) {
 				spriteCanvasView.setBg('#fff');
 			}
 			else {
 				spriteCanvasView.setBg('#000');
 			}
+		});
+
+		toolbarBottom.bind('percent', function(event) {
+			cssOutput.percentPos = !event.isActive;
+			cssOutput.update();
 		});
 		
 		$tutorialLink.click(function(event) {
