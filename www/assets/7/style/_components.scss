@@ -274,6 +274,9 @@
 			&.reload-img::before {
 				background-position: -75px -2px;
 			}
+			&.percent::before {
+				background-position: -121px -2px;
+			}
 		}
 		& .feedback {
 			float: left;

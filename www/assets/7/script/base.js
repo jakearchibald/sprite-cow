@@ -37,7 +37,7 @@
 		toolbarTop.$container.addClass('top');
 
 		toolbarBottom.
-			addItem('percent', 'Percent');
+			addItem('percent', 'Percentage positioning', {noLabel: true});
 
 		toolbarBottom.$container.addClass('bottom');
 
