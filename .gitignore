@@ -5,3 +5,4 @@ fabric.cfg
 *.pyc
 tmp
 .sass-cache
+www/bgtest.html
