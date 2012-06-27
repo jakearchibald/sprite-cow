@@ -37,6 +37,7 @@
 		toolbarTop.$container.addClass('top');
 
 		toolbarBottom.
+			addItem('bg-size', 'Scale for retina displays', {noLabel: true}).
 			addItem('percent', 'Percentage positioning', {noLabel: true});
 
 		toolbarBottom.$container.addClass('bottom');
@@ -46,6 +47,12 @@
 		// listeners
 		imgInput.bind('load', function(img) {
 			spriteCanvas.setImg(img);
+			
+			cssOutput.imgWidth = spriteCanvas.canvas.width;
+			cssOutput.imgHeight = spriteCanvas.canvas.height;
+			cssOutput.scaledWidth = Math.round( cssOutput.imgWidth / 2 );
+			cssOutput.scaledHeight = Math.round( cssOutput.imgHeight / 2 );
+
 			spriteCanvasView.setTool('select-sprite');
 			cssOutput.backgroundFileName = imgInput.fileName;
 			spriteCow.pageLayout.toAppView();
@@ -53,10 +60,8 @@
 		
 		spriteCanvasView.bind('rectChange', function(rect) {
 			cssOutput.rect = rect;
-			cssOutput.imgWidth = spriteCanvas.canvas.width;
-			cssOutput.imgHeight = spriteCanvas.canvas.height;
-
 			cssOutput.update();
+
 			if (rect.width === spriteCanvas.canvas.width && rect.height === spriteCanvas.canvas.height) {
 				// if the rect is the same size as the whole canvas,
 				// it's probably because the background is set wrong
@@ -106,6 +111,11 @@
 
 		toolbarBottom.bind('percent', function(event) {
 			cssOutput.percentPos = !event.isActive;
+			cssOutput.update();
+		});
+
+		toolbarBottom.bind('bg-size', function(event) {
+			cssOutput.bgSize = !event.isActive;
 			cssOutput.update();
 		});
 		

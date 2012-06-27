@@ -277,6 +277,9 @@
 			&.percent::before {
 				background-position: -121px -2px;
 			}
+			&.bg-size::before {
+				background-position: -141px -1px;
+			}
 		}
 		& .feedback {
 			float: left;

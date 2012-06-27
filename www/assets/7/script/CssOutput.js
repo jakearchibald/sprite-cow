@@ -1,16 +1,14 @@
 spriteCow.CssOutput = (function() {
-	function bgPixelVal(offset) {
-		if (offset) {
-			return ' -' + offset + 'px';
-		}
-		return ' 0';
+	function pxVal(val) {
+		val = Math.round(val);
+		return val ? val + 'px' : '0';
 	}
 
 	function bgPercentVal(offset) {
 		if (offset) {
-			return ' ' + round(offset * 100, 3) + '%';
+			return round(offset * 100, 3) + '%';
 		}
-		return ' 0';
+		return '0';
 	}
 
 	function round(num, afterDecimal) {
@@ -27,9 +25,12 @@ spriteCow.CssOutput = (function() {
 		this.rect = new spriteCow.Rect(0, 0, 0, 0);
 		this.imgWidth = 0;
 		this.imgHeight = 0;
+		this.scaledWidth = 0;
+		this.scaledHeight = 0;
 		this.useTabs = true;
 		this.useBgUrl = true;
 		this.percentPos = false;
+		this.bgSize = false;
 		this.selector = '.sprite';
 		this._addEditEvents();
 	}
@@ -37,10 +38,12 @@ spriteCow.CssOutput = (function() {
 	var CssOutputProto = CssOutput.prototype;
 	
 	CssOutputProto.update = function() {
-		var indent = this.useTabs ? '\t' : '    ',
-			rect = this.rect,
-			$code = this._$code,
-			$file;
+		var indent = this.useTabs ? '\t' : '    ';
+		var rect = this.rect;
+		var $code = this._$code;
+		var widthMultiplier = this.bgSize ? this.scaledWidth / this.imgWidth : 1;
+		var heightMultiplier = this.bgSize ? this.scaledHeight / this.imgHeight : 1;
+		var $file;
 		
 		$code.empty()
 			.append( $('<span class="selector"/>').text(this.selector) )
@@ -52,26 +55,36 @@ spriteCow.CssOutput = (function() {
 				.append( $('<span class="file-path"/>').text( this.path ) )
 				.append( $('<span class="file-name"/>').text( this.backgroundFileName ) );
 			
-			$code.append( $file ).append( "') no-repeat" );
+			$code.append( $file ).append( "') no-repeat " );
 		}
 		else {
-			$code.append( indent + "background-position:" );
+			$code.append( indent + "background-position: " );
 		}
 
 		if (this.percentPos) {
 			$code.append(
-				bgPercentVal( rect.x / -(rect.width - this.imgWidth) ) +
-				bgPercentVal( rect.y / -(rect.height - this.imgHeight) ) +
-				';\n'
+				bgPercentVal( rect.x / -(rect.width - this.imgWidth) ) + ' ' +
+				bgPercentVal( rect.y / -(rect.height - this.imgHeight) ) + ';\n'
 			);
 		}
 		else {
-			$code.append( bgPixelVal(rect.x) + bgPixelVal(rect.y) + ';\n' );
+			$code.append(
+				pxVal(-rect.x * widthMultiplier) + ' ' +
+				pxVal(-rect.y * heightMultiplier) + ';\n'
+			);
+		}
+
+		if (this.bgSize) {
+			$code.append(
+				indent + 'background-size: ' +
+				pxVal(this.scaledWidth) + ' ' +
+				pxVal(this.scaledHeight) + ';\n'
+			);
 		}
 		
 		$code.append(
-			indent + 'width: ' + rect.width + 'px;\n' +
-			indent + 'height: ' + rect.height + 'px;\n' +
+			indent + 'width: ' + pxVal(rect.width * widthMultiplier) + ';\n' +
+			indent + 'height: ' + pxVal(rect.height * heightMultiplier) + ';\n' +
 			'}'
 		);
 	};
