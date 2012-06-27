@@ -12,48 +12,54 @@ Currently available online for you to use at http://spritecow.com
 Changes
 =======
 
-v5 2012-06-06
--------------
+2012-06-27
+----------
+
+* Added option for percent-based positioning
+* Added option to scale sprite 50% for retina users
+
+2012-06-06
+----------
 
 * Switching to Sass for CSS
 * New logo, thanks to [Stephen Waller](https://twitter.com/bruised_blood)
 * Tidied up some design bits and pieces
 
-v4 2011-12-05
--------------
+2011-12-05
+----------
 
 * Fixed issue in Firefox that prevented filename being picked up
 * Added appcache for offline use & faster loading while offline
 
-v3 2011-09-05
----------------
+2011-09-05
+----------
 
 * Making more room for the spritesheet view
 
-v2.1 2011-08-07
----------------
+2011-08-07
+----------
 
 * Adding Twitter details
 
-v2 2011-08-05
--------------
+2011-08-05
+----------
 
 * Added "Reload image" button
 * If you open the same image twice, it now reloads the image
 
-v1.2 2011-07-25
----------------
+2011-07-25
+----------
 
 * Bits of CSS & JS that stopped things working in Opera
 * Bits of CSS & JS that stopped things working in IE10 (some remaining layout issues though)
 
-v1.2 2011-07-20
----------------
+2011-07-20
+----------
 
 * Picks up the file name through drag & drop as well as the 'open' button
 
-v1.1 2011-07-04
----------------
+2011-07-04
+----------
 
 * Can change CSS path
 * Changing labels from 'Select' to 'Open' when opening files
