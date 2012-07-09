@@ -178,7 +178,7 @@
 			line-height: 1;
 		}
 
-		& .file-path {
+		& [data-inline-edit] {
 			position: relative;
 			display: inline-block;
 

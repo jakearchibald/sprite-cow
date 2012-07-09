@@ -52,7 +52,7 @@ spriteCow.CssOutput = (function() {
 		if (this.useBgUrl && this.backgroundFileName) {
 			$code.append( indent + "background: url('" );
 			$file = $('<span class="file"/>')
-				.append( $('<span class="file-path"/>').text( this.path ) )
+				.append( $('<span data-inline-edit="file-path"/>').text( this.path ) )
 				.append( $('<span class="file-name"/>').text( this.backgroundFileName ) );
 			
 			$code.append( $file ).append( "') no-repeat " );
@@ -90,45 +90,13 @@ spriteCow.CssOutput = (function() {
 	};
 	
 	CssOutputProto._addEditEvents = function() {
-		var cssOutput = this,
-			$container = cssOutput._$container,
-			$input = $('<input type="text"/>').appendTo( $container ).hide(),
-			inputTopPadding  = parseInt( $input.css('padding-top') ),
-			inputTopBorder   = parseInt( $input.css('border-top-width') ),
-			inputLeftPadding = parseInt( $input.css('padding-left') ),
-			inputLeftBorder  = parseInt( $input.css('border-left-width') ),
-			isEditingPath;
-		
-		$input.hide();
-		
-		$container.delegate('.file', 'click', function() {
-			var $path = $(this).find('.file-path'),
-				position = $path.position();
-				
-			if (isEditingPath) { return; }
-			isEditingPath = true;
-			
-			$input.show().css({
-				top:  position.top  - inputTopPadding  - inputTopBorder,
-				left: position.left - inputLeftPadding - inputLeftBorder,
-				width: Math.max( $path.width(), 50 )
-			}).val( $path.text() ).focus();
-		});
-		
-		function endPathEdit() {
-			var newVal = $input.val();
-			$input.hide();
+		var cssOutput = this;
+
+		new spriteCow.InlineEdit( cssOutput._$container ).bind('file-path', function(event) {
+			var newVal = event.val;
 			cssOutput.path = newVal;
 			cssOutput.update();
 			localStorage.setItem('cssOutputPath', newVal);
-			isEditingPath = false;
-		}
-		
-		$input.blur(endPathEdit).keyup(function(event) {
-			if (event.keyCode === 13) {
-				$input.blur();
-				event.preventDefault();
-			}
 		});
 	};
 	
