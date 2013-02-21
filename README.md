@@ -9,6 +9,20 @@ However, copying all the positions & sizes from graphics apps wasted a ton of my
 
 Currently available online for you to use at http://spritecow.com
 
+
+Install / Build
+=================
+
+* open `www/index.html` in your browser.
+* for dev:
+
+```
+   npm install uglify-js@1
+   # edit files
+   ./bin/compress_assets.js
+```
+
+
 Changes
 =======
 
