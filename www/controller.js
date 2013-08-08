@@ -116,7 +116,7 @@ function cache(path, root, success, errCallback) {
   function onResourceFetched(request) {
     req = request;
     var dirPath = path.split('/').slice(0, -1).join('/');
-    createDirRecursive(dirPath, fileSystem.root, onDirCreated, function(err) {
+    createDirRecursive(dirPath, root, onDirCreated, function(err) {
       log.push(['createdir fail', err]);
       errCallback(err);
     });
@@ -124,7 +124,7 @@ function cache(path, root, success, errCallback) {
 
   function onDirCreated(dir) {
     log.push(['dir worked', dir]);
-    fileSystem.root.getFile(path, {create: true}, onGotFileEntry, function(err) {
+    root.getFile(path, {create: true}, onGotFileEntry, function(err) {
       log.push(['getFile fail', err]);
       errCallback(err);
     });
@@ -149,7 +149,7 @@ function cache(path, root, success, errCallback) {
 }
 
 // woo, let's get cachin'
-// TODO: PERMANENT cache doesn't work, is this a general worker issue?
+// TODO: PERSISTENT cache doesn't work, is this a general worker issue?
 webkitRequestFileSystem(TEMPORARY, 1024*1024, onFileSystemReady, function(err) {
   log.push(['filesystem fail', err]);
 });
@@ -157,7 +157,7 @@ webkitRequestFileSystem(TEMPORARY, 1024*1024, onFileSystemReady, function(err) {
 function onFileSystemReady(fs) {
   fileSystem = fs;
 
-  cache('assets/8/style/all-min.css', function() {
+  cache('assets/8/style/all-min.css', fileSystem.root, function() {
     log.push(['done']);
   }, function(err) {
     // bleh
