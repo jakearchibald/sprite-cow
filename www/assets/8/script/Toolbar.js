@@ -16,6 +16,11 @@ spriteCow.Toolbar = (function() {
 			var $button = $(this),
 				toolName = $button.data('toolName'),
 				event = new $.Event( toolName );
+
+			if ($button.hasClass('disabled')) {
+				event.preventDefault();
+				return false;
+			}
 			
 			event.isActive = $button.hasClass('active');
 
@@ -45,6 +50,9 @@ spriteCow.Toolbar = (function() {
 		}
 		if (opts.active) {
 			$button.addClass('active');
+		}
+		if (opts.disabled) {
+			$button.addClass('disabled');
 		}
 
 		return $button;
@@ -115,6 +123,16 @@ spriteCow.Toolbar = (function() {
 	
 	SpriteCowToolbarProto.isActive = function(toolName) {
 		return this.$container.find('.' + toolName + '[role=button]').hasClass('active');
+	};
+
+	SpriteCowToolbarProto.disable = function(toolName) {
+		this.$container.find('.' + toolName + '[role=button]').addClass('disabled');
+		return this;
+	};
+
+	SpriteCowToolbarProto.enable = function(toolName) {
+		this.$container.find('.' + toolName + '[role=button]').removeClass('disabled');
+		return this;
 	};
 	
 	return SpriteCowToolbar;

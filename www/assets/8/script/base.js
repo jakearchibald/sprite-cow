@@ -23,9 +23,12 @@
 		var cssOutput         = new spriteCow.CssOutput( $codeContainer );
 		var toolbarTop        = new spriteCow.Toolbar('.toolbar-container');
 		var toolbarBottom     = new spriteCow.Toolbar('.toolbar-bottom-container');
+		var rectSaver		  = new spriteCow.RectSaver( $canvasContainer );
+		var currentRect 	  = null;
 		
 		toolbarTop.
 			addItem('open-img', 'Open').
+			addItem('save-selection', 'Save selection', {disabled: true}).
 			addItem('reload-img', 'Reload Current Image', {noLabel: true}).
 			addItem(
 				new spriteCow.ToolbarGroup().
@@ -68,6 +71,14 @@
 				// let's be kind...
 				toolbarTop.feedback( 'Incorrect background colour set?', true );
 			}
+
+			currentRect = rect;
+
+			if (rect.width && rect.height) {
+				toolbarTop.enable('save-selection')
+			} else {
+				toolbarTop.disable('save-selection');
+			}			
 		});
 		
 		spriteCanvasView.bind('bgColorHover', function(color) {
@@ -83,6 +94,11 @@
 		
 		toolbarTop.bind('open-img', function(event) {
 			event.preventDefault();
+		});
+
+		toolbarTop.bind('save-selection', function(event) {
+			event.preventDefault();
+			rectSaver.save(currentRect);
 		});
 
 		toolbarTop.bind('select-bg', function() {

@@ -141,8 +141,7 @@
 				startX, startY,
 				startPositionX, startPositionY,
 				isDragging,
-				$document = $(document);
-			
+				$document = $(document);			
 			
 			selectArea._listeners.push([
 				selectArea._$eventArea, 'mousedown', function(event) {
@@ -231,6 +230,7 @@
 				}
 				else {
 					highlight.hide(true);
+					spriteCanvasView.trigger('rectChange', rect);
 				}
 			});
 			

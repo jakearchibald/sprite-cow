@@ -259,6 +259,10 @@
 				padding: 4px 0;
 				text-indent: -5000px;
 			}
+			&.disabled {
+				opacity:0.7;
+				cursor:default;
+			}
 			&.select-sprite::before {
 				background-position: -4px -2px;
 			}
@@ -267,6 +271,9 @@
 			}
 			&.open-img::before {
 				background-position: -26px -2px;
+			}
+			&.save-selection::before {
+				background-position: -162px -3px;
 			}
 			&.invert-bg::before {
 				background-position: -99px -2px;
