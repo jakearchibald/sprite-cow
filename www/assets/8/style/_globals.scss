@@ -115,3 +115,7 @@
 			text-decoration: underline;
 		}
 	}
+// Mouse selection
+::-webkit-selection { background:black; color:white; }
+::-moz-selection { background:black; color:white; }
+::selection { background:black; color:white; }
