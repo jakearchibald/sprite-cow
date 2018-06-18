@@ -1,0 +1,2 @@
+/assets/$ver/*
+  Cache-Control: max-age=315360000
