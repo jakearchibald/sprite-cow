@@ -1,3 +1,0 @@
-# Requirements are only used to deploy to Amazon S3
-Fabric==1.0.1
-boto==2.0rc1

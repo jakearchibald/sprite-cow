@@ -1,11 +1,11 @@
 CACHE MANIFEST
 
-assets/8/script/mainmin.js
-assets/8/style/all-min.css
-assets/8/style/fonts/oswald.ttf
-assets/8/style/imgs/sprites1.png
-assets/8/tutorial-sprite.png
-assets/8/favicon.ico
+assets/$ver/script/mainmin.js
+assets/$ver/style/all-min.css
+assets/$ver/style/fonts/oswald.ttf
+assets/$ver/style/imgs/sprites1.png
+assets/$ver/tutorial-sprite.png
+assets/$ver/favicon.ico
 
 NETWORK:
 *

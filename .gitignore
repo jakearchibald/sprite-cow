@@ -1,8 +1,2 @@
 .DS_Store
-bin/yui*
-bin/uglify
-fabric.cfg
-*.pyc
-tmp
-.sass-cache
-www/bgtest.html
+build

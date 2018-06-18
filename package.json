@@ -1,0 +1,18 @@
+{
+  "name": "sprite-cow",
+  "private": true,
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakearchibald/sprite-cow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jakearchibald/sprite-cow/issues"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0",
+    "uglify-js": "^3.4.0"
+  }
+}
