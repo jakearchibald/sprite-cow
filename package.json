@@ -12,7 +12,7 @@
     "url": "https://github.com/jakearchibald/sprite-cow/issues"
   },
   "devDependencies": {
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "uglify-js": "^3.4.0"
   }
 }
